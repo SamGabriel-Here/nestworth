@@ -90,8 +90,8 @@ if submitted:
         mae = metrics.iloc[0]["MAE"]
         m3.metric("Typical error", f"± ${mae:,.0f}")
         st.caption(
-            f"Likely range: **${predicted_price - mae:,.0f} – "
-            f"${predicted_price + mae:,.0f}** based on the model's mean "
+            f"Likely range: **\\${predicted_price - mae:,.0f} – "
+            f"\\${predicted_price + mae:,.0f}** based on the model's mean "
             "absolute error on held-out test data."
         )
 
