@@ -69,13 +69,13 @@ and saves whichever scores highest on the test set:
 
 | Model | MAE ($) | RMSE ($) | R² |
 |---|---:|---:|---:|
+| XGBoost | 30,930 | 52,046 | 0.869 |
 | Linear Regression | 32,863 | 52,401 | 0.868 |
 | Random Forest | 34,382 | 55,308 | 0.853 |
-| XGBoost | — | — | (runs if `xgboost` is installed) |
 
-Linear Regression wins here — the price patterns in this dataset are mostly
-linear, so the simpler model generalizes better. Exact numbers vary slightly
-by library version.
+XGBoost wins, but only narrowly over plain Linear Regression — the price
+patterns in this dataset are mostly linear. Exact numbers vary slightly by
+library version.
 
 **App** (`app/app.py`) — a Streamlit form for the house features that returns
 a price estimate from the saved model.
