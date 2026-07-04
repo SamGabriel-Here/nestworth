@@ -25,8 +25,16 @@ def load_metrics():
     return None
 
 
+def inr(amount: float) -> str:
+    if amount >= 1_00_00_000:
+        return f"₹{amount / 1_00_00_000:,.2f} Cr"
+    if amount >= 1_00_000:
+        return f"₹{amount / 1_00_000:,.1f} Lakh"
+    return f"₹{amount:,.0f}"
+
+
 st.title("House Price Predictor")
-st.write("Estimate a house's market price from its key characteristics.")
+st.write("Estimate a house's market price in Indian metro cities.")
 
 if not MODEL_PATH.exists():
     st.error(
@@ -43,15 +51,17 @@ with st.form("house"):
     col1, col2 = st.columns(2)
 
     with col1:
-        area = st.number_input("Area (sq ft)", min_value=300, max_value=12000,
-                               value=1800, step=50)
+        area = st.number_input("Area (sq ft)", min_value=300, max_value=9000,
+                               value=1100, step=50)
         bedrooms = st.selectbox("Bedrooms", [1, 2, 3, 4, 5], index=2)
         bathrooms = st.selectbox("Bathrooms", [1, 2, 3, 4], index=1)
         stories = st.selectbox("Stories", [1, 2, 3, 4], index=1)
 
     with col2:
         location = st.selectbox(
-            "Location", ["Downtown", "Midtown", "Suburban", "Rural", "Waterfront"]
+            "Location",
+            ["City Centre", "Prime Suburb", "Suburb", "Outskirts", "Premium Township"],
+            index=2,
         )
         house_age = st.slider("House age (years)", min_value=0, max_value=60, value=10)
         parking = st.selectbox("Parking spots", [0, 1, 2, 3], index=1)
@@ -84,14 +94,14 @@ if submitted:
     st.divider()
 
     m1, m2, m3 = st.columns(3)
-    m1.metric("Estimated price", f"${predicted_price:,.0f}")
-    m2.metric("Price per sq ft", f"${predicted_price / area:,.0f}")
+    m1.metric("Estimated price", inr(predicted_price))
+    m2.metric("Price per sq ft", f"₹{predicted_price / area:,.0f}")
     if metrics is not None:
         mae = metrics.iloc[0]["MAE"]
-        m3.metric("Typical error", f"± ${mae:,.0f}")
+        m3.metric("Typical error", f"± {inr(mae)}")
         st.caption(
-            f"Likely range: **\\${predicted_price - mae:,.0f} – "
-            f"\\${predicted_price + mae:,.0f}** based on the model's mean "
+            f"Likely range: **{inr(predicted_price - mae)} – "
+            f"{inr(predicted_price + mae)}** based on the model's mean "
             "absolute error on held-out test data."
         )
 
@@ -102,12 +112,12 @@ st.divider()
 with st.expander("About the model"):
     st.write(
         "A scikit-learn pipeline (imputation, one-hot encoding, scaling, and "
-        "the best of three compared regressors) trained on ~1,500 listings. "
-        "Test-set results:"
+        "the best of three compared regressors) trained on ~1,500 listings "
+        "priced at Indian metro-city rates. Test-set results:"
     )
     if metrics is not None:
         st.dataframe(
-            metrics.style.format({"MAE": "${:,.0f}", "RMSE": "${:,.0f}", "R2": "{:.3f}"}),
+            metrics.style.format({"MAE": inr, "RMSE": inr, "R2": "{:.3f}"}),
             hide_index=True,
             width="stretch",
         )
