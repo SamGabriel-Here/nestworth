@@ -81,7 +81,18 @@ def save_plots(df: pd.DataFrame) -> None:
     plt.savefig(FIG_DIR / "location_vs_price.png", dpi=150)
     plt.close()
 
-    print(f"Saved 5 figures to: {FIG_DIR}")
+    plt.figure(figsize=(8, 5))
+    order = df.groupby("city")["price"].mean().sort_values(ascending=False).index
+    sns.barplot(data=df, x="city", y="price", order=order,
+                errorbar=None, color="mediumseagreen")
+    plt.title("Average Price by City")
+    plt.xlabel("City")
+    plt.ylabel("Average price (INR)")
+    plt.tight_layout()
+    plt.savefig(FIG_DIR / "city_vs_price.png", dpi=150)
+    plt.close()
+
+    print(f"Saved 6 figures to: {FIG_DIR}")
 
 
 def main() -> None:

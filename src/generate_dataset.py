@@ -22,6 +22,9 @@ def generate_houses(n: int, seed: int) -> pd.DataFrame:
     house_age = rng.integers(0, 61, n)
     parking = rng.choice([0, 1, 2, 3], n, p=[0.25, 0.45, 0.22, 0.08])
 
+    cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata"]
+    city = rng.choice(cities, n, p=[0.22, 0.22, 0.22, 0.17, 0.17])
+
     locations = ["City Centre", "Prime Suburb", "Suburb", "Outskirts", "Premium Township"]
     location = rng.choice(locations, n, p=[0.15, 0.22, 0.33, 0.20, 0.10])
     main_road = rng.choice(["yes", "no"], n, p=[0.70, 0.30])
@@ -29,36 +32,45 @@ def generate_houses(n: int, seed: int) -> pd.DataFrame:
         ["furnished", "semi-furnished", "unfurnished"], n, p=[0.20, 0.45, 0.35]
     )
 
-    # metro-city rates in rupees per sq ft
-    rate_per_sqft = pd.Series(location).map(
-        {"City Centre": 13_000, "Prime Suburb": 8_500, "Suburb": 5_500,
-         "Outskirts": 3_000, "Premium Township": 10_500}
+    # average city rates in rupees per sq ft, adjusted by locality
+    city_rate = pd.Series(city).map(
+        {"Mumbai": 18_000, "Delhi": 11_000, "Bangalore": 8_500,
+         "Chennai": 7_000, "Kolkata": 5_500}
+    ).to_numpy()
+
+    location_multiplier = pd.Series(location).map(
+        {"City Centre": 1.8, "Prime Suburb": 1.25, "Suburb": 1.0,
+         "Outskirts": 0.55, "Premium Township": 1.5}
     ).to_numpy()
 
     furnishing_bonus = pd.Series(furnishing).map(
-        {"furnished": 8_00_000, "semi-furnished": 3_50_000, "unfurnished": 0}
+        {"furnished": 6_00_000, "semi-furnished": 2_50_000, "unfurnished": 0}
     ).to_numpy()
 
-    noise = rng.normal(0, 9_00_000, n)
+    # amenity premiums scale with how expensive the city is
+    premium_scale = city_rate / 8_500
 
     price = (
-        8_00_000
-        + area * rate_per_sqft
-        + bedrooms * 4_00_000
-        + bathrooms * 3_00_000
-        + stories * 1_50_000
-        + parking * 2_50_000
-        - house_age * 40_000
-        + (main_road == "yes") * 3_50_000
-        + furnishing_bonus
-        + noise
-    ).clip(12_00_000).round(0)
+        3_00_000
+        + area * city_rate * location_multiplier
+        + (
+            bedrooms * 3_00_000
+            + bathrooms * 2_00_000
+            + stories * 1_00_000
+            + parking * 2_00_000
+            - house_age * 40_000
+            + (main_road == "yes") * 2_50_000
+            + furnishing_bonus
+        ) * premium_scale
+    )
+    price = (price * (1 + rng.normal(0, 0.08, n))).clip(10_00_000).round(0)
 
     return pd.DataFrame({
         "area": area,
         "bedrooms": bedrooms,
         "bathrooms": bathrooms,
         "stories": stories,
+        "city": city,
         "location": location,
         "house_age": house_age,
         "parking": parking,

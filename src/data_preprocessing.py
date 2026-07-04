@@ -13,7 +13,7 @@ CLEAN_DATA_PATH = ROOT / "data" / "housing_clean.csv"
 TARGET = "price"
 
 NUMERIC_COLS = ["area", "bedrooms", "bathrooms", "stories", "house_age", "parking"]
-CATEGORICAL_COLS = ["location", "main_road", "furnishing_status"]
+CATEGORICAL_COLS = ["city", "location", "main_road", "furnishing_status"]
 ENGINEERED_COLS = ["total_rooms", "is_new"]
 
 NUMERIC_FEATURES = NUMERIC_COLS + ENGINEERED_COLS

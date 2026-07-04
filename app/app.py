@@ -58,6 +58,9 @@ with st.form("house"):
         stories = st.selectbox("Stories", [1, 2, 3, 4], index=1)
 
     with col2:
+        city = st.selectbox(
+            "City", ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata"]
+        )
         location = st.selectbox(
             "Location",
             ["City Centre", "Prime Suburb", "Suburb", "Outskirts", "Premium Township"],
@@ -65,7 +68,8 @@ with st.form("house"):
         )
         house_age = st.slider("House age (years)", min_value=0, max_value=60, value=10)
         parking = st.selectbox("Parking spots", [0, 1, 2, 3], index=1)
-        main_road = st.radio("On a main road?", ["yes", "no"], horizontal=True)
+
+    main_road = st.radio("On a main road?", ["yes", "no"], horizontal=True)
 
     furnishing_status = st.selectbox(
         "Furnishing status", ["furnished", "semi-furnished", "unfurnished"], index=1
@@ -80,6 +84,7 @@ if submitted:
         "bedrooms": bedrooms,
         "bathrooms": bathrooms,
         "stories": stories,
+        "city": city,
         "location": location,
         "house_age": house_age,
         "parking": parking,
