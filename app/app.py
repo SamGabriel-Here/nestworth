@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
 
-st.set_page_config(page_title="House Price Predictor", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
 
 
 @st.cache_resource
@@ -33,8 +33,8 @@ def inr(amount: float) -> str:
     return f"₹{amount:,.0f}"
 
 
-st.title("House Price Predictor")
-st.write("Estimate a house's market price in Indian metro cities.")
+st.title("NestWorth")
+st.write("Know what a home is worth — price estimates for Indian metro cities.")
 
 if not MODEL_PATH.exists():
     st.error(
@@ -128,6 +128,6 @@ with st.expander("About the model"):
         )
     st.write(
         "Source code and full pipeline: "
-        "[github.com/SamGabriel-Here/house-price-prediction]"
-        "(https://github.com/SamGabriel-Here/house-price-prediction)"
+        "[github.com/SamGabriel-Here/nestworth]"
+        "(https://github.com/SamGabriel-Here/nestworth)"
     )

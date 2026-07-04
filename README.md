@@ -1,10 +1,10 @@
-# House Price Prediction
+# NestWorth
 
-Predicts house prices from property features (area, bedrooms, bathrooms,
-location, age, parking, etc.) using scikit-learn, with a Streamlit app for
-making predictions interactively.
+House price estimates for Indian metro cities. Predicts prices from property
+features (city, locality, area, bedrooms, age, parking, etc.) using
+scikit-learn, with a Streamlit app for making predictions interactively.
 
-**Live demo:** https://sam-house-price-prediction.streamlit.app
+**Live demo:** https://nestworth.streamlit.app
 
 ## Dataset
 
@@ -33,8 +33,8 @@ California Housing) with minor column-name changes in `src/data_preprocessing.py
 ## Setup
 
 ```bash
-git clone https://github.com/SamGabriel-Here/house-price-prediction.git
-cd house-price-prediction
+git clone https://github.com/SamGabriel-Here/nestworth.git
+cd nestworth
 
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
