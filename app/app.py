@@ -11,6 +11,22 @@ MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
 DATA_PATH = ROOT / "data" / "housing_clean.csv"
 
+NUMERIC_RAW = ["area", "bedrooms", "bathrooms", "stories", "house_age", "parking"]
+CATEGORICAL_RAW = ["city", "location", "main_road", "furnishing_status"]
+
+FACTOR_LABELS = {
+    "area": lambda v: f"Area · {int(v):,} sq ft",
+    "city": lambda v: f"City · {v}",
+    "location": lambda v: f"Location · {v}",
+    "bedrooms": lambda v: f"Bedrooms · {int(v)}",
+    "bathrooms": lambda v: f"Bathrooms · {int(v)}",
+    "stories": lambda v: f"Stories · {int(v)}",
+    "house_age": lambda v: f"Age · {int(v)} yrs",
+    "parking": lambda v: f"Parking · {int(v)}",
+    "main_road": lambda v: f"Main road · {v}",
+    "furnishing_status": lambda v: f"Furnishing · {v}",
+}
+
 st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
 
 st.markdown(
@@ -54,6 +70,22 @@ st.markdown(
   display: flex; justify-content: space-between;
   color: #8A93A5; font-size: 0.75rem; margin-top: 9px;
 }
+.nw-factor { margin: 10px 0; }
+.nw-factor-top {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.9rem;
+}
+.nw-factor-label { color: #C7CEDA; }
+.nw-factor-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+.nw-factor-bar {
+  height: 6px; border-radius: 999px; background: #171C24;
+  margin-top: 5px; overflow: hidden;
+}
+.nw-factor-fill { height: 100%; border-radius: 999px; }
+.nw-pos { color: #5FBF8B; }
+.nw-neg { color: #E08A7A; }
+.nw-pos-bg { background: #3E7D5E; }
+.nw-neg-bg { background: #9E5142; }
 </style>
 """,
     unsafe_allow_html=True,
@@ -79,12 +111,29 @@ def load_data():
     return None
 
 
+@st.cache_data
+def baseline_features(df: pd.DataFrame) -> dict:
+    """A 'typical' listing: median for numerics, mode for categoricals."""
+    base = {c: df[c].mode()[0] for c in CATEGORICAL_RAW}
+    for c in NUMERIC_RAW:
+        base[c] = int(round(df[c].median()))
+    base["area"] = float(df["area"].median())
+    return base
+
+
 def inr(amount: float) -> str:
     if amount >= 1_00_00_000:
         return f"₹{amount / 1_00_00_000:,.2f} Cr"
     if amount >= 1_00_000:
         return f"₹{amount / 1_00_000:,.1f} Lakh"
     return f"₹{amount:,.0f}"
+
+
+def build_input(raw: dict) -> pd.DataFrame:
+    row = pd.DataFrame([raw])
+    row["total_rooms"] = row["bedrooms"] + row["bathrooms"]
+    row["is_new"] = (row["house_age"] <= 5).astype(int)
+    return row
 
 
 def market_position(df: pd.DataFrame, city: str, location: str, price: float):
@@ -114,6 +163,55 @@ def market_position(df: pd.DataFrame, city: str, location: str, price: float):
         "</div>"
     )
     return delta_pct, bar_html, len(seg)
+
+
+def explain_prediction(_model, raw: dict, baseline: dict, full_pred: float, top=5):
+    """Per-feature contribution to the estimate.
+
+    Each feature is set back to its typical value one at a time; the resulting
+    change in the prediction is that feature's contribution versus a typical
+    listing.
+    """
+    factors = []
+    for feat, label_fn in FACTOR_LABELS.items():
+        probe = dict(raw)
+        probe[feat] = baseline[feat]
+        delta = full_pred - _model.predict(build_input(probe))[0]
+        factors.append((label_fn(raw[feat]), delta))
+    factors.sort(key=lambda x: abs(x[1]), reverse=True)
+    return factors[:top]
+
+
+def factors_html(factors) -> str:
+    max_abs = max((abs(d) for _, d in factors), default=1) or 1
+    rows = []
+    for label, delta in factors:
+        cls = "nw-pos" if delta >= 0 else "nw-neg"
+        sign = "+" if delta >= 0 else "−"
+        width = abs(delta) / max_abs * 100
+        rows.append(
+            '<div class="nw-factor">'
+            '<div class="nw-factor-top">'
+            f'<span class="nw-factor-label">{label}</span>'
+            f'<span class="nw-factor-val {cls}">{sign}{inr(abs(delta))}</span>'
+            "</div>"
+            '<div class="nw-factor-bar">'
+            f'<div class="nw-factor-fill {cls}-bg" style="width:{width:.0f}%"></div>'
+            "</div></div>"
+        )
+    return "".join(rows)
+
+
+def comparable_homes(df: pd.DataFrame, city: str, location: str, area: float, k=5):
+    seg = df[(df["city"] == city) & (df["location"] == location)]
+    if len(seg) < k:
+        seg = df[df["city"] == city]
+    if seg.empty:
+        return None
+    seg = seg.assign(_d=(seg["area"] - area).abs()).sort_values("_d").head(k)
+    out = seg[["area", "bedrooms", "bathrooms", "house_age", "price"]].copy()
+    out.columns = ["Area (sq ft)", "Beds", "Baths", "Age (yrs)", "Price"]
+    return out
 
 
 st.title("NestWorth")
@@ -163,20 +261,13 @@ with st.form("house"):
                                       width="stretch")
 
 if submitted:
-    input_df = pd.DataFrame([{
-        "area": area,
-        "bedrooms": bedrooms,
-        "bathrooms": bathrooms,
-        "stories": stories,
-        "city": city,
-        "location": location,
-        "house_age": house_age,
-        "parking": parking,
-        "main_road": main_road,
+    raw = {
+        "area": area, "bedrooms": bedrooms, "bathrooms": bathrooms,
+        "stories": stories, "city": city, "location": location,
+        "house_age": house_age, "parking": parking, "main_road": main_road,
         "furnishing_status": furnishing_status,
-    }])
-    input_df["total_rooms"] = input_df["bedrooms"] + input_df["bathrooms"]
-    input_df["is_new"] = (input_df["house_age"] <= 5).astype(int)
+    }
+    input_df = build_input(raw)
 
     predicted_price = model.predict(input_df)[0]
     price_per_sqft = predicted_price / area
@@ -222,6 +313,30 @@ if submitted:
                 f"Bar spans the typical range (10th–90th percentile) of {n_seg} "
                 f"comparable {city} · {location} homes."
             )
+
+        factors = explain_prediction(
+            model, raw, baseline_features(data), predicted_price
+        )
+        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+        st.markdown("###### Why this price?")
+        st.markdown(factors_html(factors), unsafe_allow_html=True)
+        st.caption(
+            "How much each feature adds to or subtracts from the estimate, "
+            "versus a typical listing."
+        )
+
+        comps = comparable_homes(data, city, location, area)
+        if comps is not None:
+            with st.expander(f"Comparable homes in {city} · {location}"):
+                st.dataframe(
+                    comps.style.format({
+                        "Area (sq ft)": "{:,.0f}", "Beds": "{:.0f}",
+                        "Baths": "{:.0f}", "Age (yrs)": "{:.0f}", "Price": inr,
+                    }),
+                    hide_index=True,
+                    width="stretch",
+                )
+                st.caption("Closest listings by size in the same city and locality.")
 
     st.caption("Trained on this project's dataset — not a real valuation.")
 

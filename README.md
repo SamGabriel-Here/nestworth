@@ -82,15 +82,23 @@ The tree models win clearly here because city and locality change the price
 *per square foot* — an interaction a plain linear model can't capture.
 Exact numbers vary slightly by library version.
 
-**App** (`app/app.py`) — a Streamlit form for the house features that returns
-a price estimate from the saved model.
+**App** (`app/app.py`) — a Streamlit form for the house features. On submit it
+returns the estimate as a headline figure with price per sq ft, a likely range
+(± the model's test-set MAE), and the model's R². Below that:
+
+- **How it compares** — where the estimate sits within the 10th–90th-percentile
+  price range of comparable homes in the same city and locality, shown as a bar.
+- **Why this price?** — each feature's contribution to the estimate, measured by
+  setting that feature back to a typical value and re-predicting (single-feature
+  ablation against a median/mode baseline listing).
+- **Comparable homes** — the closest listings by size in the same segment.
 
 ## Possible improvements
 
 - Hyperparameter tuning (`GridSearchCV`) and k-fold cross-validation
 - A real dataset (Ames / King County) with richer features
-- SHAP or permutation importance to explain predictions
-- Deploy the app on Streamlit Community Cloud
+- Calibrated prediction intervals (quantile regression / conformal) in place of
+  the ± MAE band, and proper SHAP/Shapley attributions for the explanation panel
 
 ## Stack
 
