@@ -9,8 +9,55 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
+DATA_PATH = ROOT / "data" / "housing_clean.csv"
 
 st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
+
+st.markdown(
+    """
+<style>
+.nw-hero {
+  background: linear-gradient(135deg, #1A2029 0%, #232C3A 100%);
+  border: 1px solid #2A3542; border-radius: 16px;
+  padding: 26px 24px; text-align: center; margin: 4px 0 6px;
+}
+.nw-hero-label {
+  color: #8A93A5; font-size: 0.78rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.09em;
+}
+.nw-hero-price {
+  color: #E6E9EF; font-weight: 700; line-height: 1.05;
+  font-size: clamp(2.1rem, 8vw, 2.9rem); margin: 6px 0 4px;
+}
+.nw-hero-sub { color: #9AA4B4; font-size: 0.95rem; }
+.nw-badge {
+  display: inline-block; margin-top: 14px;
+  background: rgba(91, 141, 239, 0.15); color: #8FB2F5;
+  border: 1px solid rgba(91, 141, 239, 0.35); border-radius: 999px;
+  padding: 4px 13px; font-size: 0.78rem; font-weight: 600;
+}
+.nw-bar-wrap { margin: 26px 0 2px; }
+.nw-bar-track {
+  position: relative; height: 10px; border-radius: 999px;
+  background: linear-gradient(90deg, #2E7D5B 0%, #C9A227 55%, #C0563B 100%);
+}
+.nw-bar-marker {
+  position: absolute; top: -5px; width: 3px; height: 20px;
+  background: #E6E9EF; border-radius: 2px; box-shadow: 0 0 0 2px #0E1117;
+}
+.nw-bar-mark-label {
+  position: absolute; top: -30px; transform: translateX(-50%);
+  white-space: nowrap; background: #E6E9EF; color: #0E1117;
+  font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;
+}
+.nw-bar-ends {
+  display: flex; justify-content: space-between;
+  color: #8A93A5; font-size: 0.75rem; margin-top: 9px;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
 
 
 @st.cache_resource
@@ -25,12 +72,48 @@ def load_metrics():
     return None
 
 
+@st.cache_data
+def load_data():
+    if DATA_PATH.exists():
+        return pd.read_csv(DATA_PATH)
+    return None
+
+
 def inr(amount: float) -> str:
     if amount >= 1_00_00_000:
         return f"₹{amount / 1_00_00_000:,.2f} Cr"
     if amount >= 1_00_000:
         return f"₹{amount / 1_00_000:,.1f} Lakh"
     return f"₹{amount:,.0f}"
+
+
+def market_position(df: pd.DataFrame, city: str, location: str, price: float):
+    """Position of an estimate within its city/location segment.
+
+    Returns (delta_pct, bar_html, n_listings), or (None, None, 0) if the
+    segment is too small to be meaningful.
+    """
+    seg = df[(df["city"] == city) & (df["location"] == location)]
+    if len(seg) < 8:
+        seg = df[df["city"] == city]
+    if len(seg) < 8:
+        return None, None, 0
+
+    low, mid, high = seg["price"].quantile([0.10, 0.50, 0.90])
+    span = max(high - low, 1.0)
+    pct = min(max((price - low) / span * 100, 4.0), 96.0)
+    delta_pct = (price - mid) / mid * 100
+
+    bar_html = (
+        '<div class="nw-bar-wrap">'
+        '<div class="nw-bar-track">'
+        f'<div class="nw-bar-marker" style="left:{pct:.1f}%"></div>'
+        f'<div class="nw-bar-mark-label" style="left:{pct:.1f}%">{inr(price)}</div>'
+        "</div>"
+        f'<div class="nw-bar-ends"><span>{inr(low)}</span><span>{inr(high)}</span></div>'
+        "</div>"
+    )
+    return delta_pct, bar_html, len(seg)
 
 
 st.title("NestWorth")
@@ -46,6 +129,7 @@ if not MODEL_PATH.exists():
 
 model = load_model()
 metrics = load_metrics()
+data = load_data()
 
 with st.form("house"):
     col1, col2 = st.columns(2)
@@ -95,20 +179,45 @@ if submitted:
     input_df["is_new"] = (input_df["house_age"] <= 5).astype(int)
 
     predicted_price = model.predict(input_df)[0]
+    price_per_sqft = predicted_price / area
 
-    st.divider()
+    mae = metrics.iloc[0]["MAE"] if metrics is not None else None
+    r2 = metrics.iloc[0]["R2"] if metrics is not None else None
 
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Estimated price", inr(predicted_price))
-    m2.metric("Price per sq ft", f"₹{predicted_price / area:,.0f}")
-    if metrics is not None:
-        mae = metrics.iloc[0]["MAE"]
-        m3.metric("Typical error", f"± {inr(mae)}")
-        st.caption(
-            f"Likely range: **{inr(predicted_price - mae)} – "
-            f"{inr(predicted_price + mae)}** based on the model's mean "
-            "absolute error on held-out test data."
+    sub_bits = [f"₹{price_per_sqft:,.0f} / sq ft"]
+    if mae is not None:
+        sub_bits.append(
+            f"likely {inr(predicted_price - mae)} – {inr(predicted_price + mae)}"
         )
+    sub_line = "&nbsp;&nbsp;·&nbsp;&nbsp;".join(sub_bits)
+    badge = (
+        f'<span class="nw-badge">Model R² {r2:.2f} on held-out test data</span>'
+        if r2 is not None else ""
+    )
+
+    st.markdown(
+        f'<div class="nw-hero">'
+        f'<div class="nw-hero-label">Estimated value</div>'
+        f'<div class="nw-hero-price">{inr(predicted_price)}</div>'
+        f'<div class="nw-hero-sub">{sub_line}</div>'
+        f"{badge}"
+        f"</div>",
+        unsafe_allow_html=True,
+    )
+
+    if data is not None:
+        delta_pct, bar_html, n_seg = market_position(
+            data, city, location, predicted_price
+        )
+        if bar_html:
+            direction = "above" if delta_pct >= 0 else "below"
+            st.markdown("###### How it compares")
+            st.markdown(
+                f"About **{abs(delta_pct):.0f}% {direction}** the typical price for "
+                f"**{city} · {location}** homes."
+            )
+            st.markdown(bar_html, unsafe_allow_html=True)
+            st.caption(f"Positioned against {n_seg} similar listings in the dataset.")
 
     st.caption("Trained on this project's dataset — not a real valuation.")
 
