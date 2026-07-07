@@ -1,4 +1,4 @@
-"""Streamlit app for house price predictions."""
+"""Streamlit app for Bengaluru house price predictions."""
 
 from pathlib import Path
 
@@ -12,20 +12,18 @@ INTERVAL_PATH = ROOT / "models" / "prediction_interval.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
 DATA_PATH = ROOT / "data" / "housing_clean.csv"
 
-NUMERIC_RAW = ["area", "bedrooms", "bathrooms", "stories", "house_age", "parking"]
-CATEGORICAL_RAW = ["city", "location", "main_road", "furnishing_status"]
+NUMERIC_RAW = ["area", "bedrooms", "bathrooms", "balcony", "ready_to_move"]
+CATEGORICAL_RAW = ["location", "area_type"]
+AREA_TYPES = ["Super built-up Area", "Built-up Area", "Plot Area", "Carpet Area"]
 
 FACTOR_LABELS = {
-    "area": lambda v: f"Area · {int(v):,} sq ft",
-    "city": lambda v: f"City · {v}",
     "location": lambda v: f"Location · {v}",
-    "bedrooms": lambda v: f"Bedrooms · {int(v)}",
+    "area": lambda v: f"Area · {int(v):,} sq ft",
+    "bedrooms": lambda v: f"Bedrooms · {int(v)} BHK",
     "bathrooms": lambda v: f"Bathrooms · {int(v)}",
-    "stories": lambda v: f"Stories · {int(v)}",
-    "house_age": lambda v: f"Age · {int(v)} yrs",
-    "parking": lambda v: f"Parking · {int(v)}",
-    "main_road": lambda v: f"Main road · {v}",
-    "furnishing_status": lambda v: f"Furnishing · {v}",
+    "balcony": lambda v: f"Balcony · {int(v)}",
+    "area_type": lambda v: f"Type · {v}",
+    "ready_to_move": lambda v: f"Status · {'Ready to move' if v else 'Under construction'}",
 }
 
 st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
@@ -119,15 +117,6 @@ def load_interval():
     return None
 
 
-def prediction_interval(bundle, input_df, point):
-    """Conformalized [low, high] band, widened to always contain the point."""
-    lo = bundle["lo"].predict(input_df)[0] - bundle["q"]
-    hi = bundle["hi"].predict(input_df)[0] + bundle["q"]
-    lo, hi = min(lo, hi), max(lo, hi)
-    lo, hi = min(lo, point), max(hi, point)
-    return max(lo, 0.0), hi
-
-
 @st.cache_data
 def baseline_features(df: pd.DataFrame) -> dict:
     """A 'typical' listing: median for numerics, mode for categoricals."""
@@ -147,24 +136,23 @@ def inr(amount: float) -> str:
 
 
 def build_input(raw: dict) -> pd.DataFrame:
-    row = pd.DataFrame([raw])
-    row["total_rooms"] = row["bedrooms"] + row["bathrooms"]
-    row["is_new"] = (row["house_age"] <= 5).astype(int)
-    return row
+    return pd.DataFrame([raw])
 
 
-def market_position(df: pd.DataFrame, city: str, location: str, price: float):
-    """Position of an estimate within its city/location segment.
+def prediction_interval(bundle, input_df, point):
+    """Conformalized [low, high] band, widened to always contain the point."""
+    lo = bundle["lo"].predict(input_df)[0] - bundle["q"]
+    hi = bundle["hi"].predict(input_df)[0] + bundle["q"]
+    lo, hi = min(lo, hi), max(lo, hi)
+    lo, hi = min(lo, point), max(hi, point)
+    return max(lo, 0.0), hi
 
-    Returns (delta_pct, bar_html, n_listings), or (None, None, 0) if the
-    segment is too small to be meaningful.
-    """
-    seg = df[(df["city"] == city) & (df["location"] == location)]
+
+def market_position(df: pd.DataFrame, location: str, price: float):
+    """Position of an estimate within its locality (falls back to all of Bengaluru)."""
+    seg = df[df["location"] == location]
     if len(seg) < 8:
-        seg = df[df["city"] == city]
-    if len(seg) < 8:
-        return None, None, 0
-
+        seg = df
     low, mid, high = seg["price"].quantile([0.10, 0.50, 0.90])
     span = max(high - low, 1.0)
     pct = min(max((price - low) / span * 100, 4.0), 96.0)
@@ -183,12 +171,7 @@ def market_position(df: pd.DataFrame, city: str, location: str, price: float):
 
 
 def explain_prediction(_model, raw: dict, baseline: dict, full_pred: float, top=5):
-    """Per-feature contribution to the estimate.
-
-    Each feature is set back to its typical value one at a time; the resulting
-    change in the prediction is that feature's contribution versus a typical
-    listing.
-    """
+    """Per-feature contribution: set each feature to its typical value, re-predict."""
     factors = []
     for feat, label_fn in FACTOR_LABELS.items():
         probe = dict(raw)
@@ -219,26 +202,25 @@ def factors_html(factors) -> str:
     return "".join(rows)
 
 
-def comparable_homes(df: pd.DataFrame, city: str, location: str, area: float, k=5):
-    seg = df[(df["city"] == city) & (df["location"] == location)]
+def comparable_homes(df: pd.DataFrame, location: str, area: float, k=5):
+    seg = df[df["location"] == location]
     if len(seg) < k:
-        seg = df[df["city"] == city]
+        seg = df
     if seg.empty:
         return None
     seg = seg.assign(_d=(seg["area"] - area).abs()).sort_values("_d").head(k)
-    out = seg[["area", "bedrooms", "bathrooms", "house_age", "price"]].copy()
-    out.columns = ["Area (sq ft)", "Beds", "Baths", "Age (yrs)", "Price"]
+    out = seg[["area", "bedrooms", "bathrooms", "area_type", "price"]].copy()
+    out.columns = ["Area (sq ft)", "BHK", "Baths", "Type", "Price"]
     return out
 
 
 st.title("NestWorth")
-st.write("Know what a home is worth — price estimates for Indian metro cities.")
+st.write("Know what a home is worth — price estimates for Bengaluru.")
 
 if not MODEL_PATH.exists():
     st.error(
         "No trained model found. From the project root, run:\n\n"
-        "```\npython src/generate_dataset.py\npython src/data_preprocessing.py\n"
-        "python src/train_model.py\n```"
+        "```\npython src/data_preprocessing.py\npython src/train_model.py\n```"
     )
     st.stop()
 
@@ -247,33 +229,24 @@ metrics = load_metrics()
 data = load_data()
 interval = load_interval()
 
+locations = sorted(data["location"].unique()) if data is not None else ["Whitefield"]
+loc_default = locations.index("Whitefield") if "Whitefield" in locations else 0
+
 with st.form("house"):
     col1, col2 = st.columns(2)
 
     with col1:
-        area = st.number_input("Area (sq ft)", min_value=300, max_value=9000,
-                               value=1100, step=50)
-        bedrooms = st.selectbox("Bedrooms", [1, 2, 3, 4, 5], index=2)
-        bathrooms = st.selectbox("Bathrooms", [1, 2, 3, 4], index=1)
-        stories = st.selectbox("Stories", [1, 2, 3, 4], index=1)
+        area = st.number_input("Area (sq ft)", min_value=300, max_value=30000,
+                               value=1200, step=50)
+        bedrooms = st.selectbox("Bedrooms (BHK)", [1, 2, 3, 4, 5, 6], index=1)
+        bathrooms = st.selectbox("Bathrooms", [1, 2, 3, 4, 5, 6], index=1)
+        balcony = st.selectbox("Balconies", [0, 1, 2, 3], index=1)
 
     with col2:
-        city = st.selectbox(
-            "City", ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata"]
-        )
-        location = st.selectbox(
-            "Location",
-            ["City Centre", "Prime Suburb", "Suburb", "Outskirts", "Premium Township"],
-            index=2,
-        )
-        house_age = st.slider("House age (years)", min_value=0, max_value=60, value=10)
-        parking = st.selectbox("Parking spots", [0, 1, 2, 3], index=1)
-
-    main_road = st.radio("On a main road?", ["yes", "no"], horizontal=True)
-
-    furnishing_status = st.selectbox(
-        "Furnishing status", ["furnished", "semi-furnished", "unfurnished"], index=1
-    )
+        location = st.selectbox("Locality", locations, index=loc_default)
+        area_type = st.selectbox("Area type", AREA_TYPES)
+        status = st.radio("Possession", ["Ready to move", "Under construction"],
+                          horizontal=True)
 
     submitted = st.form_submit_button("Estimate price", type="primary",
                                       width="stretch")
@@ -281,9 +254,8 @@ with st.form("house"):
 if submitted:
     raw = {
         "area": area, "bedrooms": bedrooms, "bathrooms": bathrooms,
-        "stories": stories, "city": city, "location": location,
-        "house_age": house_age, "parking": parking, "main_road": main_road,
-        "furnishing_status": furnishing_status,
+        "balcony": balcony, "ready_to_move": int(status == "Ready to move"),
+        "location": location, "area_type": area_type,
     }
     input_df = build_input(raw)
 
@@ -319,22 +291,19 @@ if submitted:
     )
 
     if data is not None:
-        delta_pct, bar_html, n_seg = market_position(
-            data, city, location, predicted_price
+        delta_pct, bar_html, n_seg = market_position(data, location, predicted_price)
+        direction = "above" if delta_pct >= 0 else "below"
+        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
+        st.markdown("###### How it compares")
+        st.markdown(
+            f"About **{abs(delta_pct):.0f}% {direction}** the typical price for "
+            f"**{location}** homes."
         )
-        if bar_html:
-            direction = "above" if delta_pct >= 0 else "below"
-            st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-            st.markdown("###### How it compares")
-            st.markdown(
-                f"About **{abs(delta_pct):.0f}% {direction}** the typical price for "
-                f"**{city} · {location}** homes."
-            )
-            st.markdown(bar_html, unsafe_allow_html=True)
-            st.caption(
-                f"Bar spans the typical range (10th–90th percentile) of {n_seg} "
-                f"comparable {city} · {location} homes."
-            )
+        st.markdown(bar_html, unsafe_allow_html=True)
+        st.caption(
+            f"Bar spans the typical range (10th–90th percentile) of {n_seg} "
+            f"comparable listings in {location}."
+        )
 
         factors = explain_prediction(
             model, raw, baseline_features(data), predicted_price
@@ -347,28 +316,28 @@ if submitted:
             "versus a typical listing."
         )
 
-        comps = comparable_homes(data, city, location, area)
+        comps = comparable_homes(data, location, area)
         if comps is not None:
-            with st.expander(f"Comparable homes in {city} · {location}"):
+            with st.expander(f"Comparable homes in {location}"):
                 st.dataframe(
                     comps.style.format({
-                        "Area (sq ft)": "{:,.0f}", "Beds": "{:.0f}",
-                        "Baths": "{:.0f}", "Age (yrs)": "{:.0f}", "Price": inr,
+                        "Area (sq ft)": "{:,.0f}", "BHK": "{:.0f}",
+                        "Baths": "{:.0f}", "Price": inr,
                     }),
                     hide_index=True,
                     width="stretch",
                 )
-                st.caption("Closest listings by size in the same city and locality.")
+                st.caption("Closest listings by size in the same locality.")
 
-    st.caption("Trained on this project's dataset — not a real valuation.")
+    st.caption("Estimates from real Bengaluru listings — not a formal valuation.")
 
 st.divider()
 
 with st.expander("About the model"):
     st.write(
-        "A scikit-learn pipeline (imputation, one-hot encoding, scaling, and "
-        "the best of three compared regressors) trained on ~1,500 listings "
-        "priced at Indian metro-city rates. Test-set results:"
+        "A scikit-learn pipeline (one-hot encoding, scaling, and the best of "
+        "three compared regressors) trained on ~7,300 real Bengaluru listings "
+        "after cleaning. Test-set results:"
     )
     if metrics is not None:
         st.dataframe(
