@@ -211,13 +211,17 @@ if submitted:
         )
         if bar_html:
             direction = "above" if delta_pct >= 0 else "below"
+            st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
             st.markdown("###### How it compares")
             st.markdown(
                 f"About **{abs(delta_pct):.0f}% {direction}** the typical price for "
                 f"**{city} · {location}** homes."
             )
             st.markdown(bar_html, unsafe_allow_html=True)
-            st.caption(f"Positioned against {n_seg} similar listings in the dataset.")
+            st.caption(
+                f"Bar spans the typical range (10th–90th percentile) of {n_seg} "
+                f"comparable {city} · {location} homes."
+            )
 
     st.caption("Trained on this project's dataset — not a real valuation.")
 
