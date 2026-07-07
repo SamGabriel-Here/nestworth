@@ -30,65 +30,88 @@ FACTOR_LABELS = {
 
 st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
 
-st.markdown(
-    """
+BASE_CSS = """
 <style>
-h1 { font-weight: 800 !important; letter-spacing: -0.02em; }
-.nw-hero {
-  background: #FFFFFF; border: 2px solid #0B0B0C; border-radius: 14px;
-  padding: 28px 24px; text-align: center; margin: 4px 0 6px;
-}
-.nw-hero-label {
-  color: #8A8A92; font-size: 0.72rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.12em;
-}
-.nw-hero-price {
-  color: #0B0B0C; font-weight: 800; line-height: 1;
-  font-size: clamp(2.6rem, 10vw, 3.5rem); margin: 8px 0 6px;
-  letter-spacing: -0.02em;
-}
-.nw-hero-sub { color: #52525B; font-size: 0.95rem; font-weight: 500; }
-.nw-badge {
-  display: inline-block; margin-top: 15px;
-  background: #0D9488; color: #FFFFFF; border-radius: 7px;
-  padding: 5px 13px; font-size: 0.76rem; font-weight: 700;
-}
+h1 { letter-spacing: -0.02em; }
+.nw-hero { border-radius: 14px; padding: 28px 24px; text-align: center; margin: 4px 0 6px; }
+.nw-hero-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+.nw-hero-price { font-weight: 800; line-height: 1; font-size: clamp(2.4rem, 9vw, 3.3rem); margin: 8px 0 6px; letter-spacing: -0.02em; }
+.nw-hero-sub { font-size: 0.95rem; font-weight: 500; }
+.nw-badge { display: inline-block; margin-top: 15px; border-radius: 7px; padding: 5px 13px; font-size: 0.76rem; font-weight: 700; }
 .nw-bar-wrap { margin: 26px 0 2px; }
-.nw-bar-track {
-  position: relative; height: 11px; border-radius: 999px;
-  background: linear-gradient(90deg, #0D9488 0%, #EAB308 55%, #EA580C 100%);
-}
-.nw-bar-marker {
-  position: absolute; top: -5px; width: 4px; height: 21px;
-  background: #0B0B0C; border-radius: 2px; box-shadow: 0 0 0 2px #FFFFFF;
-}
-.nw-bar-mark-label {
-  position: absolute; top: -31px; transform: translateX(-50%);
-  white-space: nowrap; background: #0B0B0C; color: #FFFFFF;
-  font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;
-}
-.nw-bar-ends {
-  display: flex; justify-content: space-between;
-  color: #71717A; font-size: 0.75rem; font-weight: 600; margin-top: 9px;
-}
+.nw-bar-track { position: relative; height: 11px; border-radius: 999px; }
+.nw-bar-marker { position: absolute; top: -5px; width: 4px; height: 21px; border-radius: 2px; }
+.nw-bar-mark-label { position: absolute; top: -31px; transform: translateX(-50%); white-space: nowrap; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
+.nw-bar-ends { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; margin-top: 9px; }
 .nw-factor { margin: 10px 0; }
-.nw-factor-top {
-  display: flex; justify-content: space-between; align-items: baseline;
-  font-size: 0.9rem;
-}
-.nw-factor-label { color: #27272A; font-weight: 600; }
+.nw-factor-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.9rem; }
+.nw-factor-label { font-weight: 600; }
 .nw-factor-val { font-weight: 800; font-variant-numeric: tabular-nums; }
-.nw-factor-bar {
-  height: 6px; border-radius: 999px; background: #F1F1EE;
-  margin-top: 5px; overflow: hidden;
-}
+.nw-factor-bar { height: 6px; border-radius: 999px; margin-top: 5px; overflow: hidden; }
 .nw-factor-fill { height: 100%; border-radius: 999px; }
-.nw-pos { color: #0D9488; }
-.nw-neg { color: #EA580C; }
-.nw-pos-bg { background: #0D9488; }
-.nw-neg-bg { background: #EA580C; }
+[data-testid="stHeader"] { background: transparent; }
 </style>
-""",
+"""
+
+LEDGER_CSS = """
+<style>
+.stApp { background-color: #F1F2EE; }
+h1, .nw-hero-price { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; font-weight: 700; color: #1B1E1C; }
+.nw-hero { background: #FBFBF8; border: 1px solid #E3E4DD; }
+.nw-hero-label { color: #9A9E94; }
+.nw-hero-sub { color: #6E736C; }
+.nw-badge { background: #E7EFEA; color: #1F5C43; }
+.nw-bar-track { background: linear-gradient(90deg,#2E7D5B,#C9A227,#C0563B); }
+.nw-bar-marker { background: #1B1E1C; box-shadow: 0 0 0 2px #FBFBF8; }
+.nw-bar-mark-label { background: #1B1E1C; color: #FBFBF8; }
+.nw-bar-ends { color: #9A9E94; }
+.nw-factor-label { color: #45463F; }
+.nw-factor-bar { background: #E7E8E0; }
+.nw-pos { color: #1F5C43; } .nw-neg { color: #9A3B34; }
+.nw-pos-bg { background: #2E7D5B; } .nw-neg-bg { background: #C06A5C; }
+[data-testid="stForm"] { border-color: #DEDFD8; }
+button[kind="primaryFormSubmit"] { background-color: #1F5C43; border-color: #1F5C43; color: #FBFBF8; }
+button[kind="primaryFormSubmit"]:hover { background-color: #17472F; border-color: #17472F; color: #FBFBF8; }
+</style>
+"""
+
+INSTRUMENT_CSS = """
+<style>
+.stApp { background: radial-gradient(130% 90% at 50% -10%, #15212C 0%, #0B0E13 58%) #0B0E13; }
+h1 { color: #F4F7FB; font-weight: 800; }
+.nw-hero-price { color: #F4F7FB; text-shadow: 0 0 30px rgba(70,224,166,0.18); }
+.nw-hero { background: #12161E; border: 1px solid rgba(70,224,166,0.16); }
+.nw-hero-label { color: #5C687A; }
+.nw-hero-sub { color: #8892A4; }
+.nw-badge { background: rgba(70,224,166,0.14); color: #7CE9BE; }
+.nw-bar-track { background: linear-gradient(90deg,#1E5C43,#8A6B22,#8A3A2E); }
+.nw-bar-marker { background: #E9ECF2; box-shadow: 0 0 0 2px #0B0E13; }
+.nw-bar-mark-label { background: #46E0A6; color: #06231A; }
+.nw-bar-ends { color: #5C687A; }
+.nw-factor-label { color: #B7BECC; }
+.nw-factor-bar { background: #1A212B; }
+.nw-pos { color: #46E0A6; } .nw-neg { color: #FF8A7A; }
+.nw-pos-bg { background: #35C08C; } .nw-neg-bg { background: #E06A5A; }
+[data-testid="stMain"], [data-testid="stMarkdownContainer"] { color: #E9ECF2; }
+[data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] label, .stRadio label p, [data-testid="stExpander"] summary span { color: #C2C8DC !important; }
+[data-testid="stForm"] { background: #0E121A; border: 1px solid #1E2530; }
+[data-baseweb="select"] > div, [data-baseweb="input"], [data-baseweb="base-input"], [data-testid="stNumberInputContainer"] { background-color: #12161E !important; border-color: #28303C !important; }
+input, textarea { background-color: transparent !important; color: #E9ECF2 !important; }
+[data-baseweb="select"] div, [data-baseweb="select"] span, .stSlider label { color: #E9ECF2 !important; }
+[data-testid="stNumberInputContainer"] button { background-color: #161B25 !important; color: #C2C8DC !important; border-color: #28303C !important; }
+[data-testid="stSegmentedControl"] button { background-color: #12161E !important; color: #B7BECC !important; border-color: #28303C !important; }
+[data-baseweb="popover"] ul[role="listbox"], [data-baseweb="menu"] { background-color: #12161E !important; }
+[data-baseweb="popover"] li { color: #E9ECF2 !important; }
+[data-testid="stExpander"] details { background: #0E121A; border-color: #1E2530; }
+[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p { color: #C2C8DC; }
+button[kind="primaryFormSubmit"] { background-color: #35C08C; border-color: #35C08C; color: #06231A; }
+button[kind="primaryFormSubmit"]:hover { background-color: #2CA97B; border-color: #2CA97B; color: #06231A; }
+</style>
+"""
+
+st.markdown(BASE_CSS, unsafe_allow_html=True)
+st.markdown(
+    LEDGER_CSS if st.session_state.get("theme", "Ledger") == "Ledger" else INSTRUMENT_CSS,
     unsafe_allow_html=True,
 )
 
@@ -230,6 +253,13 @@ def comparable_homes(df: pd.DataFrame, city: str, location: str, area: float, k=
     out.columns = ["Area (sq ft)", "Beds", "Baths", "Age (yrs)", "Price"]
     return out
 
+
+_, theme_col = st.columns([3, 1])
+with theme_col:
+    st.segmented_control(
+        "Theme", ["Ledger", "Instrument"], default="Ledger",
+        key="theme", label_visibility="collapsed",
+    )
 
 st.title("NestWorth")
 st.write("Know what a home is worth — price estimates for Indian metro cities.")
