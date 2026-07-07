@@ -33,60 +33,60 @@ st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
 st.markdown(
     """
 <style>
+h1 { font-weight: 800 !important; letter-spacing: -0.02em; }
 .nw-hero {
-  background: linear-gradient(135deg, #1A2029 0%, #232C3A 100%);
-  border: 1px solid #2A3542; border-radius: 16px;
-  padding: 26px 24px; text-align: center; margin: 4px 0 6px;
+  background: #FFFFFF; border: 2px solid #0B0B0C; border-radius: 14px;
+  padding: 28px 24px; text-align: center; margin: 4px 0 6px;
 }
 .nw-hero-label {
-  color: #8A93A5; font-size: 0.78rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.09em;
+  color: #8A8A92; font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
 }
 .nw-hero-price {
-  color: #E6E9EF; font-weight: 700; line-height: 1.05;
-  font-size: clamp(2.1rem, 8vw, 2.9rem); margin: 6px 0 4px;
+  color: #0B0B0C; font-weight: 800; line-height: 1;
+  font-size: clamp(2.6rem, 10vw, 3.5rem); margin: 8px 0 6px;
+  letter-spacing: -0.02em;
 }
-.nw-hero-sub { color: #9AA4B4; font-size: 0.95rem; }
+.nw-hero-sub { color: #52525B; font-size: 0.95rem; font-weight: 500; }
 .nw-badge {
-  display: inline-block; margin-top: 14px;
-  background: rgba(91, 141, 239, 0.15); color: #8FB2F5;
-  border: 1px solid rgba(91, 141, 239, 0.35); border-radius: 999px;
-  padding: 4px 13px; font-size: 0.78rem; font-weight: 600;
+  display: inline-block; margin-top: 15px;
+  background: #0D9488; color: #FFFFFF; border-radius: 7px;
+  padding: 5px 13px; font-size: 0.76rem; font-weight: 700;
 }
 .nw-bar-wrap { margin: 26px 0 2px; }
 .nw-bar-track {
-  position: relative; height: 10px; border-radius: 999px;
-  background: linear-gradient(90deg, #2E7D5B 0%, #C9A227 55%, #C0563B 100%);
+  position: relative; height: 11px; border-radius: 999px;
+  background: linear-gradient(90deg, #0D9488 0%, #EAB308 55%, #EA580C 100%);
 }
 .nw-bar-marker {
-  position: absolute; top: -5px; width: 3px; height: 20px;
-  background: #E6E9EF; border-radius: 2px; box-shadow: 0 0 0 2px #0E1117;
+  position: absolute; top: -5px; width: 4px; height: 21px;
+  background: #0B0B0C; border-radius: 2px; box-shadow: 0 0 0 2px #FFFFFF;
 }
 .nw-bar-mark-label {
-  position: absolute; top: -30px; transform: translateX(-50%);
-  white-space: nowrap; background: #E6E9EF; color: #0E1117;
-  font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;
+  position: absolute; top: -31px; transform: translateX(-50%);
+  white-space: nowrap; background: #0B0B0C; color: #FFFFFF;
+  font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;
 }
 .nw-bar-ends {
   display: flex; justify-content: space-between;
-  color: #8A93A5; font-size: 0.75rem; margin-top: 9px;
+  color: #71717A; font-size: 0.75rem; font-weight: 600; margin-top: 9px;
 }
 .nw-factor { margin: 10px 0; }
 .nw-factor-top {
   display: flex; justify-content: space-between; align-items: baseline;
   font-size: 0.9rem;
 }
-.nw-factor-label { color: #C7CEDA; }
-.nw-factor-val { font-weight: 700; font-variant-numeric: tabular-nums; }
+.nw-factor-label { color: #27272A; font-weight: 600; }
+.nw-factor-val { font-weight: 800; font-variant-numeric: tabular-nums; }
 .nw-factor-bar {
-  height: 6px; border-radius: 999px; background: #171C24;
+  height: 6px; border-radius: 999px; background: #F1F1EE;
   margin-top: 5px; overflow: hidden;
 }
 .nw-factor-fill { height: 100%; border-radius: 999px; }
-.nw-pos { color: #5FBF8B; }
-.nw-neg { color: #E08A7A; }
-.nw-pos-bg { background: #3E7D5E; }
-.nw-neg-bg { background: #9E5142; }
+.nw-pos { color: #0D9488; }
+.nw-neg { color: #EA580C; }
+.nw-pos-bg { background: #0D9488; }
+.nw-neg-bg { background: #EA580C; }
 </style>
 """,
     unsafe_allow_html=True,
