@@ -1,0 +1,1526 @@
+area,bedrooms,bathrooms,stories,city,location,house_age,parking,main_road,furnishing_status,price
+1905.0,2,1.0,3,Chennai,Suburb,36,0.0,yes,unfurnished,15076481.0
+971.0,1,1.0,1,Mumbai,City Centre,54,1.0,yes,semi-furnished,31097882.0
+1309.0,2,1.0,2,Mumbai,Outskirts,15,1.0,yes,semi-furnished,16597257.0
+944.0,2,1.0,3,Mumbai,Suburb,22,3.0,yes,unfurnished,17763159.0
+2485.0,5,3.0,1,Bangalore,Premium Township,42,1.0,yes,furnished,34824915.0
+1559.0,4,3.0,1,Delhi,Suburb,20,2.0,no,unfurnished,19434693.0
+627.0,4,3.0,2,Delhi,Suburb,49,2.0,yes,unfurnished,7800026.0
+686.0,3,3.0,3,Bangalore,Prime Suburb,43,0.0,yes,furnished,7568581.0
+426.0,4,2.0,1,Delhi,Premium Township,0,1.0,yes,semi-furnished,11644463.0
+1407.0,2,1.0,3,Delhi,Suburb,13,2.0,no,unfurnished,15520463.0
+1252.0,4,2.0,2,Kolkata,Suburb,21,0.0,no,semi-furnished,7927058.0
+1101.0,2,2.0,2,Mumbai,Outskirts,31,1.0,yes,furnished,13410224.0
+1445.0,3,3.0,2,Delhi,City Centre,50,0.0,no,semi-furnished,32211477.0
+538.0,1,1.0,3,Bangalore,Suburb,21,0.0,yes,unfurnished,4782570.0
+1482.0,2,2.0,3,Chennai,Outskirts,57,1.0,yes,semi-furnished,5833841.0
+1573.0,2,2.0,3,Delhi,Prime Suburb,16,2.0,yes,semi-furnished,26922207.0
+916.0,4,3.0,2,Mumbai,Suburb,53,0.0,yes,unfurnished,17139281.0
+2049.0,2,2.0,1,Mumbai,Outskirts,22,1.0,yes,furnished,19637349.0
+1178.0,2,1.0,3,Chennai,Premium Township,20,2.0,yes,unfurnished,13966421.0
+782.0,2,1.0,1,Bangalore,Suburb,9,0.0,yes,furnished,9398344.0
+7524.0,3,1.0,2,Mumbai,Suburb,55,0.0,no,semi-furnished,23428195.0
+1506.0,3,2.0,1,Kolkata,Outskirts,9,2.0,yes,furnished,6069281.0
+1501.0,4,3.0,2,Mumbai,Prime Suburb,33,2.0,no,furnished,30795468.0
+1625.0,3,3.0,2,Bangalore,Prime Suburb,41,1.0,yes,unfurnished,19658188.0
+1151.0,2,2.0,1,Delhi,Suburb,1,0.0,no,furnished,16380493.0
+614.0,2,2.0,3,Mumbai,Prime Suburb,7,0.0,no,semi-furnished,18095553.0
+1113.0,4,4.0,4,Chennai,Suburb,21,1.0,yes,furnished,12219225.0
+1499.0,2,1.0,2,Kolkata,Prime Suburb,60,2.0,yes,furnished,45697008.79140646
+1477.0,3,2.0,2,Chennai,Premium Township,27,2.0,no,unfurnished,17916742.0
+730.0,2,1.0,1,Mumbai,Suburb,16,1.0,no,unfurnished,15945225.0
+1326.0,2,2.0,3,Kolkata,Suburb,43,0.0,yes,semi-furnished,7256239.0
+1180.0,2,1.0,2,Mumbai,Suburb,29,0.0,yes,semi-furnished,21924733.0
+874.0,3,2.0,1,Bangalore,Outskirts,1,0.0,yes,semi-furnished,6312663.0
+1049.0,3,3.0,2,Bangalore,Suburb,14,1.0,yes,semi-furnished,10134438.0
+981.0,2,1.0,2,Mumbai,Suburb,0,2.0,yes,furnished,20035652.0
+439.0,1,1.0,1,Delhi,Suburb,27,0.0,no,semi-furnished,4575303.0
+1753.0,4,4.0,1,Chennai,Premium Township,58,1.0,yes,unfurnished,19890187.0
+1532.0,2,1.0,4,Delhi,Outskirts,21,1.0,no,semi-furnished,10676690.0
+1341.0,2,2.0,2,Delhi,Premium Township,30,0.0,yes,semi-furnished,23320112.0
+1752.0,1,1.0,3,Kolkata,Outskirts,46,2.0,yes,semi-furnished,4886483.0
+1212.0,5,5.0,4,Bangalore,Premium Township,12,2.0,yes,unfurnished,19800383.0
+1356.0,1,1.0,2,Bangalore,Outskirts,0,1.0,yes,semi-furnished,8191270.0
+1338.0,5,5.0,2,Delhi,Suburb,27,1.0,yes,semi-furnished,18164906.0
+542.0,3,2.0,1,Mumbai,Outskirts,22,1.0,no,furnished,9167704.0
+910.0,3,1.0,2,Mumbai,Prime Suburb,40,2.0,yes,furnished,19762804.0
+1038.0,3,3.0,1,Bangalore,City Centre,59,0.0,no,unfurnished,15848768.0
+1557.0,2,2.0,2,Mumbai,City Centre,8,3.0,no,semi-furnished,54381722.0
+1459.0,3,1.0,2,Bangalore,Suburb,60,3.0,yes,semi-furnished,13210259.0
+1341.0,2,1.0,2,Bangalore,Suburb,36,0.0,yes,semi-furnished,13314479.0
+992.0,5,5.0,1,Delhi,City Centre,32,1.0,yes,semi-furnished,23764892.0
+573.0,3,3.0,3,Chennai,Outskirts,42,1.0,yes,furnished,3060696.0
+1708.0,2,2.0,2,Delhi,Suburb,6,1.0,yes,semi-furnished,21021587.0
+994.0,2,1.0,1,Delhi,Outskirts,37,1.0,yes,furnished,6808839.0
+1915.0,3,3.0,2,Mumbai,City Centre,18,2.0,no,furnished,68608453.0
+1010.0,2,1.0,1,Chennai,City Centre,32,1.0,yes,furnished,15164531.0
+1140.0,1,1.0,2,Bangalore,Suburb,30,1.0,no,furnished,10147450.0
+1415.0,1,1.0,2,Bangalore,Prime Suburb,53,3.0,yes,semi-furnished,15303103.0
+977.0,4,,2,Bangalore,Suburb,23,0.0,no,unfurnished,10196511.0
+639.0,3,3.0,3,Chennai,Outskirts,9,2.0,yes,unfurnished,4642389.0
+1769.0,1,1.0,3,Bangalore,Outskirts,14,1.0,yes,furnished,50400493.43033866
+1900.0,2,,3,Delhi,Prime Suburb,19,1.0,yes,furnished,30003683.0
+1205.0,1,1.0,2,Delhi,City Centre,56,1.0,no,furnished,23548769.0
+1085.0,4,3.0,3,Delhi,City Centre,33,0.0,yes,semi-furnished,22127163.0
+1272.0,1,1.0,3,Kolkata,Outskirts,4,0.0,yes,semi-furnished,5368741.0
+,3,1.0,3,Mumbai,Suburb,21,,yes,semi-furnished,30046718.0
+700.0,2,2.0,1,Delhi,City Centre,27,1.0,yes,,14526413.0
+1538.0,3,3.0,3,Delhi,Premium Township,6,1.0,yes,furnished,31407599.0
+1155.0,2,2.0,1,Mumbai,Suburb,14,1.0,yes,unfurnished,24221684.0
+1399.0,2,1.0,3,Chennai,City Centre,41,2.0,yes,furnished,17650298.0
+1084.0,4,4.0,1,Bangalore,Suburb,60,1.0,no,unfurnished,8974409.0
+1166.0,1,1.0,1,Delhi,Suburb,35,1.0,yes,,14865705.0
+787.0,1,1.0,3,Bangalore,Suburb,32,2.0,yes,semi-furnished,6346813.0
+856.0,5,4.0,2,Mumbai,City Centre,23,3.0,yes,semi-furnished,34461123.0
+1322.0,3,3.0,1,Delhi,Prime Suburb,21,2.0,yes,unfurnished,19023569.0
+1082.0,2,1.0,1,Chennai,Prime Suburb,0,1.0,no,semi-furnished,11114932.0
+1314.0,5,5.0,1,Bangalore,Outskirts,22,0.0,yes,furnished,9060259.0
+815.0,3,3.0,1,Bangalore,Outskirts,48,2.0,yes,unfurnished,4582159.0
+900.0,1,1.0,2,Bangalore,City Centre,45,1.0,no,unfurnished,11920308.0
+1047.0,3,1.0,3,Bangalore,City Centre,53,2.0,yes,furnished,15547130.0
+770.0,3,3.0,1,Bangalore,Premium Township,44,1.0,yes,semi-furnished,10200718.0
+1045.0,2,1.0,2,Bangalore,City Centre,11,0.0,yes,furnished,16663834.0
+671.0,2,2.0,3,Delhi,Outskirts,46,2.0,yes,semi-furnished,4957916.0
+1673.0,1,1.0,4,Bangalore,Suburb,48,1.0,yes,semi-furnished,14035977.0
+956.0,2,1.0,1,Mumbai,Suburb,11,1.0,no,furnished,18610468.0
+1401.0,3,3.0,3,Bangalore,Outskirts,45,0.0,no,unfurnished,6955651.0
+1922.0,3,3.0,2,Kolkata,Suburb,34,2.0,yes,semi-furnished,12592768.0
+1624.0,5,5.0,2,Chennai,Outskirts,9,1.0,yes,semi-furnished,7796973.0
+350.0,1,1.0,1,Bangalore,Suburb,17,1.0,yes,semi-furnished,4082455.0
+1385.0,3,2.0,1,Bangalore,Suburb,8,1.0,yes,semi-furnished,13659590.0
+364.0,3,2.0,1,Mumbai,City Centre,55,1.0,yes,unfurnished,10366920.0
+1384.0,4,4.0,3,Mumbai,Premium Township,30,1.0,no,furnished,40263305.0
+1491.0,3,3.0,1,Bangalore,Suburb,9,0.0,yes,unfurnished,15056556.0
+1721.0,2,1.0,1,Delhi,Prime Suburb,12,2.0,yes,unfurnished,21888575.0
+368.0,3,1.0,3,Delhi,Suburb,56,1.0,yes,unfurnished,3993013.0
+1116.0,2,2.0,1,Bangalore,Suburb,19,3.0,no,semi-furnished,10511194.0
+514.0,3,3.0,4,Delhi,Prime Suburb,1,1.0,no,semi-furnished,10300568.0
+1447.0,3,2.0,3,Mumbai,Prime Suburb,8,0.0,yes,unfurnished,30109744.0
+666.0,3,3.0,2,Bangalore,Suburb,47,3.0,yes,semi-furnished,7253882.0
+1338.0,3,1.0,4,Delhi,Premium Township,7,0.0,yes,semi-furnished,21298766.0
+997.0,3,3.0,2,Kolkata,Premium Township,0,3.0,yes,furnished,11174924.0
+381.0,2,2.0,3,Chennai,Outskirts,39,0.0,yes,semi-furnished,2381331.0
+984.0,3,3.0,3,Bangalore,Suburb,50,1.0,yes,semi-furnished,8894163.0
+928.0,2,2.0,2,Delhi,Suburb,56,2.0,yes,semi-furnished,9769634.0
+1009.0,2,2.0,2,Delhi,Prime Suburb,57,3.0,yes,semi-furnished,13230753.0
+1311.0,1,1.0,1,Kolkata,Outskirts,27,2.0,yes,unfurnished,4926487.0
+823.0,3,3.0,2,Bangalore,Outskirts,28,1.0,yes,semi-furnished,5371756.0
+1020.0,1,1.0,2,Chennai,Prime Suburb,12,3.0,yes,unfurnished,8768246.0
+805.0,1,1.0,1,Bangalore,Outskirts,8,3.0,yes,semi-furnished,5595652.0
+502.0,2,2.0,3,Mumbai,Suburb,10,2.0,no,semi-furnished,10602756.0
+526.0,3,3.0,2,Kolkata,Suburb,34,1.0,yes,semi-furnished,3873433.0
+,2,2.0,2,Delhi,Outskirts,1,3.0,yes,semi-furnished,11636757.0
+350.0,1,1.0,2,Kolkata,Outskirts,56,,no,semi-furnished,1000000.0
+1200.0,1,1.0,1,Mumbai,Suburb,4,1.0,yes,unfurnished,27178987.0
+1265.0,5,4.0,2,Chennai,Premium Township,22,1.0,yes,semi-furnished,16374341.0
+1508.0,1,1.0,1,Bangalore,Outskirts,16,3.0,no,semi-furnished,8969841.0
+1483.0,2,1.0,1,Chennai,City Centre,0,1.0,yes,semi-furnished,21768652.0
+1044.0,1,1.0,4,Chennai,Prime Suburb,23,1.0,yes,semi-furnished,10399543.0
+1012.0,4,4.0,2,Bangalore,Suburb,8,2.0,yes,unfurnished,11665963.0
+482.0,4,4.0,3,Chennai,Premium Township,4,2.0,yes,semi-furnished,8299304.0
+1131.0,3,1.0,1,Bangalore,Suburb,45,3.0,yes,unfurnished,9727073.0
+986.0,4,4.0,2,Kolkata,Suburb,53,2.0,no,furnished,6534852.0
+734.0,4,4.0,1,Mumbai,Suburb,5,2.0,yes,semi-furnished,19648304.0
+651.0,3,3.0,3,Kolkata,Suburb,35,1.0,yes,unfurnished,3863061.0
+1654.0,2,2.0,2,Kolkata,Premium Township,9,,yes,unfurnished,13550333.0
+998.0,3,3.0,3,Mumbai,City Centre,5,2.0,yes,semi-furnished,173421717.477116
+1110.0,3,1.0,2,Bangalore,Suburb,53,1.0,no,,9403842.0
+1312.0,3,3.0,1,Delhi,Premium Township,21,2.0,yes,furnished,21407879.0
+611.0,4,4.0,1,Delhi,Prime Suburb,44,0.0,no,semi-furnished,8903826.0
+614.0,2,2.0,3,Mumbai,Prime Suburb,7,0.0,no,semi-furnished,18095553.0
+947.0,3,2.0,2,Mumbai,Prime Suburb,51,1.0,yes,furnished,19219618.0
+1070.0,2,2.0,1,Chennai,City Centre,6,3.0,yes,unfurnished,15977677.0
+1730.0,2,2.0,2,Mumbai,Prime Suburb,52,1.0,yes,unfurnished,33598777.0
+749.0,1,1.0,2,Bangalore,Outskirts,7,3.0,yes,semi-furnished,5058538.0
+1723.0,2,2.0,1,Delhi,Suburb,14,1.0,yes,unfurnished,20441590.0
+1496.0,3,2.0,1,Mumbai,Prime Suburb,45,0.0,yes,semi-furnished,31219888.0
+1199.0,3,2.0,2,Mumbai,Outskirts,17,1.0,yes,semi-furnished,14832274.0
+1759.0,4,3.0,1,Mumbai,Suburb,8,0.0,yes,semi-furnished,35668415.0
+847.0,2,1.0,2,Delhi,Outskirts,13,0.0,no,semi-furnished,6250508.0
+1227.0,4,4.0,2,Bangalore,Suburb,44,0.0,no,unfurnished,10674407.0
+505.0,3,3.0,1,Bangalore,Premium Township,60,1.0,yes,semi-furnished,6500921.0
+928.0,2,2.0,3,Chennai,Outskirts,32,2.0,yes,unfurnished,4441789.0
+1878.0,3,3.0,3,Delhi,Prime Suburb,2,0.0,yes,semi-furnished,29524437.0
+1702.0,1,1.0,1,Mumbai,Prime Suburb,7,0.0,yes,furnished,38153319.0
+1065.0,2,2.0,3,Chennai,Suburb,55,0.0,no,unfurnished,8363345.0
+1926.0,1,1.0,2,Mumbai,Prime Suburb,55,2.0,yes,unfurnished,39191004.0
+569.0,2,2.0,1,Bangalore,City Centre,17,1.0,yes,semi-furnished,9458158.0
+978.0,3,3.0,2,Mumbai,City Centre,21,2.0,yes,semi-furnished,37285154.0
+1044.0,1,1.0,1,Delhi,Suburb,4,2.0,yes,unfurnished,13288239.0
+1413.0,5,5.0,2,Delhi,Prime Suburb,6,1.0,yes,furnished,24094872.0
+1246.0,2,2.0,2,Kolkata,Suburb,25,0.0,yes,semi-furnished,7413935.0
+1257.0,2,2.0,1,Bangalore,City Centre,46,1.0,yes,furnished,19611129.0
+1548.0,2,1.0,2,Chennai,Outskirts,46,0.0,no,unfurnished,5293237.0
+1162.0,4,3.0,1,Bangalore,City Centre,42,3.0,yes,semi-furnished,18192524.0
+1178.0,2,1.0,2,Delhi,Prime Suburb,59,1.0,yes,unfurnished,16872934.0
+683.0,2,2.0,2,Bangalore,Premium Township,22,3.0,no,unfurnished,7932943.0
+789.0,3,3.0,2,Mumbai,Outskirts,5,2.0,yes,semi-furnished,14042158.0
+1128.0,1,1.0,1,Mumbai,Suburb,56,1.0,no,semi-furnished,17480513.0
+1383.0,2,2.0,1,Mumbai,City Centre,9,3.0,no,semi-furnished,58901029.0
+1222.0,3,2.0,1,Bangalore,City Centre,0,1.0,no,unfurnished,18419302.0
+1336.0,2,1.0,2,Kolkata,Outskirts,5,1.0,yes,semi-furnished,6143022.0
+1568.0,1,1.0,1,Kolkata,Suburb,27,,yes,unfurnished,8809073.0
+,3,3.0,2,Delhi,Outskirts,29,0.0,no,semi-furnished,6117236.0
+1107.0,2,2.0,3,Mumbai,Outskirts,12,,yes,unfurnished,13826371.0
+350.0,2,1.0,1,Mumbai,Suburb,2,1.0,yes,furnished,9796188.0
+1501.0,4,3.0,2,Delhi,Prime Suburb,41,,yes,unfurnished,22145584.0
+1021.0,2,2.0,4,Bangalore,Outskirts,40,1.0,yes,semi-furnished,5854593.0
+1420.0,4,4.0,1,Kolkata,City Centre,9,1.0,yes,furnished,12502605.0
+350.0,3,3.0,2,Delhi,Prime Suburb,24,3.0,no,furnished,7429177.0
+1385.0,4,3.0,2,Delhi,City Centre,17,1.0,yes,semi-furnished,30226358.0
+1114.0,4,3.0,1,Mumbai,Suburb,49,1.0,no,unfurnished,18391391.0
+1465.0,5,5.0,4,Delhi,Suburb,57,3.0,yes,semi-furnished,19773251.0
+1931.0,2,2.0,2,Chennai,Prime Suburb,32,1.0,yes,unfurnished,16595892.0
+1817.0,3,2.0,2,Delhi,Prime Suburb,40,0.0,yes,semi-furnished,25062697.0
+1149.0,3,3.0,1,Bangalore,Suburb,8,0.0,yes,unfurnished,12420732.0
+1330.0,2,2.0,1,Delhi,Suburb,18,1.0,yes,furnished,16099605.0
+1378.0,2,1.0,1,Bangalore,Outskirts,57,2.0,yes,semi-furnished,6560022.0
+938.0,3,3.0,2,Chennai,Outskirts,42,1.0,yes,semi-furnished,4923566.0
+1034.0,2,2.0,2,Bangalore,Outskirts,1,0.0,no,semi-furnished,7104240.0
+1307.0,4,3.0,1,Bangalore,City Centre,18,1.0,no,unfurnished,20820044.0
+1188.0,1,1.0,3,Chennai,Suburb,42,0.0,yes,unfurnished,7616110.0
+477.0,2,1.0,1,Kolkata,Outskirts,58,2.0,yes,unfurnished,1174858.0
+1248.0,2,1.0,4,Bangalore,Outskirts,24,3.0,yes,furnished,7175912.0
+1291.0,3,3.0,3,Delhi,Prime Suburb,12,,yes,semi-furnished,21137058.0
+1040.0,2,1.0,3,Mumbai,Suburb,6,1.0,yes,semi-furnished,22287809.0
+1568.0,4,3.0,2,Delhi,Suburb,53,0.0,yes,semi-furnished,16476289.0
+1496.0,2,2.0,3,Delhi,Outskirts,36,2.0,yes,unfurnished,10609866.0
+1696.0,1,1.0,1,Delhi,Suburb,4,1.0,yes,unfurnished,19694948.0
+1636.0,3,2.0,2,Kolkata,Suburb,28,1.0,yes,unfurnished,9687210.0
+539.0,4,3.0,3,Bangalore,Prime Suburb,35,0.0,yes,semi-furnished,8472955.0
+1008.0,3,2.0,1,Chennai,Outskirts,37,0.0,no,semi-furnished,3962208.0
+1599.0,2,1.0,2,Delhi,Suburb,21,2.0,yes,semi-furnished,19739633.0
+1125.0,1,1.0,2,Delhi,Prime Suburb,39,2.0,yes,semi-furnished,14518269.0
+1056.0,2,2.0,2,Delhi,Outskirts,46,0.0,yes,semi-furnished,6327459.0
+1038.0,4,4.0,3,Bangalore,Premium Township,2,3.0,no,semi-furnished,15888781.0
+1365.0,4,4.0,1,Mumbai,Suburb,7,0.0,yes,unfurnished,29061119.0
+1676.0,2,1.0,1,Chennai,Outskirts,8,1.0,no,furnished,9235275.0
+1377.0,4,3.0,3,Mumbai,Suburb,53,2.0,yes,unfurnished,25611697.0
+1003.0,1,1.0,2,Chennai,City Centre,32,1.0,no,semi-furnished,11858761.0
+881.0,1,1.0,3,Delhi,City Centre,44,1.0,no,semi-furnished,17561404.0
+1418.0,3,3.0,1,Kolkata,City Centre,51,1.0,yes,semi-furnished,16068385.0
+667.0,1,1.0,1,Kolkata,Outskirts,41,0.0,yes,semi-furnished,1908640.0
+2116.0,3,3.0,2,Chennai,Prime Suburb,29,0.0,no,semi-furnished,17867790.0
+1617.0,2,2.0,1,Kolkata,Prime Suburb,25,3.0,no,furnished,12589474.0
+1258.0,2,1.0,1,Chennai,Premium Township,20,1.0,yes,unfurnished,14347853.0
+2044.0,2,2.0,4,Chennai,Premium Township,56,0.0,yes,furnished,21373472.0
+1176.0,4,4.0,2,Kolkata,Prime Suburb,36,0.0,yes,unfurnished,8755215.0
+1023.0,4,4.0,4,Delhi,Outskirts,30,0.0,yes,furnished,9023317.0
+1922.0,1,1.0,1,Delhi,Outskirts,5,0.0,yes,unfurnished,12004568.0
+1323.0,2,1.0,2,Kolkata,City Centre,37,1.0,yes,semi-furnished,14352362.0
+1761.0,3,2.0,1,Bangalore,Suburb,42,2.0,yes,semi-furnished,16406588.0
+902.0,3,2.0,2,Delhi,Prime Suburb,5,3.0,yes,semi-furnished,15192959.0
+935.0,3,2.0,1,Mumbai,Suburb,57,1.0,yes,furnished,19277467.0
+1445.0,3,2.0,1,Delhi,City Centre,46,2.0,yes,semi-furnished,33859781.0
+1606.0,1,1.0,1,Bangalore,Suburb,11,2.0,yes,semi-furnished,14949771.0
+1201.0,2,1.0,2,Bangalore,City Centre,30,2.0,no,semi-furnished,18122076.0
+1807.0,3,3.0,2,Kolkata,Suburb,44,1.0,yes,furnished,11939707.0
+1484.0,4,4.0,1,Chennai,Prime Suburb,54,1.0,yes,semi-furnished,15722712.0
+1768.0,4,4.0,2,Bangalore,Premium Township,30,1.0,yes,furnished,26741017.0
+891.0,3,2.0,2,Mumbai,City Centre,5,1.0,yes,semi-furnished,35322872.0
+350.0,3,1.0,2,Kolkata,Suburb,9,1.0,no,semi-furnished,2757223.0
+1144.0,3,3.0,2,Kolkata,Prime Suburb,4,1.0,yes,unfurnished,9362838.0
+350.0,3,1.0,3,Bangalore,Outskirts,54,2.0,no,,1859293.0
+1161.0,3,3.0,2,Bangalore,City Centre,33,1.0,no,semi-furnished,20694814.0
+805.0,3,2.0,2,Kolkata,Suburb,22,1.0,yes,semi-furnished,5432588.0
+788.0,2,1.0,2,Mumbai,Premium Township,0,1.0,no,semi-furnished,19645213.0
+762.0,3,3.0,2,Kolkata,Premium Township,6,2.0,yes,semi-furnished,8215098.0
+1336.0,3,3.0,1,Delhi,Suburb,42,0.0,no,semi-furnished,14916164.0
+1415.0,1,1.0,2,Bangalore,Prime Suburb,53,3.0,yes,semi-furnished,15303103.0
+350.0,4,4.0,2,Mumbai,Outskirts,43,1.0,no,semi-furnished,6012940.0
+931.0,2,1.0,1,Mumbai,Suburb,28,1.0,no,semi-furnished,16589105.0
+1115.0,3,2.0,1,Chennai,Prime Suburb,53,0.0,yes,unfurnished,9542677.0
+1829.0,2,2.0,3,Mumbai,Suburb,21,1.0,yes,furnished,36248905.0
+1650.0,2,1.0,1,Delhi,Prime Suburb,33,1.0,no,unfurnished,23573347.0
+1289.0,4,3.0,1,Mumbai,Suburb,3,2.0,yes,unfurnished,26777909.0
+989.0,3,2.0,1,Chennai,Premium Township,16,1.0,yes,unfurnished,12371540.0
+844.0,2,1.0,2,Kolkata,Outskirts,54,1.0,no,unfurnished,2065967.0
+1406.0,3,1.0,2,Kolkata,Suburb,51,1.0,yes,furnished,7893907.0
+1723.0,2,1.0,1,Kolkata,Prime Suburb,30,1.0,no,unfurnished,11358460.0
+7614.0,3,2.0,2,Mumbai,Prime Suburb,3,1.0,yes,semi-furnished,37389342.0
+1424.0,2,1.0,1,Delhi,Prime Suburb,20,3.0,no,unfurnished,19759767.0
+1674.0,3,3.0,3,Bangalore,Suburb,12,1.0,yes,semi-furnished,16909563.0
+1226.0,2,2.0,2,Mumbai,Prime Suburb,1,0.0,yes,semi-furnished,30793517.0
+1639.0,3,2.0,3,Delhi,City Centre,54,0.0,no,unfurnished,30785299.0
+1193.0,2,2.0,3,Delhi,Suburb,15,1.0,yes,unfurnished,14164197.0
+1811.0,4,4.0,2,Delhi,Suburb,36,1.0,yes,semi-furnished,24938016.0
+1509.0,3,3.0,1,Mumbai,Outskirts,41,0.0,yes,semi-furnished,15068734.0
+1239.0,3,3.0,1,Mumbai,Suburb,46,1.0,yes,semi-furnished,25547287.0
+1192.0,2,1.0,1,Bangalore,Prime Suburb,32,1.0,yes,semi-furnished,14788426.0
+1148.0,3,3.0,1,Chennai,Prime Suburb,9,0.0,yes,semi-furnished,11629284.0
+1296.0,3,3.0,3,Chennai,City Centre,51,1.0,yes,semi-furnished,15746734.0
+1135.0,2,1.0,3,Chennai,Suburb,21,1.0,yes,semi-furnished,9724160.0
+2221.0,2,1.0,2,Chennai,Prime Suburb,30,0.0,yes,unfurnished,20285835.0
+1138.0,4,4.0,2,Delhi,City Centre,21,1.0,yes,unfurnished,23707678.0
+1283.0,2,1.0,2,Delhi,Suburb,60,0.0,yes,unfurnished,12587607.0
+1144.0,3,2.0,1,Chennai,Suburb,50,2.0,yes,semi-furnished,7821836.0
+1085.0,4,3.0,1,Kolkata,Prime Suburb,49,0.0,no,unfurnished,7898819.0
+1193.0,2,,2,Bangalore,Suburb,21,1.0,yes,,10626378.0
+678.0,3,3.0,3,Bangalore,Premium Township,22,1.0,yes,semi-furnished,10073777.0
+1000.0,1,1.0,1,Mumbai,Suburb,26,0.0,no,furnished,16367840.0
+1305.0,2,2.0,1,Delhi,City Centre,16,1.0,no,unfurnished,25271896.0
+1165.0,1,1.0,1,Delhi,Outskirts,4,1.0,yes,unfurnished,8074371.0
+716.0,3,2.0,2,Bangalore,Outskirts,53,1.0,yes,unfurnished,3813008.0
+681.0,1,1.0,1,Mumbai,Suburb,37,1.0,yes,unfurnished,11590870.0
+2177.0,1,1.0,1,Mumbai,Outskirts,35,1.0,no,semi-furnished,19439709.0
+1338.0,4,4.0,1,Delhi,Prime Suburb,2,2.0,yes,semi-furnished,21112724.0
+1036.0,2,1.0,2,Chennai,Prime Suburb,21,1.0,no,unfurnished,48497108.8928119
+1120.0,3,3.0,2,Delhi,Prime Suburb,60,0.0,yes,unfurnished,16320975.0
+1700.0,2,2.0,1,Delhi,Prime Suburb,55,1.0,yes,furnished,22263290.0
+922.0,3,2.0,1,Kolkata,Suburb,8,1.0,yes,semi-furnished,6339540.0
+1151.0,3,3.0,2,Mumbai,City Centre,9,1.0,yes,semi-furnished,39909700.0
+555.0,3,3.0,1,Kolkata,Outskirts,14,3.0,yes,semi-furnished,3682664.0
+814.0,2,2.0,1,Mumbai,Premium Township,37,1.0,yes,furnished,22836334.0
+1222.0,1,1.0,2,Kolkata,Suburb,39,0.0,yes,unfurnished,6527446.0
+1308.0,3,2.0,3,Chennai,City Centre,25,3.0,yes,unfurnished,20024726.0
+940.0,3,3.0,2,Mumbai,Prime Suburb,26,1.0,yes,semi-furnished,22807396.0
+715.0,2,2.0,1,Bangalore,Prime Suburb,28,0.0,yes,semi-furnished,8203046.0
+1516.0,3,2.0,1,Kolkata,Suburb,30,2.0,yes,semi-furnished,9203812.0
+761.0,3,2.0,2,Bangalore,Premium Township,48,3.0,yes,unfurnished,11140384.0
+1156.0,5,4.0,2,Chennai,Prime Suburb,44,1.0,yes,unfurnished,11779870.0
+350.0,3,3.0,2,Chennai,Premium Township,16,1.0,yes,semi-furnished,4960908.0
+1249.0,1,1.0,1,Kolkata,Prime Suburb,38,1.0,yes,semi-furnished,8347675.0
+1415.0,2,1.0,3,Mumbai,Prime Suburb,42,1.0,yes,semi-furnished,37011354.0
+1196.0,2,1.0,3,Kolkata,Suburb,32,1.0,no,semi-furnished,33998566.67652117
+928.0,3,3.0,1,Bangalore,Prime Suburb,42,3.0,yes,furnished,10126913.0
+1009.0,1,1.0,1,Bangalore,Outskirts,20,0.0,yes,unfurnished,4225802.0
+781.0,2,1.0,3,Bangalore,Suburb,16,2.0,yes,unfurnished,6810473.0
+767.0,2,1.0,2,Chennai,Suburb,57,2.0,no,furnished,5529665.0
+350.0,1,1.0,2,Bangalore,Outskirts,5,1.0,no,furnished,3339628.0
+1774.0,3,2.0,3,Kolkata,Prime Suburb,3,1.0,no,unfurnished,15003100.0
+786.0,3,3.0,1,Mumbai,Suburb,36,0.0,yes,furnished,16825214.0
+792.0,2,2.0,2,Mumbai,Prime Suburb,32,1.0,no,furnished,21102696.0
+8810.0,4,4.0,3,Chennai,Suburb,52,1.0,yes,unfurnished,10611994.0
+1873.0,4,4.0,1,Mumbai,City Centre,21,2.0,no,semi-furnished,66721520.0
+1905.0,4,,3,Kolkata,Suburb,29,1.0,yes,unfurnished,11355110.0
+1522.0,2,2.0,1,Chennai,Outskirts,5,1.0,no,semi-furnished,7792874.0
+628.0,3,3.0,2,Mumbai,Outskirts,56,2.0,yes,furnished,8289761.0
+919.0,2,1.0,3,Kolkata,Suburb,56,0.0,yes,unfurnished,4739731.0
+1233.0,5,4.0,1,Delhi,Suburb,58,1.0,yes,semi-furnished,16198998.0
+1303.0,3,3.0,3,Chennai,City Centre,43,0.0,yes,semi-furnished,16875937.0
+800.0,2,1.0,2,Delhi,Premium Township,28,1.0,yes,furnished,15262643.0
+2167.0,2,2.0,1,Bangalore,Outskirts,57,1.0,yes,semi-furnished,9436327.0
+731.0,1,1.0,2,Mumbai,Suburb,39,2.0,yes,semi-furnished,14008873.0
+914.0,3,2.0,1,Chennai,Suburb,14,1.0,yes,semi-furnished,7960526.0
+350.0,2,2.0,1,Kolkata,Prime Suburb,19,0.0,no,unfurnished,3002974.0
+1656.0,4,3.0,2,Delhi,Premium Township,27,1.0,yes,furnished,32445906.0
+488.0,3,3.0,3,Delhi,Outskirts,21,3.0,yes,furnished,6489699.0
+1420.0,4,2.0,2,Kolkata,Outskirts,52,1.0,no,unfurnished,4684527.0
+1349.0,2,2.0,1,Delhi,Outskirts,10,0.0,yes,unfurnished,9651802.0
+1104.0,1,1.0,1,Delhi,Prime Suburb,38,1.0,yes,unfurnished,14248279.0
+872.0,3,3.0,3,Bangalore,Outskirts,11,1.0,yes,furnished,8132738.0
+,3,1.0,2,Kolkata,Suburb,29,1.0,yes,unfurnished,8197834.0
+1564.0,3,2.0,4,Bangalore,Suburb,35,2.0,yes,semi-furnished,15226932.0
+478.0,2,2.0,1,Delhi,City Centre,35,2.0,no,unfurnished,9780606.0
+1250.0,2,1.0,3,Mumbai,Prime Suburb,22,1.0,yes,unfurnished,33754715.0
+745.0,1,1.0,1,Mumbai,Suburb,29,0.0,no,furnished,13561763.0
+1034.0,2,1.0,1,Mumbai,Outskirts,29,3.0,yes,semi-furnished,13495059.0
+1431.0,5,5.0,4,Mumbai,Prime Suburb,43,0.0,no,furnished,33395938.0
+1044.0,3,1.0,3,Delhi,Prime Suburb,2,1.0,yes,semi-furnished,19429635.0
+1991.0,3,2.0,2,Mumbai,Prime Suburb,33,3.0,yes,semi-furnished,46460913.0
+1480.0,5,,2,Delhi,Premium Township,39,1.0,yes,furnished,26336370.0
+1645.0,2,2.0,1,Bangalore,Premium Township,6,1.0,no,furnished,20317719.0
+350.0,3,2.0,1,Chennai,Prime Suburb,22,1.0,yes,unfurnished,4199560.0
+355.0,2,2.0,2,Bangalore,Prime Suburb,15,0.0,yes,unfurnished,4699580.0
+1274.0,3,2.0,1,Mumbai,City Centre,4,2.0,yes,furnished,43234727.0
+1221.0,2,2.0,2,Chennai,Suburb,19,0.0,yes,semi-furnished,9861602.0
+1048.0,3,2.0,2,Bangalore,Outskirts,50,3.0,yes,semi-furnished,5866105.0
+422.0,1,1.0,1,Mumbai,Prime Suburb,1,1.0,yes,unfurnished,10815692.0
+1772.0,2,1.0,2,Mumbai,Prime Suburb,34,2.0,yes,unfurnished,40100611.0
+715.0,2,2.0,1,Bangalore,Prime Suburb,28,0.0,yes,semi-furnished,8203046.0
+1443.0,1,1.0,1,Delhi,Prime Suburb,28,0.0,yes,semi-furnished,23077582.0
+381.0,2,2.0,3,Chennai,Outskirts,39,0.0,yes,semi-furnished,2381331.0
+1444.0,4,4.0,1,Chennai,Premium Township,26,1.0,yes,unfurnished,16608671.0
+1392.0,2,2.0,2,Mumbai,Prime Suburb,24,1.0,yes,unfurnished,33148127.0
+1062.0,5,5.0,1,Delhi,Outskirts,1,3.0,yes,semi-furnished,10849171.0
+2022.0,1,1.0,2,Chennai,Prime Suburb,4,2.0,yes,furnished,17963839.0
+991.0,2,1.0,3,Kolkata,City Centre,51,1.0,yes,semi-furnished,10264809.0
+834.0,3,3.0,1,Mumbai,Outskirts,5,0.0,no,unfurnished,11734452.0
+1932.0,2,1.0,2,Mumbai,Suburb,36,3.0,yes,furnished,44831989.0
+877.0,2,1.0,2,Mumbai,Outskirts,36,0.0,yes,semi-furnished,9373784.0
+1317.0,3,3.0,3,Bangalore,Outskirts,28,1.0,no,furnished,8483609.0
+1277.0,5,4.0,1,Bangalore,Prime Suburb,49,1.0,yes,unfurnished,15497731.0
+1047.0,4,4.0,1,Delhi,Prime Suburb,44,3.0,yes,unfurnished,16869601.0
+1642.0,5,4.0,1,Bangalore,Prime Suburb,25,1.0,yes,furnished,17839411.0
+1775.0,5,5.0,3,Chennai,Prime Suburb,47,1.0,yes,semi-furnished,18079628.0
+1488.0,3,2.0,2,Mumbai,Suburb,19,1.0,yes,unfurnished,34605527.0
+1706.0,3,3.0,1,Mumbai,Outskirts,18,1.0,yes,semi-furnished,19703762.0
+1477.0,2,1.0,3,Chennai,City Centre,35,1.0,yes,semi-furnished,21545801.0
+1070.0,2,2.0,1,Bangalore,City Centre,3,1.0,yes,unfurnished,19803632.0
+1492.0,1,1.0,1,Delhi,City Centre,32,0.0,yes,unfurnished,28971579.0
+1465.0,5,5.0,4,Delhi,Suburb,57,3.0,yes,semi-furnished,19773251.0
+953.0,2,1.0,3,Chennai,Outskirts,40,0.0,no,unfurnished,3457861.0
+1272.0,2,2.0,2,Bangalore,Suburb,55,0.0,no,semi-furnished,11194654.0
+1575.0,3,3.0,2,Mumbai,Prime Suburb,23,1.0,yes,semi-furnished,39437416.0
+1172.0,2,1.0,2,Delhi,Prime Suburb,40,3.0,yes,unfurnished,17792883.0
+993.0,3,3.0,2,Mumbai,Prime Suburb,20,1.0,no,unfurnished,24225238.0
+664.0,2,1.0,2,Chennai,Outskirts,27,1.0,yes,semi-furnished,3534677.0
+1298.0,3,2.0,3,Mumbai,City Centre,45,1.0,yes,unfurnished,35286501.0
+948.0,4,4.0,2,Kolkata,Prime Suburb,6,2.0,yes,unfurnished,7920289.0
+2030.0,4,4.0,1,Delhi,Suburb,12,3.0,yes,unfurnished,23774628.0
+724.0,3,3.0,3,Delhi,Prime Suburb,5,1.0,no,furnished,13423557.0
+1252.0,2,1.0,2,Bangalore,Suburb,49,3.0,no,semi-furnished,11626784.0
+543.0,1,1.0,1,Kolkata,Suburb,3,1.0,yes,unfurnished,3854893.0
+560.0,4,3.0,1,Kolkata,Outskirts,46,0.0,no,semi-furnished,2480653.0
+1251.0,3,2.0,1,Chennai,City Centre,35,0.0,no,semi-furnished,15988994.0
+613.0,2,2.0,2,Bangalore,City Centre,59,0.0,no,semi-furnished,9048845.0
+1151.0,3,3.0,1,Bangalore,Premium Township,57,3.0,yes,unfurnished,17526421.0
+1195.0,2,1.0,2,Mumbai,Suburb,28,1.0,yes,unfurnished,24077244.0
+350.0,3,3.0,2,Mumbai,Suburb,55,2.0,yes,unfurnished,7650909.0
+1519.0,3,3.0,1,Delhi,Suburb,26,1.0,yes,unfurnished,19304156.0
+1293.0,2,,1,Delhi,Suburb,56,2.0,no,semi-furnished,14654501.0
+952.0,1,1.0,2,Bangalore,Outskirts,49,1.0,yes,unfurnished,3827190.0
+434.0,3,1.0,2,Mumbai,Suburb,59,3.0,yes,furnished,10074685.0
+667.0,5,4.0,3,Kolkata,Prime Suburb,12,0.0,no,unfurnished,6342231.0
+390.0,4,4.0,1,Bangalore,Outskirts,57,1.0,no,unfurnished,1963876.0
+979.0,3,1.0,3,Bangalore,Premium Township,2,3.0,yes,semi-furnished,15545332.0
+1083.0,3,3.0,1,Kolkata,Suburb,16,2.0,yes,semi-furnished,7005379.0
+1535.0,3,1.0,1,Mumbai,Outskirts,42,2.0,yes,semi-furnished,18952469.0
+555.0,4,4.0,1,Delhi,Prime Suburb,16,2.0,yes,semi-furnished,10265958.0
+1140.0,1,1.0,2,Bangalore,Suburb,30,1.0,no,furnished,10147450.0
+572.0,3,2.0,3,Kolkata,Prime Suburb,53,2.0,yes,unfurnished,4541956.0
+1627.0,1,1.0,2,Mumbai,Outskirts,12,1.0,no,unfurnished,15547718.0
+846.0,3,3.0,1,Kolkata,Outskirts,21,0.0,yes,semi-furnished,3340522.0
+986.0,2,1.0,2,Chennai,City Centre,30,2.0,yes,semi-furnished,13705563.0
+1078.0,2,2.0,2,Mumbai,City Centre,23,2.0,yes,unfurnished,39611397.0
+575.0,1,1.0,2,Delhi,City Centre,16,2.0,no,furnished,14649814.0
+1095.0,3,2.0,1,Chennai,Suburb,60,1.0,yes,unfurnished,5837129.0
+1456.0,2,2.0,2,Kolkata,Suburb,30,2.0,yes,semi-furnished,8214382.0
+1759.0,1,1.0,1,Delhi,Prime Suburb,42,0.0,yes,furnished,24052729.0
+1303.0,1,1.0,1,Chennai,Prime Suburb,35,3.0,yes,unfurnished,12777413.0
+1769.0,3,2.0,1,Kolkata,Outskirts,35,1.0,no,unfurnished,5758954.0
+1080.0,2,2.0,1,Mumbai,Suburb,16,1.0,yes,semi-furnished,23379878.0
+990.0,1,1.0,3,Delhi,Prime Suburb,2,1.0,no,unfurnished,13740807.0
+1245.0,2,2.0,1,Delhi,Prime Suburb,46,1.0,no,furnished,15587954.0
+1435.0,2,1.0,2,Delhi,Outskirts,50,3.0,yes,semi-furnished,8374875.0
+862.0,2,1.0,2,Bangalore,Outskirts,37,2.0,yes,semi-furnished,5329758.0
+1893.0,3,3.0,2,Mumbai,City Centre,8,2.0,yes,semi-furnished,60593471.0
+607.0,3,2.0,2,Kolkata,Outskirts,38,1.0,yes,semi-furnished,2513970.0
+977.0,3,1.0,3,Kolkata,Suburb,50,1.0,yes,unfurnished,5558315.0
+900.0,3,3.0,2,Chennai,City Centre,11,1.0,yes,semi-furnished,13832034.0
+1323.0,1,1.0,1,Chennai,Premium Township,26,3.0,no,semi-furnished,14218415.0
+1055.0,1,1.0,3,Bangalore,Suburb,35,1.0,yes,furnished,10343203.0
+1191.0,2,1.0,2,Mumbai,Prime Suburb,22,2.0,yes,unfurnished,30961649.0
+544.0,3,2.0,1,Delhi,Suburb,24,0.0,no,semi-furnished,6493569.0
+962.0,2,2.0,2,Bangalore,Prime Suburb,4,1.0,no,unfurnished,11452696.0
+1270.0,4,4.0,1,Delhi,Suburb,7,1.0,no,semi-furnished,17826458.0
+1189.0,3,3.0,1,Chennai,City Centre,10,1.0,yes,unfurnished,14759878.0
+1423.0,2,1.0,1,Bangalore,Premium Township,39,2.0,yes,furnished,18980557.0
+1330.0,2,1.0,3,Delhi,Prime Suburb,14,3.0,yes,unfurnished,17008679.0
+1514.0,4,3.0,4,Delhi,Outskirts,35,0.0,yes,unfurnished,9230120.0
+1556.0,1,1.0,1,Delhi,Suburb,59,3.0,no,furnished,15126836.0
+705.0,2,1.0,3,Mumbai,Prime Suburb,13,1.0,yes,unfurnished,20726465.0
+634.0,2,2.0,2,Bangalore,City Centre,19,3.0,yes,furnished,11901320.0
+1179.0,3,3.0,2,Delhi,Premium Township,8,2.0,no,unfurnished,19751495.0
+902.0,1,1.0,1,Delhi,Outskirts,38,0.0,no,furnished,4795627.0
+979.0,2,1.0,2,Mumbai,Premium Township,44,2.0,yes,furnished,28091218.0
+1249.0,1,1.0,3,Mumbai,Suburb,51,1.0,yes,unfurnished,25035013.0
+,2,1.0,1,Delhi,Suburb,35,0.0,yes,semi-furnished,11028542.0
+1921.0,4,3.0,3,Kolkata,Prime Suburb,7,0.0,no,semi-furnished,14344354.0
+945.0,3,3.0,2,Bangalore,City Centre,6,2.0,yes,unfurnished,17213111.0
+700.0,2,1.0,2,Chennai,Prime Suburb,58,2.0,yes,unfurnished,6270644.0
+842.0,4,4.0,1,Chennai,Premium Township,38,0.0,no,unfurnished,9533066.0
+534.0,2,2.0,2,Kolkata,City Centre,34,0.0,no,furnished,5532059.0
+572.0,2,2.0,2,Bangalore,Prime Suburb,46,0.0,no,unfurnished,5438041.0
+350.0,3,3.0,3,Mumbai,City Centre,5,1.0,yes,semi-furnished,15974875.0
+1254.0,5,4.0,1,Mumbai,Suburb,6,3.0,no,unfurnished,29573963.0
+888.0,1,1.0,2,Bangalore,Prime Suburb,60,3.0,yes,semi-furnished,10433596.0
+875.0,3,1.0,3,Mumbai,City Centre,43,0.0,no,furnished,29908299.0
+1090.0,1,1.0,2,Mumbai,Outskirts,36,2.0,no,furnished,12284512.0
+1290.0,1,1.0,1,Mumbai,Suburb,14,0.0,yes,unfurnished,25030383.0
+1395.0,2,1.0,1,Delhi,City Centre,46,0.0,no,unfurnished,24306620.0
+713.0,2,2.0,2,Chennai,Outskirts,35,0.0,yes,semi-furnished,3868672.0
+889.0,2,2.0,4,Bangalore,Outskirts,20,0.0,yes,furnished,5904690.0
+1373.0,2,2.0,2,Mumbai,Prime Suburb,30,0.0,yes,furnished,34070488.0
+528.0,2,2.0,1,Chennai,Suburb,12,1.0,yes,semi-furnished,5056211.0
+1155.0,1,1.0,1,Delhi,City Centre,39,1.0,no,furnished,25934228.0
+952.0,4,4.0,1,Kolkata,Prime Suburb,48,1.0,yes,furnished,7700879.0
+1121.0,3,3.0,2,Delhi,Suburb,11,2.0,no,furnished,16514083.0
+1450.0,2,1.0,2,Mumbai,Outskirts,16,1.0,yes,unfurnished,17142160.0
+1882.0,3,3.0,3,Delhi,Premium Township,28,1.0,yes,semi-furnished,31896960.0
+1272.0,3,3.0,3,Mumbai,Prime Suburb,47,2.0,no,unfurnished,30476424.0
+729.0,4,3.0,1,Chennai,Suburb,14,2.0,no,unfurnished,6076762.0
+425.0,3,3.0,2,Chennai,Premium Township,59,3.0,no,semi-furnished,5108045.0
+2241.0,2,1.0,2,Mumbai,Prime Suburb,3,1.0,yes,unfurnished,50623586.0
+1535.0,1,1.0,3,Bangalore,Suburb,2,2.0,yes,semi-furnished,15218088.0
+991.0,3,3.0,1,Chennai,Suburb,41,1.0,yes,unfurnished,7784789.0
+1153.0,3,2.0,2,Bangalore,Outskirts,25,2.0,yes,semi-furnished,7066006.0
+791.0,2,1.0,2,Delhi,Prime Suburb,5,2.0,yes,unfurnished,13255657.0
+558.0,1,1.0,3,Mumbai,Prime Suburb,20,2.0,yes,unfurnished,13209305.0
+1215.0,1,1.0,2,Chennai,City Centre,47,2.0,yes,furnished,14310639.0
+581.0,3,3.0,2,Bangalore,Prime Suburb,18,1.0,yes,semi-furnished,7595644.0
+1274.0,1,1.0,1,Mumbai,Suburb,43,2.0,no,semi-furnished,24967343.0
+1075.0,2,1.0,1,Bangalore,City Centre,51,1.0,yes,semi-furnished,15596373.0
+838.0,4,4.0,2,Kolkata,Suburb,13,0.0,yes,semi-furnished,6807356.0
+1043.0,2,1.0,1,Bangalore,Suburb,27,0.0,yes,unfurnished,9229755.0
+1409.0,1,1.0,1,Kolkata,Outskirts,18,1.0,yes,semi-furnished,4419305.0
+350.0,3,2.0,2,Chennai,Outskirts,27,0.0,no,semi-furnished,2351678.0
+1261.0,3,3.0,1,Mumbai,Suburb,37,0.0,yes,semi-furnished,22682771.0
+1343.0,3,3.0,1,Mumbai,Prime Suburb,35,2.0,yes,furnished,31705181.0
+1320.0,3,2.0,2,Delhi,Prime Suburb,19,0.0,yes,unfurnished,19839547.0
+1765.0,4,4.0,3,Kolkata,Suburb,16,1.0,no,semi-furnished,11653485.0
+1122.0,2,1.0,1,Chennai,Suburb,11,1.0,yes,unfurnished,7884336.0
+1768.0,2,2.0,2,Bangalore,City Centre,1,2.0,yes,semi-furnished,28636360.0
+1200.0,4,3.0,2,Chennai,Outskirts,45,0.0,no,unfurnished,5263733.0
+1541.0,1,1.0,1,Delhi,Prime Suburb,26,3.0,no,semi-furnished,19866566.0
+907.0,2,2.0,2,Chennai,Premium Township,53,0.0,yes,unfurnished,9860102.0
+1248.0,2,1.0,2,Delhi,Premium Township,42,2.0,yes,furnished,20078139.0
+,1,1.0,4,Bangalore,Suburb,25,1.0,yes,semi-furnished,14457257.0
+875.0,3,3.0,3,Kolkata,Suburb,15,1.0,yes,furnished,6779726.0
+859.0,3,3.0,2,Bangalore,Prime Suburb,46,0.0,no,semi-furnished,9736653.0
+1397.0,3,2.0,3,Chennai,Suburb,14,0.0,yes,semi-furnished,10553619.0
+927.0,2,2.0,3,Bangalore,Suburb,53,1.0,yes,semi-furnished,8938081.0
+1010.0,2,2.0,1,Mumbai,Suburb,37,2.0,yes,semi-furnished,19201107.0
+1251.0,2,2.0,2,Chennai,Suburb,30,,no,semi-furnished,8070042.0
+492.0,2,2.0,4,Kolkata,Prime Suburb,27,2.0,yes,unfurnished,4702426.0
+1324.0,3,1.0,3,Mumbai,City Centre,37,0.0,yes,semi-furnished,43033977.0
+1358.0,2,1.0,2,Chennai,Outskirts,52,0.0,yes,unfurnished,4234944.0
+455.0,4,4.0,1,Bangalore,City Centre,2,1.0,yes,semi-furnished,9942080.0
+1176.0,3,3.0,1,Bangalore,Outskirts,48,3.0,no,semi-furnished,6904238.0
+2108.0,2,2.0,4,Kolkata,Suburb,44,0.0,yes,semi-furnished,12565061.0
+1591.0,2,2.0,2,Delhi,Premium Township,60,2.0,yes,semi-furnished,26674934.0
+929.0,2,2.0,4,Delhi,Premium Township,52,2.0,yes,semi-furnished,13686556.0
+1125.0,3,2.0,2,Bangalore,Outskirts,3,1.0,no,furnished,8203947.0
+1081.0,3,3.0,2,Chennai,Prime Suburb,27,0.0,no,semi-furnished,10580408.0
+1488.0,2,2.0,3,Mumbai,City Centre,17,0.0,no,semi-furnished,53337227.0
+817.0,2,2.0,1,Bangalore,Outskirts,58,1.0,yes,semi-furnished,3872540.0
+,3,3.0,1,Bangalore,City Centre,47,0.0,yes,semi-furnished,13059166.0
+1649.0,2,1.0,1,Kolkata,City Centre,1,0.0,yes,furnished,17067141.0
+1143.0,4,4.0,1,Bangalore,Outskirts,53,1.0,yes,semi-furnished,6447738.0
+1519.0,1,1.0,1,Chennai,City Centre,28,1.0,yes,unfurnished,19396177.0
+1091.0,3,2.0,2,Chennai,Prime Suburb,58,1.0,yes,semi-furnished,9406636.0
+1430.0,3,3.0,1,Mumbai,Prime Suburb,52,2.0,yes,semi-furnished,32296235.0
+1540.0,3,2.0,2,Chennai,Prime Suburb,59,1.0,yes,semi-furnished,15051635.0
+412.0,3,3.0,1,Bangalore,Prime Suburb,47,0.0,yes,unfurnished,4513791.0
+350.0,3,2.0,1,Chennai,Outskirts,16,0.0,yes,semi-furnished,2911652.0
+1214.0,5,5.0,1,Delhi,Prime Suburb,44,2.0,no,semi-furnished,17562716.0
+740.0,2,1.0,2,Kolkata,Outskirts,19,2.0,no,semi-furnished,3242257.0
+1337.0,3,3.0,1,Delhi,Suburb,58,1.0,yes,unfurnished,14296790.0
+1857.0,3,2.0,2,Kolkata,Premium Township,43,1.0,yes,semi-furnished,17999367.0
+876.0,5,5.0,1,Kolkata,Suburb,6,0.0,yes,furnished,6861070.0
+1472.0,3,3.0,3,Delhi,Suburb,32,1.0,no,furnished,16864602.0
+761.0,4,3.0,1,Mumbai,Outskirts,26,1.0,no,semi-furnished,9803782.0
+1020.0,2,1.0,1,Bangalore,Suburb,25,2.0,yes,semi-furnished,9441399.0
+1418.0,2,2.0,1,Bangalore,Prime Suburb,41,0.0,yes,semi-furnished,15493970.0
+1465.0,3,2.0,3,Mumbai,Outskirts,30,1.0,no,furnished,18154233.0
+1235.0,3,2.0,1,Delhi,City Centre,23,1.0,yes,unfurnished,26564626.0
+495.0,2,1.0,2,Mumbai,Outskirts,15,2.0,yes,semi-furnished,8098379.0
+1711.0,2,2.0,2,Mumbai,Outskirts,15,0.0,yes,semi-furnished,17959475.0
+723.0,4,4.0,1,Bangalore,Premium Township,7,0.0,yes,furnished,13184067.0
+1711.0,3,1.0,1,Bangalore,Suburb,57,1.0,no,furnished,16565561.0
+1205.0,5,5.0,2,Chennai,Suburb,9,3.0,yes,semi-furnished,11374712.0
+,3,3.0,2,Kolkata,Outskirts,46,0.0,yes,unfurnished,1626017.0
+896.0,2,2.0,2,Kolkata,Outskirts,6,0.0,yes,semi-furnished,3889922.0
+1094.0,4,3.0,2,Bangalore,Prime Suburb,48,1.0,yes,semi-furnished,12061831.0
+1286.0,3,2.0,3,Mumbai,Premium Township,43,1.0,no,semi-furnished,32824517.0
+940.0,5,5.0,2,Mumbai,Suburb,28,2.0,yes,semi-furnished,22906145.0
+637.0,2,2.0,1,Chennai,Suburb,52,1.0,yes,,4285889.0
+774.0,3,3.0,2,Kolkata,Premium Township,11,1.0,yes,unfurnished,8273586.0
+1484.0,1,1.0,3,Bangalore,Outskirts,14,2.0,yes,unfurnished,8127922.0
+1761.0,3,2.0,2,Kolkata,Prime Suburb,36,2.0,yes,semi-furnished,14513672.0
+527.0,4,3.0,1,Delhi,Suburb,30,1.0,yes,unfurnished,8283432.0
+594.0,2,1.0,1,Kolkata,Outskirts,51,1.0,yes,semi-furnished,1598918.0
+405.0,4,3.0,3,Mumbai,Prime Suburb,43,0.0,yes,unfurnished,11158831.0
+1205.0,2,1.0,2,Delhi,Outskirts,32,2.0,no,semi-furnished,8321135.0
+1719.0,3,2.0,2,Delhi,Prime Suburb,23,1.0,yes,unfurnished,24351159.0
+1408.0,3,2.0,3,Kolkata,Prime Suburb,15,2.0,yes,unfurnished,10544968.0
+670.0,1,1.0,2,Kolkata,Prime Suburb,45,1.0,no,semi-furnished,4550841.0
+1042.0,3,2.0,2,Kolkata,Prime Suburb,29,3.0,yes,unfurnished,8129797.0
+1334.0,3,3.0,3,Delhi,Prime Suburb,37,2.0,no,unfurnished,17672541.0
+1149.0,3,3.0,1,Bangalore,Suburb,20,1.0,yes,furnished,11829144.0
+1011.0,3,2.0,1,Delhi,Prime Suburb,42,1.0,no,unfurnished,12757483.0
+1100.0,3,3.0,2,Bangalore,Prime Suburb,2,1.0,no,furnished,14173167.0
+350.0,3,2.0,3,Mumbai,Outskirts,5,1.0,yes,semi-furnished,7807821.0
+866.0,3,2.0,1,Chennai,Suburb,44,2.0,no,unfurnished,7019235.0
+904.0,4,4.0,2,Chennai,Suburb,0,1.0,yes,furnished,9143718.0
+962.0,3,3.0,2,Mumbai,Suburb,19,2.0,yes,unfurnished,18773162.0
+965.0,2,2.0,4,Delhi,Suburb,55,2.0,no,unfurnished,11379302.0
+1827.0,1,1.0,4,Bangalore,City Centre,45,1.0,yes,unfurnished,30510769.0
+1077.0,3,2.0,2,Mumbai,Suburb,21,2.0,yes,furnished,26826181.0
+969.0,3,2.0,3,Bangalore,Outskirts,44,3.0,no,semi-furnished,6614876.0
+1016.0,1,1.0,2,Bangalore,City Centre,51,1.0,no,,14336872.0
+350.0,2,1.0,1,Bangalore,Outskirts,25,0.0,yes,semi-furnished,2251136.0
+,4,2.0,4,Chennai,City Centre,22,0.0,no,semi-furnished,13449960.0
+1051.0,2,2.0,1,Kolkata,Suburb,7,1.0,no,semi-furnished,6547527.0
+1989.0,2,1.0,1,Delhi,Outskirts,31,0.0,yes,unfurnished,13090687.0
+978.0,3,2.0,2,Delhi,Outskirts,55,1.0,no,furnished,6145738.0
+1352.0,2,1.0,1,Delhi,Prime Suburb,57,1.0,yes,unfurnished,16216281.0
+1125.0,3,3.0,4,Delhi,Premium Township,16,2.0,yes,semi-furnished,19559413.0
+1351.0,1,1.0,1,Mumbai,City Centre,38,2.0,yes,,40335405.0
+,3,1.0,1,Kolkata,Suburb,23,1.0,no,semi-furnished,8195093.0
+1326.0,4,3.0,1,Delhi,Prime Suburb,17,0.0,yes,unfurnished,18988687.0
+1766.0,3,3.0,2,Chennai,Outskirts,21,3.0,no,semi-furnished,7153803.0
+1062.0,5,5.0,3,Mumbai,Outskirts,28,1.0,yes,furnished,18447097.0
+1043.0,4,4.0,1,Bangalore,Outskirts,55,0.0,no,unfurnished,4754716.0
+1044.0,2,1.0,2,Bangalore,Suburb,5,2.0,yes,semi-furnished,11341387.0
+566.0,1,1.0,3,Kolkata,City Centre,16,3.0,yes,unfurnished,7278044.0
+716.0,3,3.0,2,Mumbai,Premium Township,53,1.0,yes,semi-furnished,20328181.0
+486.0,4,4.0,2,Bangalore,Prime Suburb,55,2.0,no,semi-furnished,6705031.0
+1027.0,2,2.0,2,Mumbai,City Centre,4,1.0,yes,furnished,39382261.0
+965.0,3,2.0,3,Delhi,Prime Suburb,17,1.0,no,furnished,15939912.0
+1256.0,2,2.0,2,Bangalore,Outskirts,15,1.0,yes,semi-furnished,7541155.0
+1557.0,1,1.0,3,Mumbai,Prime Suburb,33,1.0,no,furnished,35533446.0
+811.0,3,3.0,1,Kolkata,Prime Suburb,25,1.0,yes,furnished,6051657.0
+1290.0,4,4.0,2,Chennai,City Centre,10,2.0,yes,unfurnished,19154208.0
+2128.0,2,2.0,3,Bangalore,Premium Township,19,1.0,yes,semi-furnished,27815807.0
+,5,5.0,2,Chennai,City Centre,24,2.0,yes,unfurnished,42158871.255760215
+551.0,1,1.0,3,Mumbai,Suburb,3,2.0,yes,semi-furnished,12488329.0
+1287.0,1,1.0,1,Bangalore,Outskirts,4,1.0,yes,semi-furnished,7225130.0
+494.0,1,1.0,2,Delhi,Suburb,38,2.0,no,semi-furnished,6136473.0
+1554.0,4,4.0,2,Kolkata,Suburb,2,1.0,no,unfurnished,9697983.0
+1163.0,2,1.0,3,Bangalore,City Centre,47,2.0,no,semi-furnished,18868421.0
+658.0,3,3.0,2,Mumbai,Suburb,17,0.0,yes,,12471230.0
+1566.0,2,1.0,1,Delhi,Outskirts,58,1.0,yes,unfurnished,8704442.0
+1101.0,2,2.0,4,Delhi,Premium Township,60,1.0,yes,unfurnished,19173849.0
+573.0,4,3.0,1,Bangalore,City Centre,3,2.0,yes,furnished,13636449.0
+1178.0,2,1.0,1,Mumbai,Suburb,50,1.0,no,furnished,19430266.0
+1337.0,2,1.0,1,Bangalore,Suburb,19,0.0,yes,semi-furnished,11763034.0
+1050.0,3,1.0,2,Bangalore,City Centre,40,3.0,yes,furnished,18462144.0
+1165.0,2,1.0,2,Chennai,Prime Suburb,13,2.0,yes,unfurnished,13445879.0
+683.0,3,3.0,3,Mumbai,Prime Suburb,6,3.0,yes,semi-furnished,20394353.0
+1253.0,3,,2,Bangalore,Premium Township,41,0.0,yes,unfurnished,16011260.0
+1989.0,4,4.0,1,Kolkata,Outskirts,57,1.0,yes,furnished,7406179.0
+1428.0,2,2.0,1,Chennai,Outskirts,42,2.0,yes,furnished,7158184.0
+713.0,2,2.0,1,Kolkata,City Centre,47,1.0,no,semi-furnished,6422255.0
+979.0,2,1.0,1,Mumbai,Outskirts,34,2.0,no,semi-furnished,9131271.0
+1581.0,3,2.0,3,Bangalore,City Centre,14,1.0,yes,unfurnished,23565168.0
+627.0,1,1.0,3,Chennai,Prime Suburb,39,1.0,yes,semi-furnished,4985132.0
+2374.0,3,2.0,3,Bangalore,Suburb,36,3.0,no,semi-furnished,21517502.0
+1649.0,2,1.0,1,Kolkata,City Centre,1,0.0,yes,furnished,17067141.0
+1941.0,3,3.0,3,Chennai,Prime Suburb,35,0.0,yes,furnished,15516175.0
+1188.0,1,1.0,2,Delhi,Premium Township,12,0.0,yes,semi-furnished,19088485.0
+1685.0,3,2.0,1,Chennai,Suburb,60,0.0,yes,unfurnished,11666554.0
+605.0,4,3.0,2,Mumbai,Outskirts,10,1.0,no,semi-furnished,9721608.0
+1457.0,4,4.0,1,Bangalore,Suburb,34,2.0,yes,unfurnished,15269890.0
+1288.0,3,2.0,1,Bangalore,Suburb,37,1.0,yes,unfurnished,11455232.0
+614.0,2,2.0,2,Delhi,Suburb,9,2.0,yes,semi-furnished,9474921.0
+763.0,3,2.0,4,Delhi,Suburb,7,1.0,yes,unfurnished,11601949.0
+1347.0,2,1.0,2,Delhi,Prime Suburb,35,1.0,yes,semi-furnished,18301780.0
+1725.0,3,2.0,2,Delhi,City Centre,5,1.0,yes,unfurnished,33294587.0
+579.0,1,1.0,3,Bangalore,Prime Suburb,59,0.0,yes,semi-furnished,5038858.0
+1166.0,2,2.0,2,Kolkata,Outskirts,15,2.0,yes,unfurnished,4294285.0
+772.0,3,2.0,3,Bangalore,Suburb,51,2.0,no,unfurnished,6170148.0
+519.0,4,4.0,2,Chennai,Prime Suburb,56,0.0,yes,furnished,6130266.0
+1117.0,1,1.0,2,Delhi,Suburb,25,3.0,yes,furnished,14549224.0
+1545.0,2,2.0,2,Mumbai,City Centre,0,1.0,yes,furnished,55781348.0
+401.0,2,2.0,2,Kolkata,Premium Township,40,2.0,yes,furnished,4209647.0
+1964.0,1,1.0,2,Mumbai,Suburb,1,2.0,yes,unfurnished,40988513.0
+1070.0,5,5.0,3,Chennai,Prime Suburb,30,1.0,yes,furnished,10649244.0
+603.0,2,1.0,1,Delhi,Suburb,47,,no,semi-furnished,6837965.0
+816.0,3,2.0,1,Kolkata,Outskirts,49,0.0,yes,semi-furnished,2790655.0
+726.0,2,2.0,2,Chennai,Premium Township,9,1.0,no,unfurnished,9003443.0
+916.0,2,1.0,1,Kolkata,City Centre,47,1.0,no,unfurnished,8865592.0
+1423.0,4,4.0,1,Bangalore,Suburb,54,2.0,no,furnished,15861382.0
+1254.0,3,3.0,2,Mumbai,Suburb,19,1.0,yes,semi-furnished,27495036.0
+412.0,2,2.0,3,Mumbai,Outskirts,0,0.0,yes,furnished,8484742.0
+1282.0,3,2.0,1,Chennai,Suburb,2,1.0,no,semi-furnished,9884378.0
+851.0,2,1.0,1,Mumbai,Prime Suburb,45,0.0,yes,semi-furnished,19133612.0
+892.0,2,1.0,2,Bangalore,Suburb,45,1.0,yes,furnished,7895837.0
+1314.0,1,1.0,1,Mumbai,Suburb,30,2.0,yes,semi-furnished,24139823.0
+350.0,4,3.0,2,Chennai,Suburb,16,2.0,yes,furnished,5158367.0
+1196.0,3,1.0,1,Bangalore,Premium Township,37,1.0,yes,semi-furnished,16230344.0
+765.0,3,3.0,1,Delhi,Suburb,5,1.0,yes,,13710064.0
+664.0,1,1.0,1,Kolkata,City Centre,26,2.0,yes,semi-furnished,7833916.0
+654.0,3,3.0,2,Kolkata,Prime Suburb,51,0.0,yes,semi-furnished,4300227.0
+1241.0,1,1.0,1,Kolkata,Outskirts,13,1.0,yes,semi-furnished,4225135.0
+491.0,1,1.0,2,Kolkata,Suburb,22,1.0,yes,unfurnished,3034833.0
+1064.0,3,2.0,2,Bangalore,Premium Township,13,2.0,no,furnished,16742483.0
+1498.0,4,4.0,1,Chennai,Suburb,36,1.0,yes,semi-furnished,11120772.0
+1302.0,4,3.0,1,Delhi,Prime Suburb,27,0.0,no,unfurnished,17964164.0
+655.0,2,1.0,1,Mumbai,Prime Suburb,60,0.0,yes,furnished,14855177.0
+1163.0,2,1.0,2,Mumbai,Prime Suburb,26,1.0,yes,furnished,27409636.0
+1111.0,1,,1,Bangalore,Suburb,45,1.0,no,furnished,10537561.0
+8742.0,3,3.0,3,Mumbai,Premium Township,60,1.0,yes,unfurnished,43421155.0
+777.0,3,2.0,1,Mumbai,Outskirts,28,2.0,no,unfurnished,8602734.0
+2005.0,2,2.0,2,Bangalore,Premium Township,32,0.0,yes,furnished,23290539.0
+612.0,3,2.0,3,Bangalore,Outskirts,34,0.0,yes,unfurnished,3368605.0
+1753.0,3,1.0,1,Bangalore,Premium Township,11,0.0,yes,furnished,24048732.0
+930.0,2,2.0,1,Mumbai,Suburb,51,0.0,no,semi-furnished,14401918.0
+350.0,3,3.0,3,Chennai,City Centre,0,2.0,yes,semi-furnished,6282570.0
+1423.0,2,1.0,1,Bangalore,Premium Township,39,2.0,yes,furnished,18980557.0
+361.0,3,3.0,2,Mumbai,Premium Township,54,1.0,no,semi-furnished,10954546.0
+1938.0,1,1.0,2,Mumbai,Outskirts,17,0.0,yes,semi-furnished,18992209.0
+1872.0,3,2.0,3,Bangalore,Prime Suburb,30,1.0,yes,unfurnished,21694910.0
+1339.0,2,2.0,4,Delhi,Prime Suburb,16,1.0,yes,unfurnished,19045529.0
+1554.0,2,1.0,1,Kolkata,Premium Township,7,1.0,yes,semi-furnished,13894414.0
+768.0,2,2.0,2,Kolkata,Prime Suburb,12,1.0,yes,semi-furnished,6074743.0
+1004.0,5,5.0,3,Chennai,Suburb,1,0.0,yes,furnished,10316590.0
+1343.0,3,3.0,1,Kolkata,City Centre,25,1.0,no,furnished,14733340.0
+1303.0,2,1.0,2,Bangalore,Premium Township,15,3.0,yes,semi-furnished,18253214.0
+867.0,3,3.0,1,Mumbai,Outskirts,12,1.0,no,semi-furnished,12346516.0
+593.0,2,1.0,2,Chennai,Outskirts,39,2.0,yes,unfurnished,2611002.0
+1304.0,1,1.0,1,Bangalore,Suburb,22,0.0,yes,semi-furnished,12901764.0
+1295.0,3,2.0,3,Mumbai,Suburb,42,2.0,yes,semi-furnished,23272067.0
+924.0,5,4.0,2,Chennai,Prime Suburb,4,3.0,yes,unfurnished,10489768.0
+1409.0,3,2.0,1,Bangalore,Outskirts,14,1.0,yes,unfurnished,7882711.0
+1080.0,2,2.0,1,Bangalore,Prime Suburb,28,1.0,yes,semi-furnished,12565425.0
+1355.0,3,3.0,2,Bangalore,Prime Suburb,34,1.0,yes,semi-furnished,16709645.0
+476.0,3,3.0,1,Kolkata,Premium Township,2,0.0,no,unfurnished,4630845.0
+1109.0,3,2.0,2,Kolkata,Outskirts,32,1.0,yes,semi-furnished,4208102.0
+1545.0,2,2.0,2,Chennai,Outskirts,54,1.0,no,furnished,6531389.0
+1313.0,4,2.0,1,Kolkata,Suburb,50,2.0,yes,furnished,8601128.0
+1140.0,2,2.0,1,Mumbai,Outskirts,15,1.0,yes,furnished,12309920.0
+1827.0,2,2.0,2,Delhi,Prime Suburb,53,0.0,no,semi-furnished,28052339.0
+924.0,2,1.0,2,Delhi,Prime Suburb,32,1.0,yes,unfurnished,13142323.0
+1738.0,3,1.0,1,Chennai,City Centre,16,1.0,yes,semi-furnished,22509360.0
+1668.0,1,1.0,1,Delhi,Suburb,49,1.0,yes,,17915425.0
+2029.0,2,1.0,3,Delhi,City Centre,43,0.0,yes,unfurnished,40803979.0
+1037.0,3,3.0,2,Bangalore,Premium Township,16,3.0,no,semi-furnished,15227903.0
+1570.0,4,3.0,1,Kolkata,City Centre,55,3.0,yes,semi-furnished,17526732.0
+1263.0,2,1.0,1,Bangalore,City Centre,37,0.0,no,unfurnished,19933379.0
+1465.0,2,1.0,4,Bangalore,City Centre,48,2.0,yes,semi-furnished,20264983.0
+1204.0,2,2.0,4,Chennai,City Centre,50,,no,unfurnished,17770497.0
+1334.0,4,4.0,2,Mumbai,Outskirts,25,1.0,yes,furnished,20265484.0
+1493.0,2,1.0,1,Kolkata,Prime Suburb,31,0.0,no,unfurnished,11158398.0
+434.0,3,3.0,1,Delhi,Outskirts,59,1.0,yes,semi-furnished,2784475.0
+1091.0,4,4.0,1,Chennai,Suburb,48,1.0,yes,unfurnished,9393357.0
+900.0,3,3.0,2,Chennai,City Centre,11,1.0,yes,semi-furnished,13832034.0
+1571.0,3,2.0,2,Delhi,Prime Suburb,19,1.0,yes,semi-furnished,23356041.0
+1047.0,1,1.0,1,Mumbai,Suburb,8,3.0,yes,unfurnished,21096559.0
+1303.0,1,1.0,1,Kolkata,City Centre,13,0.0,yes,unfurnished,13808759.0
+1813.0,2,1.0,1,Kolkata,Suburb,51,1.0,yes,unfurnished,8748456.0
+350.0,3,3.0,3,Chennai,City Centre,0,2.0,yes,semi-furnished,6282570.0
+803.0,3,3.0,2,Bangalore,Prime Suburb,8,1.0,yes,semi-furnished,12158824.0
+1393.0,2,2.0,2,Delhi,Suburb,50,1.0,no,furnished,16877760.0
+1626.0,3,3.0,3,Chennai,Outskirts,32,1.0,yes,semi-furnished,6714871.0
+1626.0,3,3.0,3,Chennai,Outskirts,32,1.0,yes,semi-furnished,6714871.0
+,4,4.0,2,Delhi,Prime Suburb,6,,no,semi-furnished,23508037.0
+984.0,2,2.0,1,Delhi,Prime Suburb,1,,yes,semi-furnished,15844107.0
+1333.0,3,2.0,1,Chennai,Suburb,59,1.0,yes,semi-furnished,8906329.0
+1002.0,2,2.0,2,Bangalore,Prime Suburb,51,0.0,yes,semi-furnished,9750426.0
+868.0,2,2.0,1,Delhi,City Centre,56,1.0,yes,semi-furnished,17807968.0
+1260.0,2,1.0,3,Kolkata,Prime Suburb,51,2.0,no,semi-furnished,8120345.0
+1244.0,3,3.0,3,Mumbai,Suburb,24,1.0,yes,semi-furnished,25151393.0
+751.0,2,1.0,3,Bangalore,Suburb,8,3.0,no,semi-furnished,7969396.0
+1770.0,2,2.0,4,Mumbai,City Centre,15,0.0,no,unfurnished,60000441.0
+882.0,3,3.0,4,Bangalore,Suburb,13,0.0,yes,semi-furnished,9536373.0
+350.0,3,3.0,1,Kolkata,Outskirts,40,2.0,yes,unfurnished,1723005.0
+947.0,3,3.0,2,Bangalore,City Centre,47,1.0,yes,semi-furnished,16336930.0
+720.0,2,1.0,2,Chennai,City Centre,32,2.0,yes,semi-furnished,10823181.0
+350.0,1,1.0,1,Kolkata,Outskirts,49,1.0,no,semi-furnished,1000000.0
+1842.0,3,3.0,1,Chennai,Prime Suburb,57,1.0,no,unfurnished,16957423.0
+764.0,3,2.0,2,Bangalore,City Centre,43,0.0,no,semi-furnished,11914175.0
+834.0,2,1.0,2,Kolkata,Suburb,6,1.0,no,furnished,5607607.0
+1390.0,3,2.0,2,Mumbai,Outskirts,48,2.0,yes,unfurnished,16184618.0
+1242.0,4,4.0,3,Chennai,City Centre,9,0.0,yes,furnished,19175466.0
+593.0,2,2.0,2,Mumbai,City Centre,2,0.0,yes,semi-furnished,21389491.0
+1070.0,1,1.0,1,Kolkata,Premium Township,30,1.0,no,unfurnished,8990347.0
+631.0,3,1.0,1,Chennai,City Centre,4,0.0,yes,semi-furnished,9401351.0
+907.0,4,4.0,3,Bangalore,Outskirts,9,3.0,yes,furnished,7649541.0
+830.0,3,2.0,3,Mumbai,Suburb,22,1.0,yes,semi-furnished,15885677.0
+1479.0,2,1.0,3,Chennai,Prime Suburb,60,1.0,no,unfurnished,13003846.0
+1340.0,4,4.0,2,Chennai,Suburb,42,3.0,yes,unfurnished,10670948.0
+1796.0,1,1.0,2,Chennai,Suburb,2,1.0,yes,furnished,17022134.0
+886.0,3,3.0,3,Delhi,Suburb,55,2.0,no,furnished,10954239.0
+957.0,4,3.0,2,Delhi,Prime Suburb,36,0.0,yes,furnished,17806500.0
+1013.0,4,4.0,1,Delhi,Prime Suburb,49,3.0,yes,unfurnished,14359891.0
+1172.0,3,3.0,2,Chennai,Suburb,35,1.0,yes,semi-furnished,7793555.0
+1009.0,3,3.0,3,Bangalore,Suburb,43,2.0,no,semi-furnished,10360433.0
+1031.0,2,2.0,1,Kolkata,Prime Suburb,8,1.0,yes,semi-furnished,7936898.0
+443.0,4,2.0,2,Kolkata,Prime Suburb,20,3.0,yes,unfurnished,4635668.0
+1179.0,3,,2,Delhi,Outskirts,19,0.0,yes,semi-furnished,9546861.0
+972.0,3,3.0,1,Mumbai,Suburb,31,1.0,yes,semi-furnished,20901390.0
+471.0,3,3.0,1,Chennai,Suburb,19,2.0,no,furnished,5527681.0
+1098.0,4,4.0,1,Bangalore,Suburb,20,1.0,yes,unfurnished,10325838.0
+685.0,4,4.0,3,Chennai,Suburb,39,1.0,yes,semi-furnished,5952896.0
+1352.0,4,4.0,2,Bangalore,Suburb,1,1.0,no,unfurnished,16910389.0
+821.0,4,2.0,2,Chennai,Suburb,7,2.0,yes,unfurnished,8939752.0
+1088.0,1,1.0,3,Bangalore,Suburb,26,1.0,no,semi-furnished,8374501.0
+1834.0,1,1.0,1,Kolkata,City Centre,58,1.0,no,semi-furnished,16139169.0
+736.0,3,2.0,2,Bangalore,Premium Township,15,2.0,yes,unfurnished,12322693.0
+695.0,3,1.0,2,Mumbai,Prime Suburb,31,0.0,yes,unfurnished,18787930.0
+977.0,3,2.0,1,Delhi,Premium Township,20,0.0,yes,unfurnished,18282608.0
+1559.0,4,4.0,2,Mumbai,City Centre,27,1.0,yes,furnished,61490767.0
+1332.0,2,2.0,3,Bangalore,Prime Suburb,44,1.0,no,semi-furnished,14555451.0
+870.0,2,1.0,3,Mumbai,Outskirts,53,1.0,yes,furnished,8231559.0
+1113.0,2,2.0,2,Chennai,Suburb,35,1.0,yes,unfurnished,8841085.0
+350.0,3,3.0,1,Bangalore,Prime Suburb,47,2.0,yes,unfurnished,4046263.0
+947.0,3,1.0,3,Kolkata,Suburb,27,2.0,yes,semi-furnished,5920262.0
+538.0,4,3.0,2,Chennai,Prime Suburb,18,2.0,yes,unfurnished,6742434.0
+1083.0,2,1.0,2,Mumbai,Premium Township,58,2.0,no,semi-furnished,24832424.0
+979.0,2,2.0,2,Mumbai,Suburb,45,0.0,yes,semi-furnished,14934132.0
+1372.0,1,1.0,2,Delhi,Suburb,22,1.0,yes,semi-furnished,16104068.0
+908.0,3,2.0,2,Delhi,Suburb,32,2.0,yes,,12443143.0
+1257.0,2,1.0,1,Bangalore,Outskirts,17,0.0,no,unfurnished,5137798.0
+1615.0,3,2.0,2,Mumbai,Prime Suburb,39,3.0,yes,unfurnished,40109542.0
+1502.0,2,2.0,1,Delhi,City Centre,22,2.0,yes,furnished,33308793.0
+1104.0,4,4.0,3,Bangalore,Premium Township,57,1.0,yes,unfurnished,11738139.0
+1342.0,2,2.0,1,Delhi,City Centre,4,1.0,yes,unfurnished,27123822.0
+1186.0,1,1.0,2,Bangalore,Outskirts,36,1.0,yes,semi-furnished,4698393.0
+1064.0,2,1.0,4,Bangalore,Outskirts,37,0.0,yes,semi-furnished,5528920.0
+803.0,2,1.0,2,Bangalore,Outskirts,9,2.0,yes,semi-furnished,5959921.0
+1509.0,1,1.0,1,Delhi,Suburb,53,0.0,yes,semi-furnished,16832420.0
+1244.0,3,2.0,3,Mumbai,Suburb,23,,yes,semi-furnished,21600876.0
+771.0,5,5.0,1,Mumbai,Suburb,41,1.0,yes,semi-furnished,19766807.0
+2370.0,4,4.0,1,Mumbai,Suburb,17,2.0,no,furnished,48219610.0
+1696.0,3,2.0,2,Bangalore,Premium Township,29,1.0,yes,furnished,90460282.73943077
+1598.0,2,1.0,2,Bangalore,Outskirts,27,1.0,no,furnished,8086340.0
+1293.0,2,2.0,1,Kolkata,Outskirts,42,1.0,no,unfurnished,3862075.0
+1164.0,4,3.0,2,Delhi,Prime Suburb,4,1.0,no,unfurnished,17740292.0
+731.0,4,4.0,2,Bangalore,Outskirts,21,1.0,no,semi-furnished,5741647.0
+906.0,2,2.0,1,Bangalore,Suburb,18,2.0,yes,unfurnished,10908746.0
+1489.0,2,2.0,2,Chennai,Suburb,39,2.0,yes,furnished,11682781.0
+350.0,1,1.0,2,Delhi,Prime Suburb,47,1.0,yes,furnished,5135548.0
+577.0,1,1.0,2,Mumbai,Suburb,2,2.0,no,unfurnished,13068449.0
+1000.0,2,1.0,2,Bangalore,City Centre,3,0.0,no,semi-furnished,15786892.0
+1540.0,2,1.0,2,Bangalore,Outskirts,50,1.0,yes,,6134408.0
+1210.0,4,4.0,1,Bangalore,City Centre,39,1.0,yes,semi-furnished,20055797.0
+991.0,2,2.0,2,Kolkata,Prime Suburb,23,1.0,yes,semi-furnished,7325931.0
+1351.0,2,2.0,3,Chennai,Suburb,16,1.0,yes,semi-furnished,12872717.0
+1081.0,3,3.0,1,Bangalore,Premium Township,33,1.0,yes,semi-furnished,13612494.0
+1513.0,2,2.0,1,Kolkata,City Centre,13,2.0,no,semi-furnished,16623967.0
+1065.0,3,1.0,2,Bangalore,Outskirts,30,1.0,yes,unfurnished,5565096.0
+1255.0,3,2.0,1,Bangalore,Prime Suburb,36,1.0,yes,semi-furnished,12632211.0
+1589.0,2,1.0,1,Kolkata,Outskirts,19,0.0,yes,semi-furnished,5416498.0
+1461.0,2,2.0,2,Kolkata,Premium Township,37,1.0,yes,furnished,13066103.0
+1071.0,4,3.0,3,Bangalore,Suburb,58,0.0,yes,semi-furnished,9335750.0
+1266.0,1,1.0,2,Chennai,Prime Suburb,26,3.0,yes,semi-furnished,12585381.0
+875.0,3,2.0,1,Kolkata,City Centre,2,1.0,no,furnished,9403879.0
+1387.0,3,3.0,3,Chennai,Prime Suburb,23,0.0,yes,unfurnished,13628262.0
+1298.0,2,2.0,2,Chennai,Suburb,26,0.0,no,semi-furnished,8670386.0
+708.0,3,2.0,1,Chennai,Suburb,11,1.0,yes,semi-furnished,7573736.0
+1065.0,1,1.0,3,Delhi,Outskirts,1,3.0,yes,semi-furnished,8228186.0
+1159.0,4,4.0,1,Chennai,Outskirts,38,2.0,yes,unfurnished,6374021.0
+653.0,4,3.0,1,Mumbai,Premium Township,8,3.0,no,unfurnished,22140097.0
+597.0,2,1.0,3,Bangalore,Outskirts,18,2.0,yes,semi-furnished,3986469.0
+658.0,1,1.0,2,Delhi,Suburb,54,3.0,no,unfurnished,6773505.0
+1697.0,3,3.0,2,Chennai,City Centre,60,3.0,yes,semi-furnished,22355081.0
+1226.0,3,2.0,1,Kolkata,Outskirts,0,2.0,yes,semi-furnished,6136080.0
+674.0,3,3.0,1,Kolkata,Suburb,31,2.0,yes,unfurnished,4970565.0
+441.0,5,4.0,2,Mumbai,Prime Suburb,6,3.0,yes,unfurnished,15872787.0
+1130.0,4,3.0,3,Delhi,Suburb,7,1.0,no,furnished,17008792.0
+808.0,4,3.0,2,Kolkata,Suburb,8,0.0,no,semi-furnished,5934757.0
+1626.0,2,1.0,3,Bangalore,Suburb,24,1.0,yes,semi-furnished,15076564.0
+1618.0,5,5.0,3,Chennai,Prime Suburb,43,1.0,yes,semi-furnished,16584756.0
+530.0,4,3.0,1,Delhi,Prime Suburb,3,2.0,no,semi-furnished,10441714.0
+1721.0,1,1.0,1,Kolkata,Suburb,1,1.0,no,furnished,9709247.0
+493.0,4,4.0,2,Mumbai,Suburb,1,3.0,yes,furnished,16642432.0
+698.0,3,3.0,2,Bangalore,Outskirts,51,,no,furnished,4019992.0
+997.0,3,2.0,1,Delhi,Premium Township,49,1.0,no,unfurnished,16265818.0
+910.0,3,3.0,2,Mumbai,Prime Suburb,19,0.0,no,semi-furnished,22170076.0
+749.0,2,2.0,2,Bangalore,City Centre,36,2.0,no,semi-furnished,12929482.0
+1217.0,3,2.0,2,Chennai,Outskirts,4,0.0,no,unfurnished,6235803.0
+648.0,2,2.0,1,Bangalore,Prime Suburb,7,0.0,yes,semi-furnished,8631030.0
+889.0,2,1.0,1,Chennai,Suburb,5,1.0,yes,unfurnished,7781621.0
+998.0,3,3.0,2,Mumbai,Suburb,10,1.0,yes,furnished,24659200.0
+795.0,2,1.0,2,Kolkata,Suburb,2,0.0,yes,semi-furnished,5048466.0
+1522.0,2,2.0,1,Chennai,City Centre,47,1.0,no,semi-furnished,18267049.0
+2151.0,1,1.0,2,Bangalore,Suburb,15,0.0,no,semi-furnished,18482605.0
+993.0,2,2.0,2,Kolkata,Prime Suburb,31,2.0,yes,semi-furnished,7463543.0
+1154.0,2,1.0,1,Delhi,Outskirts,15,0.0,yes,furnished,9263269.0
+926.0,2,1.0,2,Kolkata,Outskirts,57,0.0,yes,semi-furnished,2361018.0
+1876.0,5,4.0,2,Kolkata,Prime Suburb,55,2.0,yes,furnished,14218515.0
+1008.0,3,3.0,1,Chennai,Prime Suburb,56,0.0,no,unfurnished,9826691.0
+1205.0,1,1.0,1,Mumbai,Suburb,20,0.0,no,unfurnished,24311912.0
+1505.0,3,3.0,1,Kolkata,Premium Township,54,2.0,yes,semi-furnished,14243354.0
+850.0,1,1.0,3,Mumbai,Premium Township,4,0.0,no,semi-furnished,25605689.0
+1369.0,4,3.0,2,Chennai,City Centre,26,2.0,yes,semi-furnished,18602690.0
+1273.0,2,2.0,3,Mumbai,Prime Suburb,3,1.0,yes,unfurnished,32159885.0
+481.0,3,2.0,2,Bangalore,Prime Suburb,27,1.0,yes,semi-furnished,7283159.0
+898.0,2,1.0,1,Delhi,Outskirts,39,0.0,yes,unfurnished,5351902.0
+758.0,2,1.0,1,Mumbai,Suburb,3,0.0,no,semi-furnished,16599161.0
+1376.0,1,1.0,1,Mumbai,Outskirts,17,2.0,no,semi-furnished,17818634.0
+2086.0,2,2.0,2,Chennai,Suburb,47,1.0,yes,unfurnished,14415601.0
+957.0,1,1.0,1,Chennai,Prime Suburb,37,1.0,yes,unfurnished,8606677.0
+977.0,2,2.0,1,Bangalore,Suburb,37,0.0,no,unfurnished,7208601.0
+1802.0,1,1.0,1,Delhi,Premium Township,25,1.0,yes,unfurnished,24665506.0
+1218.0,3,1.0,4,Chennai,Prime Suburb,4,2.0,yes,furnished,13891554.0
+417.0,2,2.0,1,Kolkata,Premium Township,2,0.0,no,furnished,4639173.0
+1175.0,2,1.0,2,Chennai,Prime Suburb,56,2.0,yes,semi-furnished,10461486.0
+1649.0,1,1.0,1,Chennai,Premium Township,8,1.0,yes,unfurnished,17698139.0
+704.0,2,2.0,1,Chennai,Outskirts,18,1.0,no,semi-furnished,3795346.0
+695.0,1,1.0,2,Kolkata,Prime Suburb,43,,yes,semi-furnished,5493026.0
+976.0,2,2.0,1,Chennai,Prime Suburb,15,2.0,yes,semi-furnished,11151972.0
+1314.0,1,1.0,2,Kolkata,Prime Suburb,26,1.0,yes,furnished,10244334.0
+1504.0,3,3.0,3,Kolkata,Suburb,29,2.0,yes,furnished,8550533.0
+495.0,2,1.0,2,Mumbai,Outskirts,15,2.0,yes,semi-furnished,8098379.0
+1823.0,2,1.0,2,Kolkata,Prime Suburb,23,3.0,yes,semi-furnished,12619808.0
+1156.0,2,1.0,2,Chennai,Suburb,25,1.0,no,unfurnished,8618150.0
+995.0,3,3.0,2,Mumbai,City Centre,51,1.0,no,unfurnished,34364248.0
+408.0,3,3.0,3,Delhi,Prime Suburb,31,1.0,yes,unfurnished,7230617.0
+1388.0,5,4.0,2,Mumbai,Suburb,31,1.0,yes,unfurnished,30834699.0
+1565.0,3,3.0,3,Mumbai,Prime Suburb,15,1.0,yes,furnished,39767861.0
+792.0,2,2.0,1,Delhi,Suburb,32,0.0,yes,semi-furnished,9913806.0
+1311.0,2,2.0,1,Bangalore,Suburb,27,2.0,no,furnished,13057025.0
+2015.0,3,2.0,1,Mumbai,City Centre,51,1.0,yes,semi-furnished,65636359.0
+1057.0,2,2.0,1,Kolkata,Suburb,23,1.0,no,furnished,6332215.0
+1476.0,2,1.0,1,Bangalore,Suburb,28,3.0,yes,unfurnished,12636387.0
+456.0,4,4.0,2,Mumbai,Outskirts,26,,no,furnished,9853628.0
+557.0,2,1.0,1,Chennai,Suburb,21,1.0,yes,unfurnished,3862721.0
+706.0,3,2.0,2,Kolkata,Outskirts,23,2.0,yes,semi-furnished,3261486.0
+1692.0,4,3.0,3,Delhi,Outskirts,40,2.0,yes,semi-furnished,11359144.0
+716.0,2,1.0,2,Bangalore,Suburb,29,1.0,yes,unfurnished,6819090.0
+654.0,2,2.0,4,Bangalore,Outskirts,1,0.0,no,furnished,5407527.0
+544.0,3,2.0,1,Delhi,Suburb,24,0.0,no,semi-furnished,6493569.0
+1282.0,4,4.0,1,Chennai,Outskirts,49,1.0,no,unfurnished,5449442.0
+521.0,1,1.0,3,Delhi,Suburb,12,1.0,yes,semi-furnished,8060325.0
+1442.0,2,2.0,1,Delhi,Suburb,3,1.0,no,unfurnished,18401749.0
+809.0,1,1.0,4,Chennai,Outskirts,29,1.0,yes,unfurnished,4107227.0
+1526.0,3,2.0,1,Kolkata,Outskirts,43,1.0,yes,semi-furnished,4818427.0
+1193.0,2,1.0,1,Chennai,Prime Suburb,54,3.0,no,furnished,10774550.0
+350.0,3,1.0,2,Mumbai,Suburb,12,0.0,yes,semi-furnished,9579261.0
+1146.0,4,3.0,2,Mumbai,Prime Suburb,58,1.0,no,unfurnished,24686884.0
+1174.0,3,1.0,3,Kolkata,Outskirts,44,1.0,yes,unfurnished,4029730.0
+820.0,1,1.0,2,Kolkata,Outskirts,43,1.0,yes,semi-furnished,2744256.0
+1217.0,3,,2,Bangalore,Suburb,32,0.0,yes,semi-furnished,11851959.0
+1623.0,4,3.0,2,Mumbai,Outskirts,23,0.0,yes,semi-furnished,22020474.0
+745.0,2,1.0,1,Kolkata,City Centre,59,0.0,yes,furnished,6565792.0
+1104.0,4,4.0,2,Chennai,Prime Suburb,27,2.0,yes,furnished,11214314.0
+1830.0,3,2.0,1,Chennai,Suburb,2,1.0,yes,unfurnished,14288776.0
+1167.0,3,3.0,2,Delhi,City Centre,28,0.0,no,unfurnished,24489185.0
+786.0,3,3.0,1,Delhi,Suburb,55,2.0,yes,semi-furnished,9952592.0
+1338.0,5,5.0,2,Delhi,Suburb,27,1.0,yes,semi-furnished,18164906.0
+1017.0,3,2.0,1,Delhi,Prime Suburb,60,0.0,no,furnished,14268786.0
+1175.0,5,5.0,2,Mumbai,Premium Township,30,,yes,semi-furnished,38043106.0
+1352.0,2,1.0,3,Bangalore,Prime Suburb,42,2.0,yes,unfurnished,13447934.0
+1325.0,3,2.0,1,Delhi,Suburb,42,0.0,yes,unfurnished,13362704.0
+1264.0,2,2.0,2,Delhi,City Centre,11,2.0,yes,furnished,29698543.0
+1526.0,1,1.0,1,Chennai,Suburb,26,1.0,yes,unfurnished,10899761.0
+1216.0,1,1.0,3,Bangalore,Suburb,12,0.0,yes,furnished,10801173.0
+932.0,4,4.0,2,Chennai,Prime Suburb,8,1.0,yes,semi-furnished,13007082.0
+1757.0,3,1.0,2,Bangalore,Suburb,21,2.0,no,semi-furnished,13508340.0
+1907.0,2,2.0,3,Mumbai,Suburb,26,1.0,yes,semi-furnished,37642758.0
+1081.0,3,2.0,2,Bangalore,Prime Suburb,6,2.0,yes,unfurnished,13054273.0
+1094.0,3,3.0,3,Chennai,Premium Township,0,1.0,yes,unfurnished,12868832.0
+1498.0,1,1.0,1,Chennai,Outskirts,23,1.0,yes,semi-furnished,6518946.0
+1510.0,4,3.0,2,Kolkata,Suburb,52,1.0,yes,unfurnished,9786152.0
+735.0,2,2.0,2,Bangalore,Premium Township,24,1.0,yes,semi-furnished,11276220.0
+1311.0,1,1.0,2,Chennai,Outskirts,12,0.0,no,unfurnished,5425846.0
+350.0,3,3.0,3,Kolkata,Suburb,31,1.0,no,semi-furnished,2782589.0
+964.0,4,3.0,2,Delhi,Outskirts,31,0.0,no,semi-furnished,7772979.0
+1196.0,2,1.0,1,Delhi,Premium Township,51,1.0,yes,unfurnished,19990162.0
+1283.0,3,2.0,1,Kolkata,Prime Suburb,33,1.0,no,semi-furnished,9362940.0
+1113.0,3,2.0,3,Chennai,Outskirts,18,0.0,no,unfurnished,5072975.0
+1787.0,3,3.0,2,Mumbai,Outskirts,41,1.0,no,semi-furnished,20468844.0
+1071.0,4,4.0,3,Delhi,Suburb,5,1.0,no,semi-furnished,15269955.0
+755.0,2,2.0,1,Delhi,Suburb,5,0.0,yes,furnished,11331445.0
+1323.0,1,1.0,2,Delhi,Suburb,35,1.0,yes,unfurnished,12505905.0
+2207.0,5,5.0,2,Kolkata,Suburb,57,1.0,no,unfurnished,13324544.0
+1334.0,2,2.0,2,Delhi,Outskirts,26,1.0,yes,semi-furnished,9057026.0
+792.0,1,1.0,1,Bangalore,Prime Suburb,51,0.0,yes,semi-furnished,8091585.0
+1408.0,2,1.0,1,Kolkata,Suburb,47,1.0,no,unfurnished,8077450.0
+831.0,2,2.0,2,Kolkata,Suburb,55,1.0,yes,unfurnished,4458600.0
+1163.0,4,4.0,2,Mumbai,Prime Suburb,24,1.0,yes,unfurnished,29787918.0
+1271.0,3,2.0,2,Kolkata,Suburb,52,1.0,yes,unfurnished,7831527.0
+1020.0,1,1.0,2,Mumbai,Premium Township,52,1.0,no,furnished,28733930.0
+1598.0,3,3.0,3,Kolkata,Outskirts,34,0.0,no,unfurnished,5420459.0
+886.0,2,1.0,3,Chennai,Suburb,31,2.0,yes,furnished,7591346.0
+1079.0,4,4.0,3,Kolkata,Suburb,32,1.0,yes,semi-furnished,7834749.0
+1570.0,5,5.0,2,Kolkata,City Centre,0,1.0,yes,semi-furnished,17199250.0
+1264.0,2,1.0,1,Delhi,Suburb,12,1.0,yes,semi-furnished,13833786.0
+1114.0,4,3.0,1,Kolkata,Suburb,31,0.0,no,unfurnished,6046472.0
+1021.0,2,1.0,2,Bangalore,Outskirts,43,1.0,yes,unfurnished,4448362.0
+1153.0,2,1.0,2,Kolkata,Prime Suburb,12,0.0,no,semi-furnished,8291298.0
+1057.0,1,1.0,1,Kolkata,City Centre,59,1.0,yes,semi-furnished,8381224.0
+1073.0,2,,1,Kolkata,Premium Township,60,2.0,yes,unfurnished,9800870.0
+350.0,4,4.0,3,Bangalore,City Centre,17,1.0,yes,unfurnished,7244589.0
+,1,1.0,2,Mumbai,Suburb,8,2.0,no,furnished,9141575.0
+1235.0,3,2.0,2,Bangalore,Prime Suburb,34,0.0,yes,unfurnished,13595119.0
+1333.0,3,1.0,3,Bangalore,Suburb,60,0.0,yes,semi-furnished,11250517.0
+946.0,4,3.0,2,Kolkata,Outskirts,1,3.0,yes,furnished,25970011.409588844
+350.0,5,5.0,1,Bangalore,City Centre,52,1.0,yes,furnished,7155963.0
+1346.0,1,1.0,3,Bangalore,Suburb,51,1.0,no,unfurnished,10550255.0
+1398.0,2,1.0,2,Delhi,Suburb,36,0.0,no,semi-furnished,15928619.0
+1335.0,2,2.0,1,Chennai,City Centre,50,0.0,yes,semi-furnished,17735501.0
+1278.0,4,4.0,1,Chennai,Prime Suburb,24,1.0,no,unfurnished,12477185.0
+1086.0,3,3.0,2,Delhi,Suburb,24,1.0,yes,unfurnished,12700740.0
+1019.0,3,,2,Chennai,Suburb,0,0.0,yes,semi-furnished,8571878.0
+1660.0,2,1.0,3,Bangalore,Premium Township,16,2.0,yes,furnished,21191597.0
+1621.0,4,2.0,2,Kolkata,Outskirts,14,1.0,yes,semi-furnished,7080771.0
+1008.0,3,2.0,1,Delhi,Suburb,40,0.0,yes,semi-furnished,12772344.0
+1467.0,2,2.0,2,Bangalore,Suburb,3,3.0,yes,unfurnished,16394161.0
+1778.0,2,2.0,1,Mumbai,Suburb,17,1.0,yes,unfurnished,40233854.0
+682.0,4,3.0,1,Kolkata,Outskirts,30,0.0,no,semi-furnished,3044330.0
+1462.0,1,1.0,1,Chennai,Suburb,27,2.0,no,semi-furnished,11229164.0
+1014.0,2,2.0,2,Mumbai,City Centre,36,2.0,yes,unfurnished,31600720.0
+1614.0,1,1.0,1,Bangalore,Prime Suburb,0,2.0,yes,unfurnished,18345785.0
+959.0,5,4.0,2,Bangalore,City Centre,31,1.0,yes,unfurnished,16555201.0
+1095.0,1,1.0,1,Mumbai,Prime Suburb,22,1.0,yes,furnished,24303113.0
+1300.0,4,3.0,2,Chennai,Prime Suburb,51,2.0,no,unfurnished,13959866.0
+1440.0,3,2.0,1,Bangalore,City Centre,31,1.0,yes,semi-furnished,24897388.0
+998.0,4,3.0,1,Delhi,Outskirts,51,0.0,no,furnished,7435135.0
+1328.0,2,2.0,1,Bangalore,Outskirts,58,1.0,no,unfurnished,5842327.0
+1145.0,3,2.0,3,Mumbai,Suburb,48,1.0,no,semi-furnished,17582780.0
+1429.0,2,2.0,1,Bangalore,Prime Suburb,41,0.0,yes,furnished,13576255.0
+1082.0,3,3.0,1,Bangalore,City Centre,33,3.0,yes,,21112887.0
+1242.0,2,1.0,2,Chennai,City Centre,17,1.0,yes,semi-furnished,15889123.0
+350.0,1,1.0,2,Delhi,Suburb,25,1.0,yes,semi-furnished,4111726.0
+1771.0,2,1.0,1,Mumbai,City Centre,59,2.0,yes,unfurnished,47035649.0
+1169.0,2,2.0,2,Chennai,Outskirts,36,2.0,yes,semi-furnished,5506938.0
+1030.0,4,2.0,1,Bangalore,Outskirts,38,1.0,yes,semi-furnished,7040769.0
+1293.0,2,1.0,1,Mumbai,Suburb,39,0.0,yes,semi-furnished,23343472.0
+1070.0,2,1.0,4,Mumbai,Suburb,49,0.0,yes,semi-furnished,19369819.0
+1309.0,2,1.0,2,Delhi,Suburb,55,2.0,yes,furnished,16593436.0
+572.0,3,2.0,1,Kolkata,Suburb,58,2.0,yes,unfurnished,3025047.0
+1875.0,1,1.0,3,Bangalore,Suburb,2,1.0,yes,semi-furnished,18299463.0
+1017.0,2,1.0,2,Kolkata,Outskirts,33,1.0,yes,semi-furnished,3926954.0
+490.0,4,3.0,1,Bangalore,Premium Township,30,1.0,yes,semi-furnished,7773262.0
+1225.0,2,1.0,1,Chennai,Prime Suburb,39,1.0,no,semi-furnished,10587686.0
+706.0,3,2.0,2,Kolkata,Outskirts,23,2.0,yes,semi-furnished,3261486.0
+522.0,3,3.0,3,Chennai,City Centre,54,0.0,yes,unfurnished,7057894.0
+1278.0,3,2.0,2,Bangalore,City Centre,1,1.0,yes,unfurnished,25331111.0
+676.0,2,2.0,1,Kolkata,Premium Township,44,0.0,yes,unfurnished,6042054.0
+1097.0,3,2.0,2,Delhi,Prime Suburb,16,2.0,yes,unfurnished,17352028.0
+1543.0,3,2.0,1,Delhi,Prime Suburb,59,2.0,yes,unfurnished,19594946.0
+1558.0,2,2.0,2,Chennai,Outskirts,6,1.0,yes,furnished,8697932.0
+1635.0,3,3.0,2,Delhi,City Centre,8,2.0,yes,semi-furnished,32127303.0
+798.0,2,1.0,1,Mumbai,Suburb,50,2.0,yes,semi-furnished,13914520.0
+1502.0,2,1.0,1,Mumbai,Suburb,8,2.0,no,unfurnished,28184580.0
+1323.0,2,1.0,2,Delhi,Suburb,16,0.0,yes,semi-furnished,15485017.0
+1431.0,5,5.0,2,Mumbai,Suburb,46,0.0,yes,unfurnished,28969040.0
+1764.0,2,2.0,1,Bangalore,Suburb,58,2.0,yes,semi-furnished,14241346.0
+1754.0,3,3.0,1,Mumbai,Outskirts,36,1.0,no,semi-furnished,18969250.0
+1190.0,3,3.0,1,Mumbai,Suburb,52,2.0,yes,semi-furnished,24821107.0
+1001.0,2,2.0,3,Delhi,Suburb,10,1.0,no,unfurnished,15333748.0
+414.0,1,1.0,2,Delhi,Suburb,46,0.0,yes,semi-furnished,4031285.0
+1133.0,2,2.0,1,Bangalore,Prime Suburb,4,2.0,yes,unfurnished,13984580.0
+1312.0,2,2.0,2,Kolkata,City Centre,20,1.0,yes,semi-furnished,15285047.0
+1851.0,3,3.0,1,Mumbai,Premium Township,38,2.0,yes,semi-furnished,45625629.0
+635.0,4,3.0,3,Kolkata,Premium Township,14,1.0,yes,unfurnished,6507681.0
+1527.0,1,1.0,2,Kolkata,Outskirts,26,0.0,yes,furnished,5539035.0
+1287.0,3,3.0,1,Mumbai,Prime Suburb,47,0.0,yes,semi-furnished,27004325.0
+595.0,1,1.0,2,Delhi,Suburb,39,1.0,yes,unfurnished,6294868.0
+1383.0,3,1.0,2,Bangalore,City Centre,40,1.0,yes,furnished,23992221.0
+1304.0,3,3.0,3,Mumbai,Outskirts,34,0.0,yes,furnished,17334240.0
+662.0,4,4.0,1,Delhi,Outskirts,44,2.0,no,unfurnished,4834857.0
+1359.0,2,1.0,2,Delhi,Premium Township,38,1.0,yes,furnished,22525281.0
+626.0,3,2.0,1,Bangalore,Suburb,54,3.0,yes,unfurnished,5685100.0
+798.0,2,1.0,1,Chennai,Prime Suburb,28,3.0,yes,unfurnished,8632036.0
+1155.0,5,5.0,1,Mumbai,Premium Township,56,3.0,yes,furnished,33069579.0
+1225.0,3,3.0,1,Chennai,City Centre,33,1.0,yes,furnished,18206297.0
+1887.0,2,1.0,3,Delhi,Premium Township,9,2.0,yes,unfurnished,31203783.0
+844.0,3,2.0,1,Mumbai,Prime Suburb,31,0.0,no,furnished,21766339.0
+1380.0,3,2.0,3,Kolkata,City Centre,38,1.0,yes,semi-furnished,14629933.0
+1012.0,2,2.0,3,Chennai,Prime Suburb,44,2.0,no,semi-furnished,9327342.0
+2044.0,2,1.0,1,Mumbai,Outskirts,30,0.0,yes,semi-furnished,21626787.0
+1417.0,3,2.0,1,Bangalore,Suburb,14,1.0,yes,furnished,12625121.0
+1339.0,4,3.0,2,Delhi,Outskirts,33,3.0,yes,unfurnished,11338480.0
+1224.0,2,2.0,3,Bangalore,City Centre,17,0.0,yes,unfurnished,19361627.0
+483.0,3,2.0,2,Mumbai,Prime Suburb,7,1.0,yes,furnished,18381684.0
+1280.0,2,2.0,2,Mumbai,Premium Township,15,2.0,yes,unfurnished,34707861.0
+1795.0,1,1.0,1,Delhi,City Centre,44,0.0,yes,furnished,33758410.0
+1378.0,2,2.0,3,Bangalore,Prime Suburb,38,1.0,no,semi-furnished,14876412.0
+1550.0,1,1.0,2,Bangalore,Outskirts,31,1.0,yes,semi-furnished,8210665.0
+1503.0,4,3.0,1,Kolkata,Suburb,10,1.0,yes,unfurnished,9838299.0
+804.0,5,4.0,2,Chennai,Suburb,6,1.0,no,unfurnished,7051397.0
+1380.0,2,2.0,2,Delhi,Suburb,37,1.0,yes,semi-furnished,15240712.0
+1366.0,4,4.0,2,Delhi,City Centre,5,0.0,yes,semi-furnished,28720468.0
+1496.0,3,1.0,3,Mumbai,Outskirts,13,3.0,yes,semi-furnished,19538091.0
+610.0,3,3.0,2,Chennai,Prime Suburb,55,2.0,yes,furnished,6655471.0
+1394.0,2,2.0,2,Chennai,Prime Suburb,16,0.0,yes,semi-furnished,12415293.0
+1615.0,2,1.0,2,Delhi,Suburb,4,2.0,yes,furnished,20987715.0
+800.0,4,3.0,2,Delhi,Suburb,44,3.0,yes,furnished,12543395.0
+350.0,3,3.0,1,Chennai,Suburb,45,1.0,yes,semi-furnished,3045450.0
+970.0,3,3.0,1,Mumbai,Premium Township,3,1.0,yes,semi-furnished,24733609.0
+1589.0,5,5.0,3,Mumbai,Prime Suburb,9,1.0,no,unfurnished,37118167.0
+1072.0,4,4.0,3,Bangalore,Outskirts,0,1.0,yes,unfurnished,7781304.0
+1510.0,2,2.0,1,Kolkata,Suburb,6,0.0,yes,unfurnished,9585483.0
+691.0,4,4.0,3,Kolkata,Premium Township,60,1.0,no,semi-furnished,5589528.0
+1140.0,2,1.0,1,Chennai,Suburb,50,0.0,no,semi-furnished,7406930.0
+838.0,2,1.0,3,Mumbai,Suburb,2,2.0,yes,semi-furnished,17508769.0
+922.0,1,,4,Bangalore,Suburb,55,3.0,no,semi-furnished,7769769.0
+998.0,3,3.0,2,Delhi,Suburb,24,0.0,yes,furnished,12666371.0
+2289.0,3,2.0,2,Kolkata,City Centre,26,1.0,yes,unfurnished,22980776.0
+624.0,2,2.0,3,Mumbai,Prime Suburb,29,1.0,no,semi-furnished,15645916.0
+1267.0,4,3.0,2,Chennai,Outskirts,6,0.0,yes,semi-furnished,6464505.0
+1438.0,3,3.0,2,Bangalore,City Centre,33,2.0,no,unfurnished,22274077.0
+1179.0,2,2.0,2,Bangalore,Prime Suburb,9,1.0,yes,semi-furnished,14572220.0
+1348.0,3,2.0,3,Chennai,Outskirts,34,0.0,no,semi-furnished,5806445.0
+1440.0,2,,1,Kolkata,Suburb,21,1.0,no,unfurnished,8632037.0
+1006.0,3,,1,Chennai,Outskirts,40,1.0,no,unfurnished,4126593.0
+1208.0,1,1.0,1,Mumbai,City Centre,40,1.0,no,semi-furnished,40932091.0
+1813.0,2,2.0,1,Delhi,Suburb,57,1.0,yes,semi-furnished,20519671.0
+1263.0,2,2.0,1,Chennai,City Centre,10,0.0,yes,semi-furnished,18032427.0
+350.0,4,3.0,1,Bangalore,Outskirts,18,2.0,yes,furnished,4486576.0
+1196.0,3,2.0,2,Kolkata,Prime Suburb,43,0.0,yes,unfurnished,7710361.0
+972.0,3,3.0,2,Mumbai,Prime Suburb,20,2.0,yes,semi-furnished,27141489.0
+1009.0,1,1.0,3,Kolkata,Suburb,56,1.0,yes,unfurnished,4934747.0
+1454.0,2,1.0,1,Chennai,Premium Township,55,1.0,yes,unfurnished,16363183.0
+1166.0,3,1.0,2,Bangalore,Premium Township,6,1.0,no,semi-furnished,17841422.0
+1036.0,2,1.0,2,Chennai,Suburb,51,1.0,yes,semi-furnished,7614849.0
+1650.0,2,2.0,2,Chennai,Prime Suburb,60,1.0,yes,furnished,16243383.0
+1102.0,3,3.0,3,Chennai,Premium Township,14,0.0,yes,unfurnished,14438527.0
+771.0,4,3.0,1,Delhi,Outskirts,17,1.0,yes,semi-furnished,8046512.0
+1303.0,2,1.0,2,Chennai,Suburb,16,1.0,yes,semi-furnished,9986268.0
+1368.0,4,4.0,2,Mumbai,Suburb,42,0.0,yes,semi-furnished,27428750.0
+977.0,2,2.0,1,Kolkata,Suburb,31,,yes,semi-furnished,6207804.0
+470.0,4,3.0,1,Mumbai,City Centre,7,1.0,yes,semi-furnished,21223655.0
+1075.0,1,1.0,3,Mumbai,City Centre,15,3.0,yes,furnished,35742063.0
+360.0,3,3.0,1,Chennai,Suburb,35,1.0,yes,furnished,3677315.0
+1602.0,2,1.0,1,Chennai,City Centre,28,2.0,yes,unfurnished,20739585.0
+1297.0,1,1.0,2,Mumbai,Outskirts,53,0.0,yes,furnished,11341810.0
+1675.0,4,4.0,2,Mumbai,Premium Township,7,2.0,yes,furnished,45669902.0
+1384.0,2,1.0,3,Kolkata,City Centre,8,1.0,yes,semi-furnished,15630011.0
+671.0,3,2.0,3,Chennai,Suburb,9,1.0,yes,semi-furnished,7397431.0
+865.0,3,3.0,1,Mumbai,Suburb,15,0.0,yes,semi-furnished,20582161.0
+1162.0,3,3.0,4,Kolkata,Suburb,29,2.0,yes,furnished,7982585.0
+1450.0,1,1.0,1,Delhi,Outskirts,30,3.0,yes,furnished,9158027.0
+1180.0,4,4.0,2,Kolkata,Suburb,3,1.0,yes,furnished,9335946.0
+,1,1.0,1,Mumbai,Prime Suburb,37,0.0,yes,unfurnished,38802769.0
+1106.0,2,1.0,4,Bangalore,Suburb,1,3.0,yes,unfurnished,11510029.0
+1165.0,3,2.0,2,Delhi,Premium Township,20,1.0,no,semi-furnished,21567756.0
+883.0,2,2.0,1,Delhi,Suburb,5,2.0,yes,furnished,14791662.0
+1900.0,5,4.0,3,Kolkata,Prime Suburb,16,1.0,yes,furnished,13568635.0
+1338.0,2,1.0,1,Delhi,Prime Suburb,5,0.0,yes,semi-furnished,21128651.0
+853.0,3,1.0,2,Delhi,Suburb,2,1.0,no,unfurnished,11466339.0
+517.0,3,2.0,3,Chennai,Outskirts,16,0.0,no,unfurnished,3253863.0
+1188.0,2,2.0,3,Kolkata,Suburb,50,0.0,yes,semi-furnished,6795671.0
+2010.0,2,2.0,2,Bangalore,Outskirts,27,3.0,yes,,11828881.0
+350.0,3,3.0,3,Delhi,Suburb,22,1.0,no,semi-furnished,6559298.0
+1477.0,2,2.0,2,Delhi,Suburb,23,1.0,no,unfurnished,16838375.0
+1469.0,2,2.0,2,Chennai,Suburb,5,1.0,yes,furnished,11791843.0
+684.0,3,2.0,2,Kolkata,Prime Suburb,23,2.0,no,furnished,5814470.0
+700.0,3,2.0,1,Kolkata,Suburb,16,0.0,no,unfurnished,5052893.0
+1282.0,2,1.0,3,Bangalore,Premium Township,11,1.0,yes,semi-furnished,18437297.0
+1787.0,1,1.0,2,Kolkata,Prime Suburb,43,1.0,yes,unfurnished,12288632.0
+1537.0,2,1.0,1,Mumbai,Suburb,55,1.0,no,unfurnished,25297308.0
+972.0,3,2.0,1,Bangalore,Outskirts,10,2.0,no,unfurnished,6529434.0
+,3,2.0,2,Kolkata,Outskirts,52,,yes,unfurnished,2596555.0
+652.0,3,1.0,3,Chennai,Suburb,0,2.0,yes,unfurnished,6039207.0
+1591.0,4,4.0,1,Kolkata,Suburb,40,2.0,yes,furnished,10182359.0
+1275.0,1,1.0,4,Mumbai,Premium Township,38,3.0,yes,semi-furnished,33343961.0
+992.0,2,2.0,2,Bangalore,Suburb,21,1.0,yes,semi-furnished,9565926.0
+639.0,3,3.0,2,Mumbai,Prime Suburb,17,3.0,yes,furnished,22684598.0
+760.0,3,3.0,1,Kolkata,Suburb,4,2.0,yes,semi-furnished,5806554.0
+1435.0,4,4.0,3,Bangalore,Suburb,14,0.0,yes,furnished,14689976.0
+1295.0,2,1.0,1,Bangalore,Suburb,39,1.0,yes,semi-furnished,10656759.0
+721.0,3,2.0,3,Bangalore,Suburb,34,1.0,yes,furnished,6961441.0
+612.0,3,1.0,1,Mumbai,Outskirts,15,2.0,yes,unfurnished,7745087.0
+1060.0,1,1.0,1,Chennai,Outskirts,9,1.0,no,semi-furnished,4754918.0
+1417.0,3,3.0,2,Bangalore,Prime Suburb,20,1.0,yes,unfurnished,17619246.0
+1298.0,1,1.0,1,Chennai,Outskirts,4,1.0,yes,semi-furnished,6873287.0
+777.0,2,1.0,1,Kolkata,Suburb,12,1.0,yes,unfurnished,4997427.0
+1663.0,4,4.0,1,Mumbai,Suburb,9,1.0,yes,furnished,34494457.0
+1248.0,3,3.0,1,Chennai,City Centre,22,1.0,yes,unfurnished,19624511.0
+871.0,3,3.0,2,Delhi,City Centre,59,0.0,no,unfurnished,18373321.0
+350.0,3,3.0,1,Bangalore,Outskirts,31,1.0,yes,unfurnished,2676950.0
+1349.0,5,5.0,1,Bangalore,Outskirts,56,0.0,yes,unfurnished,7574784.0
+1228.0,2,1.0,2,Chennai,Prime Suburb,12,0.0,yes,semi-furnished,11653822.0
+1712.0,5,5.0,4,Delhi,Premium Township,56,0.0,yes,semi-furnished,31183562.0
+1317.0,3,1.0,2,Kolkata,Suburb,0,1.0,no,semi-furnished,8508370.0
+1370.0,4,3.0,2,Kolkata,Suburb,40,0.0,no,semi-furnished,7187239.0
+1756.0,2,1.0,1,Delhi,Prime Suburb,51,2.0,yes,unfurnished,25812324.0
+1289.0,3,2.0,3,Bangalore,Prime Suburb,23,2.0,yes,unfurnished,13720134.0
+1117.0,3,3.0,1,Delhi,Prime Suburb,29,2.0,yes,unfurnished,16765437.0
+1468.0,2,2.0,2,Bangalore,Premium Township,40,1.0,yes,furnished,18809483.0
+1067.0,4,4.0,1,Delhi,Suburb,13,1.0,yes,semi-furnished,15091568.0
+1484.0,4,4.0,2,Bangalore,Outskirts,34,1.0,no,semi-furnished,10471214.0
+350.0,1,1.0,1,Delhi,City Centre,56,1.0,yes,semi-furnished,6172516.0
+1472.0,3,3.0,1,Kolkata,Outskirts,2,1.0,yes,semi-furnished,5680116.0
+946.0,3,2.0,3,Delhi,Suburb,23,1.0,yes,unfurnished,11624068.0
+1672.0,2,1.0,2,Mumbai,City Centre,31,1.0,no,furnished,57433573.0
+1141.0,2,1.0,2,Bangalore,City Centre,18,3.0,yes,semi-furnished,19777920.0
+1793.0,1,1.0,1,Kolkata,Prime Suburb,27,,no,semi-furnished,14086139.0
+1087.0,2,1.0,1,Delhi,City Centre,36,1.0,yes,semi-furnished,24987994.0
+,2,1.0,2,Bangalore,Prime Suburb,27,1.0,yes,furnished,4805878.0
+1126.0,2,1.0,1,Delhi,Suburb,38,0.0,yes,semi-furnished,13296883.0
+350.0,3,2.0,3,Bangalore,City Centre,40,1.0,no,unfurnished,5450118.0
+1331.0,2,2.0,1,Chennai,Suburb,5,1.0,yes,unfurnished,11938040.0
+777.0,2,2.0,3,Kolkata,Outskirts,36,0.0,yes,unfurnished,11061149.11770384
+695.0,1,1.0,1,Bangalore,Outskirts,30,2.0,yes,unfurnished,4255568.0
+1192.0,2,2.0,2,Mumbai,Suburb,19,2.0,no,unfurnished,21561623.0
+350.0,2,2.0,1,Delhi,Prime Suburb,20,1.0,no,semi-furnished,6004254.0
+677.0,5,3.0,2,Delhi,Premium Township,4,2.0,yes,unfurnished,15533695.0
+1535.0,4,3.0,1,Chennai,City Centre,24,1.0,no,semi-furnished,19187228.0
+837.0,3,3.0,3,Bangalore,Outskirts,39,1.0,no,semi-furnished,4590121.0
+1248.0,2,2.0,3,Mumbai,Suburb,1,2.0,yes,unfurnished,26905631.0
+1571.0,2,2.0,4,Delhi,Suburb,25,0.0,yes,unfurnished,18905116.0
+1086.0,4,3.0,1,Mumbai,City Centre,50,0.0,yes,semi-furnished,34602506.0
+1316.0,2,2.0,1,Bangalore,Suburb,60,1.0,yes,semi-furnished,11843976.0
+1049.0,1,1.0,1,Chennai,Outskirts,8,1.0,yes,furnished,5444077.0
+785.0,1,1.0,2,Mumbai,Outskirts,23,1.0,yes,unfurnished,9014606.0
+901.0,3,2.0,2,Bangalore,City Centre,19,1.0,no,furnished,18071757.0
+1030.0,3,2.0,1,Bangalore,Suburb,57,0.0,yes,semi-furnished,8424848.0
+1505.0,4,4.0,1,Delhi,Outskirts,31,0.0,no,furnished,11082618.0
+1172.0,2,1.0,2,Delhi,Outskirts,47,1.0,no,semi-furnished,7118279.0
+1284.0,3,3.0,4,Chennai,City Centre,12,1.0,yes,semi-furnished,18210410.0
+1398.0,1,1.0,1,Chennai,Premium Township,2,1.0,yes,unfurnished,15709468.0
+662.0,2,1.0,1,Bangalore,Outskirts,3,1.0,no,semi-furnished,4428285.0
+586.0,3,2.0,2,Bangalore,Suburb,41,2.0,no,unfurnished,5256230.0
+1516.0,2,2.0,2,Chennai,Prime Suburb,56,0.0,yes,unfurnished,14247728.0
+1320.0,2,2.0,1,Delhi,Suburb,20,2.0,yes,unfurnished,15078317.0
+1771.0,3,3.0,3,Kolkata,Suburb,10,1.0,no,unfurnished,10876047.0
+1145.0,2,1.0,1,Bangalore,Prime Suburb,29,2.0,yes,semi-furnished,11724591.0
+1717.0,2,2.0,2,Chennai,Prime Suburb,6,1.0,no,semi-furnished,17842144.0
+1162.0,4,3.0,1,Bangalore,City Centre,42,3.0,yes,semi-furnished,18192524.0
+350.0,2,1.0,2,Chennai,Prime Suburb,45,1.0,yes,furnished,3541086.0
+1416.0,2,1.0,2,Mumbai,Premium Township,15,1.0,yes,semi-furnished,39048820.0
+1246.0,2,1.0,2,Mumbai,Suburb,29,0.0,yes,semi-furnished,22660589.0
+8883.0,3,1.0,2,Chennai,Suburb,25,1.0,yes,semi-furnished,7397160.0
+1107.0,3,2.0,3,Bangalore,Prime Suburb,49,2.0,no,semi-furnished,13078906.0
+1344.0,4,4.0,1,Delhi,Outskirts,0,0.0,yes,semi-furnished,9486283.0
+1705.0,2,1.0,1,Bangalore,Prime Suburb,8,1.0,yes,unfurnished,17282828.0
+976.0,2,2.0,2,Chennai,Suburb,11,0.0,yes,semi-furnished,7440487.0
+2330.0,4,3.0,3,Chennai,City Centre,59,0.0,yes,unfurnished,30872891.0
+1750.0,3,1.0,2,Bangalore,City Centre,31,2.0,yes,semi-furnished,26529552.0
+1565.0,1,1.0,1,Bangalore,Suburb,54,1.0,no,unfurnished,11680169.0
+1124.0,2,1.0,2,Mumbai,Outskirts,53,,yes,semi-furnished,9030253.0
+1465.0,2,1.0,3,Bangalore,City Centre,7,3.0,no,unfurnished,22682873.0
+1334.0,3,3.0,1,Kolkata,Outskirts,48,0.0,no,unfurnished,4663914.0
+1216.0,2,2.0,2,Mumbai,Outskirts,25,1.0,no,semi-furnished,14222933.0
+1578.0,2,2.0,3,Bangalore,Suburb,11,0.0,yes,unfurnished,13401156.0
+1230.0,1,1.0,1,Mumbai,City Centre,45,0.0,yes,semi-furnished,38183100.0
+1271.0,2,,1,Mumbai,Suburb,58,2.0,yes,semi-furnished,22973961.0
+1793.0,1,1.0,1,Kolkata,Prime Suburb,27,,no,semi-furnished,14086139.0
+1269.0,3,2.0,1,Bangalore,City Centre,5,2.0,no,semi-furnished,19855843.0
+990.0,2,2.0,2,Delhi,Suburb,28,0.0,no,unfurnished,11759788.0
+,4,4.0,1,Bangalore,City Centre,16,0.0,no,unfurnished,18411825.0
+2182.0,4,4.0,3,Mumbai,Premium Township,0,1.0,yes,semi-furnished,72139250.0
+1296.0,1,1.0,1,Bangalore,Outskirts,24,2.0,yes,semi-furnished,7521009.0
+1105.0,2,2.0,2,Mumbai,Suburb,60,3.0,yes,semi-furnished,19245746.0
+686.0,1,1.0,2,Chennai,Suburb,26,0.0,yes,unfurnished,5182534.0
+854.0,1,1.0,1,Chennai,Prime Suburb,34,1.0,yes,unfurnished,7247407.0
+1025.0,1,1.0,2,Delhi,Suburb,48,1.0,yes,unfurnished,10497613.0
+1479.0,3,3.0,2,Mumbai,Suburb,3,3.0,yes,semi-furnished,31147243.0
+1129.0,4,4.0,2,Kolkata,Outskirts,30,,yes,semi-furnished,5112476.0
+967.0,4,3.0,2,Delhi,Suburb,22,1.0,yes,semi-furnished,11606688.0
+1624.0,2,1.0,1,Mumbai,City Centre,34,1.0,yes,unfurnished,51144746.0
+1088.0,2,2.0,3,Bangalore,City Centre,39,,yes,furnished,17357537.0
+1101.0,2,,3,Bangalore,Suburb,16,1.0,no,unfurnished,10049906.0
+1673.0,4,3.0,1,Kolkata,Prime Suburb,19,0.0,no,unfurnished,12267123.0
+,4,3.0,3,Delhi,Suburb,48,2.0,yes,unfurnished,19011789.0
+1016.0,4,4.0,2,Kolkata,Outskirts,41,1.0,no,semi-furnished,4273345.0
+1632.0,2,2.0,1,Kolkata,Prime Suburb,21,1.0,yes,semi-furnished,11418768.0
+1419.0,1,1.0,1,Kolkata,Suburb,37,0.0,yes,semi-furnished,7845946.0
+958.0,2,1.0,3,Delhi,Suburb,1,1.0,yes,semi-furnished,13614422.0
+609.0,4,3.0,3,Delhi,Premium Township,20,1.0,yes,unfurnished,12278346.0
+1109.0,1,1.0,3,Chennai,Suburb,9,0.0,yes,semi-furnished,9549366.0
+1155.0,2,1.0,1,Chennai,Outskirts,19,0.0,yes,semi-furnished,5896742.0
+1430.0,3,3.0,1,Delhi,Premium Township,51,2.0,no,semi-furnished,23904725.0
+1127.0,3,2.0,2,Kolkata,Prime Suburb,40,1.0,yes,semi-furnished,7432497.0
+1205.0,3,3.0,2,Delhi,Prime Suburb,59,1.0,yes,semi-furnished,19287429.0
+1163.0,1,1.0,2,Chennai,Premium Township,15,2.0,yes,furnished,12849606.0
+926.0,2,2.0,2,Delhi,Premium Township,46,2.0,no,semi-furnished,17327303.0
+949.0,2,1.0,2,Mumbai,City Centre,40,1.0,yes,semi-furnished,35643390.0
+1229.0,2,2.0,3,Mumbai,Outskirts,36,1.0,yes,furnished,13558306.0
+1013.0,3,2.0,1,Bangalore,Outskirts,49,0.0,no,furnished,4856625.0
+747.0,2,2.0,2,Chennai,City Centre,16,3.0,no,unfurnished,12225440.0
+651.0,2,2.0,1,Kolkata,Suburb,50,1.0,yes,unfurnished,3421609.0
+1449.0,2,2.0,1,Mumbai,Suburb,14,1.0,no,semi-furnished,28349909.0
+1324.0,3,3.0,1,Kolkata,Outskirts,53,2.0,yes,semi-furnished,4020672.0
+1345.0,2,2.0,2,Mumbai,City Centre,17,0.0,no,unfurnished,50581716.0
+1001.0,5,4.0,4,Bangalore,Outskirts,39,0.0,yes,semi-furnished,7075719.0
+1874.0,4,4.0,1,Mumbai,Prime Suburb,51,3.0,yes,semi-furnished,44973940.0
+1152.0,2,1.0,2,Kolkata,Prime Suburb,0,1.0,yes,semi-furnished,9995042.0
+1904.0,3,2.0,2,Bangalore,Prime Suburb,28,1.0,no,unfurnished,22721551.0
+1288.0,3,3.0,3,Chennai,Suburb,35,3.0,yes,semi-furnished,10825901.0
+1307.0,1,1.0,2,Bangalore,Prime Suburb,26,2.0,no,semi-furnished,13868712.0
+1470.0,1,1.0,3,Delhi,City Centre,20,1.0,yes,furnished,31607202.0
+1699.0,1,1.0,2,Bangalore,Outskirts,6,2.0,yes,furnished,9662250.0
+506.0,3,2.0,2,Mumbai,City Centre,51,1.0,yes,unfurnished,15138796.0
+381.0,4,4.0,3,Bangalore,Outskirts,16,2.0,yes,unfurnished,4776176.0
+1387.0,3,2.0,1,Mumbai,Outskirts,29,1.0,yes,unfurnished,15278926.0
+1303.0,2,1.0,2,Mumbai,Suburb,6,0.0,no,semi-furnished,22944356.0
+1881.0,3,2.0,2,Bangalore,Prime Suburb,54,1.0,yes,,22988684.0
+861.0,2,1.0,2,Chennai,City Centre,17,2.0,yes,furnished,10829612.0
+1118.0,2,1.0,2,Mumbai,Suburb,26,2.0,no,unfurnished,23838570.0
+1597.0,2,1.0,2,Chennai,Suburb,11,1.0,yes,semi-furnished,13200594.0
+1563.0,3,3.0,2,Chennai,Prime Suburb,52,2.0,yes,semi-furnished,13456615.0
+1973.0,2,2.0,4,Delhi,Prime Suburb,42,0.0,yes,semi-furnished,25270726.0
+1305.0,4,3.0,3,Chennai,Suburb,19,1.0,yes,unfurnished,11355105.0
+1054.0,2,1.0,1,Bangalore,Prime Suburb,12,0.0,yes,semi-furnished,12921925.0
+1673.0,4,3.0,1,Kolkata,Prime Suburb,19,0.0,no,unfurnished,12267123.0
+1235.0,2,2.0,3,Bangalore,Suburb,54,1.0,yes,furnished,12446229.0
+1659.0,2,2.0,3,Bangalore,City Centre,7,1.0,yes,unfurnished,27020868.0
+391.0,3,3.0,3,Delhi,Suburb,51,,yes,semi-furnished,5202449.0
+1410.0,1,1.0,1,Bangalore,Premium Township,17,0.0,yes,unfurnished,18259402.0
+1058.0,4,4.0,2,Bangalore,Suburb,27,3.0,yes,unfurnished,10524979.0
+1321.0,2,2.0,1,Chennai,Prime Suburb,18,2.0,yes,semi-furnished,11951899.0
+463.0,4,4.0,4,Delhi,Suburb,48,3.0,no,unfurnished,7347424.0
+,3,2.0,2,Delhi,Outskirts,32,1.0,no,semi-furnished,10084996.0
+1595.0,2,2.0,2,Chennai,Premium Township,52,3.0,yes,unfurnished,17578764.0
+1246.0,1,1.0,1,Bangalore,City Centre,21,3.0,yes,furnished,22933671.0
+1374.0,1,1.0,3,Kolkata,City Centre,47,1.0,yes,unfurnished,15224693.0
+701.0,4,2.0,1,Delhi,City Centre,29,1.0,yes,semi-furnished,14850060.0
+1017.0,2,1.0,2,Kolkata,Outskirts,33,1.0,yes,semi-furnished,3926954.0
+1029.0,4,4.0,2,Mumbai,Outskirts,25,1.0,yes,semi-furnished,13755725.0
+797.0,4,3.0,1,Bangalore,Suburb,49,2.0,yes,furnished,8435496.0
+775.0,2,1.0,2,Mumbai,Premium Township,32,1.0,yes,unfurnished,24662088.0
+789.0,2,1.0,4,Chennai,City Centre,7,1.0,yes,unfurnished,12320176.0
+746.0,3,3.0,2,Mumbai,Premium Township,2,0.0,yes,unfurnished,22438628.0
+350.0,2,2.0,1,Mumbai,Prime Suburb,27,0.0,no,semi-furnished,9141051.0
+667.0,1,1.0,1,Delhi,Premium Township,46,2.0,no,furnished,9755628.0
+1779.0,1,1.0,1,Kolkata,Suburb,45,1.0,yes,semi-furnished,10027551.0
+1064.0,3,2.0,1,Chennai,Suburb,8,0.0,no,unfurnished,8824487.0
+1370.0,5,5.0,2,Delhi,Suburb,28,3.0,no,unfurnished,18730949.0
+1308.0,2,2.0,2,Bangalore,Suburb,44,2.0,no,semi-furnished,10020217.0
+648.0,3,1.0,1,Chennai,Prime Suburb,10,2.0,no,unfurnished,6971131.0
+350.0,2,2.0,3,Delhi,Suburb,1,1.0,no,unfurnished,6809404.0
+993.0,3,3.0,2,Mumbai,Prime Suburb,20,1.0,no,unfurnished,24225238.0
+694.0,3,3.0,3,Chennai,Outskirts,48,1.0,yes,unfurnished,3387517.0
+795.0,2,1.0,1,Chennai,City Centre,45,1.0,yes,furnished,10901227.0
+745.0,4,3.0,4,Kolkata,City Centre,14,1.0,no,semi-furnished,7768142.0
+947.0,3,3.0,4,Bangalore,Suburb,46,1.0,yes,unfurnished,8043724.0
+1017.0,3,2.0,2,Bangalore,Suburb,39,2.0,yes,semi-furnished,10618437.0
+1754.0,1,1.0,1,Delhi,Prime Suburb,18,2.0,yes,semi-furnished,27326951.0
+350.0,4,4.0,2,Chennai,Outskirts,57,1.0,no,semi-furnished,1772260.0
+1057.0,3,2.0,4,Mumbai,City Centre,15,1.0,no,unfurnished,36369557.0
+889.0,3,2.0,1,Delhi,Suburb,26,1.0,no,semi-furnished,11414427.0
+447.0,2,1.0,2,Delhi,Outskirts,28,1.0,yes,semi-furnished,4147491.0
+1073.0,1,1.0,2,Kolkata,Suburb,48,1.0,yes,semi-furnished,5195108.0
+1345.0,2,,4,Delhi,Premium Township,8,1.0,yes,unfurnished,24061531.0
+1691.0,3,2.0,3,Chennai,Prime Suburb,13,,yes,semi-furnished,15233389.0
+1556.0,4,,3,Kolkata,Premium Township,43,0.0,yes,semi-furnished,13854287.0
+1651.0,2,1.0,2,Mumbai,Premium Township,35,1.0,yes,unfurnished,46123483.0
+1460.0,2,2.0,1,Chennai,Outskirts,7,0.0,yes,furnished,6135052.0
+656.0,2,1.0,2,Kolkata,Suburb,28,0.0,no,semi-furnished,4498128.0
+1386.0,5,4.0,2,Mumbai,Prime Suburb,51,1.0,yes,furnished,32012742.0
+922.0,3,3.0,2,Bangalore,Suburb,15,0.0,no,semi-furnished,8906966.0
+1016.0,2,1.0,1,Delhi,Suburb,29,1.0,yes,semi-furnished,11936939.0
+715.0,4,4.0,1,Delhi,Prime Suburb,46,1.0,yes,semi-furnished,9787264.0
+985.0,2,2.0,4,Mumbai,Suburb,10,1.0,yes,semi-furnished,102155313.7068654
+1866.0,2,2.0,3,Mumbai,Prime Suburb,44,1.0,yes,semi-furnished,40815355.0
+638.0,3,,2,Kolkata,Prime Suburb,39,1.0,no,semi-furnished,4605328.0
+1301.0,2,1.0,2,Delhi,Premium Township,2,0.0,yes,semi-furnished,24608528.0
+835.0,2,1.0,2,Delhi,Suburb,51,1.0,no,unfurnished,8216143.0
+,1,1.0,1,Kolkata,Prime Suburb,9,2.0,no,unfurnished,10796961.0
+1143.0,2,1.0,2,Mumbai,City Centre,47,1.0,no,semi-furnished,34392764.0
+711.0,2,1.0,2,Mumbai,Suburb,3,0.0,yes,semi-furnished,15282275.0
+1059.0,3,3.0,1,Chennai,Suburb,11,1.0,yes,unfurnished,9496190.0
+1085.0,2,2.0,2,Chennai,Suburb,17,1.0,no,semi-furnished,8886868.0
+1969.0,2,1.0,2,Mumbai,Prime Suburb,11,2.0,no,unfurnished,47144670.0
+736.0,3,3.0,4,Kolkata,Suburb,36,0.0,no,unfurnished,4866478.0
+866.0,3,3.0,3,Chennai,Outskirts,27,1.0,yes,semi-furnished,4811465.0
+699.0,2,2.0,1,Chennai,Suburb,30,1.0,no,semi-furnished,4443951.0
+1245.0,1,1.0,2,Mumbai,Prime Suburb,42,3.0,yes,unfurnished,26699657.0
+1296.0,3,3.0,3,Chennai,City Centre,51,1.0,yes,semi-furnished,15746734.0
+890.0,2,1.0,2,Delhi,Suburb,56,1.0,yes,semi-furnished,8720113.0
+350.0,2,1.0,3,Bangalore,Prime Suburb,23,1.0,yes,,4747057.0
+1004.0,2,1.0,3,Bangalore,Suburb,27,3.0,yes,semi-furnished,9983572.0
+1248.0,1,1.0,1,Chennai,Suburb,24,1.0,yes,furnished,8575148.0
+1083.0,3,3.0,2,Chennai,Premium Township,4,2.0,yes,unfurnished,11612980.0
+1031.0,1,1.0,1,Delhi,City Centre,40,1.0,yes,semi-furnished,19387062.0
+522.0,3,2.0,2,Bangalore,City Centre,34,2.0,no,unfurnished,8216443.0
+573.0,3,3.0,3,Chennai,Outskirts,42,1.0,yes,furnished,3060696.0
+1250.0,3,3.0,4,Bangalore,City Centre,17,1.0,yes,semi-furnished,21542057.0
+1312.0,2,1.0,2,Mumbai,Outskirts,0,1.0,no,furnished,18430595.0
+1052.0,3,3.0,2,Chennai,City Centre,56,2.0,no,semi-furnished,12571230.0
+792.0,3,2.0,2,Kolkata,City Centre,60,1.0,yes,semi-furnished,7509620.0
+1665.0,5,5.0,2,Delhi,City Centre,40,3.0,yes,unfurnished,39676511.0
+350.0,2,2.0,2,Mumbai,Prime Suburb,55,1.0,yes,semi-furnished,7769654.0
+893.0,3,2.0,1,Delhi,Prime Suburb,12,2.0,yes,semi-furnished,12363521.0
+1495.0,2,2.0,2,Mumbai,Prime Suburb,1,1.0,yes,furnished,39594079.0
+851.0,4,4.0,3,Delhi,Outskirts,55,2.0,no,semi-furnished,6426986.0
+1463.0,2,2.0,3,Mumbai,Outskirts,26,2.0,yes,furnished,20281733.0
+1014.0,3,3.0,2,Mumbai,Prime Suburb,42,1.0,yes,furnished,26926510.0
+350.0,3,2.0,1,Chennai,Prime Suburb,13,1.0,yes,semi-furnished,4676922.0
+1227.0,2,1.0,3,Chennai,Outskirts,17,2.0,yes,unfurnished,5818688.0
+989.0,3,3.0,1,Chennai,Suburb,6,0.0,yes,semi-furnished,8263142.0
+772.0,1,1.0,2,Mumbai,Premium Township,38,0.0,yes,unfurnished,23096366.0
+442.0,3,3.0,3,Delhi,Premium Township,25,3.0,yes,semi-furnished,10211076.0
+1262.0,2,2.0,2,Bangalore,Prime Suburb,23,1.0,no,unfurnished,15555307.0
+1024.0,3,3.0,2,Mumbai,Suburb,9,1.0,no,unfurnished,24236562.0
+507.0,3,3.0,1,Chennai,Prime Suburb,16,0.0,yes,semi-furnished,5114069.0
+984.0,2,2.0,1,Mumbai,Outskirts,11,0.0,no,furnished,10164363.0
+658.0,1,1.0,1,Mumbai,Outskirts,28,1.0,yes,furnished,7929425.0
+1260.0,3,3.0,2,Chennai,City Centre,26,2.0,yes,semi-furnished,14607111.0
+350.0,2,2.0,2,Mumbai,Premium Township,43,0.0,yes,semi-furnished,9790827.0
+1291.0,2,2.0,3,Delhi,Premium Township,28,1.0,yes,semi-furnished,20215443.0
+1075.0,2,,3,Bangalore,Premium Township,58,1.0,yes,semi-furnished,15362860.0
+1242.0,3,3.0,2,Bangalore,Outskirts,45,1.0,no,semi-furnished,6265731.0
+781.0,2,2.0,4,Mumbai,Outskirts,20,1.0,yes,semi-furnished,11315845.0
+1188.0,1,1.0,3,Delhi,Prime Suburb,45,2.0,yes,semi-furnished,14115991.0
+774.0,1,1.0,2,Kolkata,Suburb,44,0.0,no,semi-furnished,3500819.0
+689.0,2,1.0,1,Mumbai,Outskirts,12,,yes,unfurnished,9398123.0
+2127.0,1,1.0,1,Mumbai,Suburb,58,3.0,yes,unfurnished,39739102.0
+785.0,1,1.0,2,Bangalore,City Centre,22,1.0,yes,unfurnished,11923210.0
+914.0,5,4.0,3,Delhi,Suburb,25,1.0,yes,semi-furnished,12856513.0
+477.0,2,2.0,2,Mumbai,Prime Suburb,58,1.0,yes,furnished,10783699.0
+2120.0,2,1.0,1,Mumbai,Premium Township,18,1.0,yes,semi-furnished,58491007.0
+1267.0,3,1.0,2,Mumbai,Suburb,52,1.0,yes,semi-furnished,20963402.0
+,4,4.0,3,Kolkata,Prime Suburb,44,1.0,yes,semi-furnished,6923374.0
+1444.0,5,5.0,2,Delhi,Suburb,21,1.0,yes,semi-furnished,18715984.0
+713.0,2,1.0,1,Kolkata,City Centre,27,1.0,yes,furnished,7710408.0
+900.0,2,2.0,1,Bangalore,Outskirts,26,1.0,yes,unfurnished,5300396.0
+766.0,2,1.0,2,Mumbai,Premium Township,24,0.0,no,semi-furnished,24658487.0
+1102.0,2,2.0,2,Chennai,Suburb,29,0.0,yes,semi-furnished,9389072.0
+,2,2.0,2,Bangalore,Outskirts,28,1.0,yes,semi-furnished,7528338.0
+815.0,2,1.0,1,Chennai,Prime Suburb,9,1.0,yes,unfurnished,8019286.0
+966.0,2,1.0,1,Mumbai,Suburb,21,1.0,yes,furnished,22812775.0
+1224.0,4,4.0,3,Kolkata,Outskirts,45,3.0,yes,unfurnished,4734773.0
+1288.0,2,1.0,1,Bangalore,Outskirts,53,0.0,yes,semi-furnished,6115538.0
+1176.0,2,1.0,1,Mumbai,Suburb,33,0.0,yes,semi-furnished,17837744.0
+1475.0,3,3.0,2,Chennai,Outskirts,4,2.0,no,unfurnished,8407109.0
+1006.0,2,1.0,2,Kolkata,Prime Suburb,3,1.0,no,semi-furnished,8291423.0
+785.0,1,1.0,2,Bangalore,City Centre,22,1.0,yes,unfurnished,11923210.0
+1134.0,2,1.0,3,Chennai,Suburb,11,3.0,yes,unfurnished,8236763.0
+937.0,2,1.0,3,Bangalore,City Centre,38,0.0,yes,unfurnished,15017634.0
+857.0,2,2.0,2,Chennai,Premium Township,28,1.0,yes,semi-furnished,9683791.0
+1219.0,2,1.0,3,Delhi,Premium Township,57,0.0,yes,semi-furnished,17405673.0
+1422.0,2,2.0,3,Bangalore,Outskirts,36,0.0,yes,unfurnished,6945449.0
+350.0,1,1.0,2,Delhi,Outskirts,8,,yes,semi-furnished,3630171.0
+1244.0,1,1.0,2,Chennai,Prime Suburb,11,1.0,yes,semi-furnished,12248321.0
+1722.0,2,2.0,2,Mumbai,City Centre,26,2.0,yes,semi-furnished,60309395.0
+,3,3.0,3,Mumbai,Suburb,21,1.0,no,unfurnished,19426647.0
+732.0,2,1.0,3,Mumbai,City Centre,53,0.0,no,unfurnished,22290088.0
+1078.0,4,2.0,3,Chennai,Suburb,57,0.0,no,unfurnished,8476538.0
+1519.0,2,1.0,1,Mumbai,City Centre,17,1.0,yes,unfurnished,52343441.0
+845.0,4,3.0,3,Bangalore,Suburb,58,3.0,yes,unfurnished,7642275.0
+1953.0,5,5.0,1,Kolkata,City Centre,24,1.0,yes,semi-furnished,23132132.0
+1424.0,3,3.0,2,Delhi,Prime Suburb,0,0.0,no,semi-furnished,21878466.0
+1098.0,3,3.0,3,Mumbai,Suburb,19,1.0,no,unfurnished,23282162.0
+1090.0,2,2.0,3,Kolkata,Premium Township,31,1.0,yes,semi-furnished,11314445.0
+940.0,3,2.0,2,Delhi,Suburb,58,1.0,no,furnished,9635606.0
+834.0,1,1.0,2,Chennai,Suburb,53,,no,unfurnished,4614384.0
+1413.0,2,1.0,2,Delhi,Suburb,43,2.0,yes,unfurnished,14984742.0
+1674.0,1,1.0,3,Delhi,Suburb,24,2.0,no,semi-furnished,19098567.0
+1503.0,4,4.0,1,Chennai,City Centre,60,1.0,yes,semi-furnished,18878427.0
+799.0,2,1.0,2,Delhi,Prime Suburb,29,1.0,yes,semi-furnished,11777925.0
+1416.0,2,2.0,3,Mumbai,Suburb,3,0.0,yes,semi-furnished,30313873.0
+1740.0,2,1.0,3,Kolkata,Outskirts,51,1.0,yes,furnished,6511645.0
+1337.0,4,2.0,2,Mumbai,Suburb,54,2.0,yes,semi-furnished,26352010.0
+442.0,2,1.0,1,Mumbai,Suburb,52,0.0,yes,semi-furnished,6309176.0
+1962.0,2,2.0,1,Chennai,Outskirts,56,2.0,yes,unfurnished,6863549.0
+994.0,2,2.0,1,Delhi,Suburb,31,0.0,no,,13089249.0
+974.0,2,1.0,1,Mumbai,Outskirts,21,0.0,yes,semi-furnished,10426590.0
+1126.0,2,1.0,2,Chennai,Prime Suburb,46,2.0,yes,semi-furnished,10438074.0
+542.0,2,1.0,1,Delhi,Outskirts,14,3.0,yes,unfurnished,4916493.0
+1293.0,3,1.0,3,Delhi,Suburb,17,0.0,no,furnished,14527304.0
+828.0,4,4.0,2,Bangalore,Outskirts,23,1.0,no,unfurnished,5659176.0
+1129.0,1,1.0,2,Mumbai,Prime Suburb,38,3.0,no,semi-furnished,26645018.0
+721.0,2,1.0,4,Delhi,Prime Suburb,24,1.0,no,semi-furnished,10923805.0
+1185.0,4,3.0,1,Kolkata,City Centre,37,0.0,yes,semi-furnished,12816059.0
+916.0,3,2.0,2,Mumbai,Outskirts,54,1.0,no,furnished,9346561.0
+1488.0,1,1.0,3,Mumbai,Suburb,40,2.0,yes,,29751986.0
+796.0,3,3.0,2,Mumbai,Prime Suburb,28,2.0,yes,unfurnished,15444585.0
+952.0,3,1.0,3,Chennai,Prime Suburb,37,1.0,no,furnished,10045897.0
+400.0,2,2.0,2,Mumbai,Suburb,53,1.0,no,semi-furnished,5381084.0
+1267.0,3,2.0,1,Delhi,City Centre,0,1.0,yes,semi-furnished,26900579.0
+1246.0,3,3.0,2,Delhi,Prime Suburb,51,1.0,yes,furnished,18145744.0
+1185.0,3,2.0,4,Bangalore,Suburb,25,1.0,yes,semi-furnished,11246377.0
+1647.0,5,5.0,2,Bangalore,Suburb,17,1.0,yes,furnished,18570801.0
+729.0,1,1.0,4,Bangalore,Prime Suburb,20,1.0,yes,unfurnished,9506524.0
+1148.0,3,1.0,1,Chennai,Prime Suburb,48,3.0,yes,semi-furnished,11085758.0
+2012.0,4,4.0,1,Mumbai,Prime Suburb,8,2.0,yes,semi-furnished,48937858.0
+552.0,3,3.0,2,Chennai,Suburb,58,1.0,yes,semi-furnished,4862978.0
+,1,1.0,1,Delhi,Prime Suburb,3,2.0,yes,semi-furnished,26215642.0
+1764.0,1,1.0,1,Kolkata,Prime Suburb,0,1.0,yes,,12161543.0
+931.0,2,2.0,1,Mumbai,Outskirts,53,1.0,yes,furnished,8120641.0
+1318.0,2,1.0,1,Delhi,City Centre,2,1.0,yes,unfurnished,26230695.0
+1691.0,3,1.0,1,Delhi,Outskirts,38,1.0,yes,unfurnished,9155839.0
+1101.0,2,1.0,2,Mumbai,City Centre,10,0.0,no,unfurnished,37016309.0
+848.0,3,2.0,1,Delhi,Outskirts,54,2.0,yes,unfurnished,6090119.0
+682.0,3,2.0,2,Bangalore,Outskirts,38,0.0,yes,unfurnished,4019602.0
+1213.0,1,1.0,3,Delhi,Outskirts,37,1.0,yes,unfurnished,7905590.0
+1182.0,2,2.0,1,Mumbai,Suburb,47,1.0,yes,furnished,22736409.0
+603.0,4,3.0,1,Delhi,Premium Township,8,3.0,yes,unfurnished,13121806.0
+1292.0,2,1.0,1,Mumbai,Prime Suburb,42,0.0,yes,semi-furnished,27995253.0
+532.0,3,2.0,2,Delhi,City Centre,0,1.0,yes,unfurnished,11649920.0
+1064.0,4,3.0,3,Mumbai,Suburb,42,1.0,no,semi-furnished,21283803.0
+1462.0,4,4.0,2,Mumbai,Outskirts,45,1.0,yes,semi-furnished,15387680.0
+1035.0,2,1.0,1,Kolkata,Prime Suburb,44,1.0,no,semi-furnished,8141611.0
+535.0,3,1.0,2,Bangalore,Prime Suburb,12,,yes,unfurnished,7674845.0
+1824.0,3,3.0,3,Bangalore,Outskirts,28,1.0,yes,semi-furnished,9801070.0
+1027.0,4,3.0,3,Bangalore,Outskirts,41,0.0,yes,unfurnished,5614356.0
+1121.0,4,4.0,2,Mumbai,Prime Suburb,14,0.0,yes,semi-furnished,28713872.0
+,3,2.0,2,Bangalore,Suburb,4,1.0,yes,unfurnished,12338201.0
+1915.0,5,4.0,1,Bangalore,City Centre,16,3.0,yes,semi-furnished,34304330.0
+,2,2.0,1,Chennai,Prime Suburb,20,2.0,yes,unfurnished,10909344.0
+563.0,3,2.0,2,Kolkata,Prime Suburb,14,1.0,yes,furnished,5117643.0
+423.0,3,1.0,2,Mumbai,Premium Township,7,1.0,no,semi-furnished,14974880.0
+1265.0,4,3.0,2,Chennai,Suburb,18,1.0,yes,unfurnished,10377609.0
+1708.0,1,1.0,2,Mumbai,Outskirts,7,0.0,no,unfurnished,17061226.0
+743.0,4,3.0,1,Chennai,City Centre,49,1.0,no,semi-furnished,10019951.0
+,2,1.0,2,Bangalore,City Centre,25,0.0,yes,unfurnished,21955463.0
+1346.0,2,1.0,1,Chennai,Prime Suburb,34,2.0,no,semi-furnished,12059963.0
+595.0,3,3.0,3,Chennai,Suburb,40,1.0,no,unfurnished,4536870.0
+879.0,1,1.0,2,Chennai,Outskirts,54,1.0,yes,furnished,3134938.0
+1030.0,2,2.0,1,Kolkata,Suburb,47,0.0,yes,unfurnished,5669683.0
+958.0,4,3.0,2,Kolkata,City Centre,26,0.0,yes,semi-furnished,11431890.0
+636.0,4,4.0,1,Bangalore,Outskirts,16,0.0,no,semi-furnished,4763235.0
+1418.0,2,2.0,1,Chennai,City Centre,32,0.0,yes,unfurnished,16879944.0
+1376.0,1,1.0,2,Bangalore,Suburb,44,2.0,yes,semi-furnished,12713422.0
+625.0,2,1.0,2,Delhi,Suburb,23,2.0,no,semi-furnished,9543696.0
+1704.0,2,1.0,2,Chennai,City Centre,25,0.0,no,semi-furnished,21790495.0
+1107.0,1,1.0,1,Mumbai,Prime Suburb,25,1.0,yes,semi-furnished,28866023.0
+1281.0,2,1.0,2,Kolkata,Premium Township,1,1.0,no,semi-furnished,11060952.0
+721.0,2,2.0,1,Mumbai,Outskirts,49,1.0,yes,unfurnished,7588251.0
+1224.0,1,1.0,3,Delhi,Outskirts,16,2.0,no,unfurnished,8098409.0
+1172.0,1,1.0,1,Kolkata,Prime Suburb,2,2.0,yes,furnished,9451471.0
+1160.0,3,2.0,3,Bangalore,Prime Suburb,54,0.0,yes,semi-furnished,10917410.0
+1217.0,3,,1,Delhi,Outskirts,48,3.0,no,unfurnished,8678492.0
+1048.0,3,2.0,2,Bangalore,Outskirts,50,3.0,yes,semi-furnished,5866105.0
+1281.0,3,3.0,3,Chennai,City Centre,28,3.0,yes,unfurnished,19352477.0
+1150.0,1,1.0,2,Kolkata,Premium Township,25,1.0,yes,semi-furnished,8813469.0
+1298.0,3,3.0,3,Mumbai,Outskirts,35,3.0,yes,unfurnished,13769468.0
+1741.0,2,1.0,1,Kolkata,Prime Suburb,11,1.0,yes,semi-furnished,13186998.0
+845.0,5,3.0,2,Mumbai,Premium Township,3,3.0,no,furnished,33722228.0
+680.0,4,3.0,2,Chennai,Premium Township,11,0.0,yes,semi-furnished,9084090.0
+1233.0,2,2.0,1,Delhi,City Centre,39,1.0,no,unfurnished,22214742.0
+717.0,2,1.0,1,Mumbai,Premium Township,33,2.0,no,unfurnished,18940853.0
+350.0,2,2.0,3,Kolkata,City Centre,44,1.0,yes,unfurnished,4211340.0
+1461.0,3,3.0,2,Mumbai,Suburb,52,1.0,yes,semi-furnished,27140365.0
+1680.0,4,3.0,1,Delhi,Prime Suburb,37,1.0,yes,unfurnished,20347812.0
+1283.0,3,2.0,2,Bangalore,Suburb,52,1.0,yes,unfurnished,9782566.0
+997.0,2,1.0,1,Kolkata,City Centre,51,1.0,yes,unfurnished,9548003.0
+2086.0,3,1.0,2,Mumbai,City Centre,6,3.0,no,,80988536.0
+689.0,2,2.0,2,Chennai,Suburb,24,1.0,yes,furnished,6120335.0
+1130.0,3,2.0,1,Bangalore,Suburb,5,2.0,yes,semi-furnished,12276070.0
+1409.0,1,1.0,3,Kolkata,Suburb,40,1.0,yes,unfurnished,6714043.0
+1235.0,2,2.0,2,Bangalore,Suburb,24,2.0,yes,unfurnished,11884491.0
+915.0,1,1.0,1,Mumbai,Suburb,39,2.0,yes,semi-furnished,15745682.0
+1364.0,4,3.0,2,Delhi,City Centre,39,3.0,yes,furnished,29383619.0
+1626.0,2,1.0,3,Bangalore,Suburb,24,1.0,yes,semi-furnished,15076564.0
+868.0,3,3.0,4,Bangalore,Prime Suburb,37,1.0,no,semi-furnished,9734551.0
+1109.0,4,2.0,2,Bangalore,City Centre,48,1.0,yes,unfurnished,15557290.0
+1512.0,5,5.0,3,Chennai,Outskirts,23,2.0,yes,furnished,8628487.0
+788.0,3,2.0,1,Bangalore,Outskirts,1,1.0,yes,semi-furnished,5269142.0
+,3,1.0,3,Bangalore,Suburb,44,1.0,yes,unfurnished,12904450.0
+1553.0,3,3.0,1,Delhi,Prime Suburb,25,1.0,yes,unfurnished,23257439.0
+691.0,2,2.0,1,Delhi,Prime Suburb,7,0.0,yes,semi-furnished,12304697.0
+1110.0,3,3.0,4,Mumbai,Outskirts,42,0.0,yes,semi-furnished,13647617.0
+1623.0,2,1.0,2,Bangalore,Outskirts,23,1.0,no,furnished,8441920.0
+1025.0,5,5.0,3,Delhi,Prime Suburb,9,0.0,yes,unfurnished,17714478.0
+1366.0,4,4.0,2,Chennai,Suburb,32,1.0,yes,unfurnished,9750239.0
+1370.0,3,2.0,2,Chennai,Outskirts,13,3.0,no,semi-furnished,7041662.0
+872.0,2,2.0,2,Bangalore,Suburb,34,0.0,yes,furnished,8236384.0
+1541.0,1,1.0,1,Kolkata,Outskirts,10,1.0,yes,semi-furnished,5806228.0
+1950.0,4,3.0,1,Mumbai,Prime Suburb,56,1.0,yes,furnished,49225334.0
+1072.0,5,4.0,4,Kolkata,Prime Suburb,43,0.0,yes,unfurnished,8258482.0
+1408.0,3,3.0,1,Mumbai,Prime Suburb,26,0.0,no,semi-furnished,35950456.0
+1443.0,4,4.0,2,Chennai,Premium Township,11,1.0,yes,furnished,18183186.0
+1806.0,2,2.0,4,Kolkata,Suburb,45,2.0,no,semi-furnished,10598128.0
+1428.0,3,3.0,3,Bangalore,Prime Suburb,26,1.0,yes,semi-furnished,16087335.0
+1171.0,3,2.0,1,Mumbai,Suburb,14,3.0,yes,unfurnished,24185418.0
+810.0,1,1.0,3,Mumbai,Prime Suburb,37,1.0,yes,unfurnished,17208529.0
+,3,1.0,1,Mumbai,Suburb,26,1.0,yes,semi-furnished,29889261.0
+2092.0,2,2.0,1,Delhi,Outskirts,12,1.0,yes,semi-furnished,15971072.0
+1843.0,2,2.0,2,Chennai,City Centre,20,,no,unfurnished,24792830.0
+713.0,4,3.0,4,Chennai,Prime Suburb,1,0.0,yes,semi-furnished,9916674.0
+1066.0,3,3.0,2,Delhi,Suburb,12,0.0,yes,unfurnished,12793861.0
+494.0,5,4.0,1,Mumbai,Prime Suburb,6,1.0,no,unfurnished,18789631.0
+1332.0,2,1.0,2,Chennai,Outskirts,57,1.0,yes,unfurnished,4332462.0
+1410.0,2,1.0,1,Delhi,Prime Suburb,40,1.0,no,furnished,18285171.0
+1291.0,2,2.0,1,Delhi,Suburb,37,0.0,yes,semi-furnished,12954625.0
+1367.0,3,3.0,2,Bangalore,Outskirts,57,2.0,yes,unfurnished,7214659.0
+1876.0,2,1.0,1,Delhi,Suburb,38,0.0,yes,furnished,21917572.0
+864.0,3,3.0,1,Delhi,Suburb,26,1.0,yes,unfurnished,10188874.0
+1426.0,2,2.0,1,Delhi,Prime Suburb,36,1.0,yes,semi-furnished,19837858.0
+1139.0,3,2.0,2,Bangalore,Premium Township,1,1.0,no,furnished,16839471.0
+1146.0,2,2.0,3,Delhi,Suburb,38,2.0,yes,,13734234.0
+830.0,3,2.0,1,Kolkata,Suburb,59,2.0,yes,unfurnished,4991511.0
+1726.0,3,3.0,1,Bangalore,Suburb,39,1.0,yes,unfurnished,16613766.0
+571.0,3,3.0,2,Bangalore,City Centre,1,2.0,yes,unfurnished,12328239.0
+816.0,1,1.0,1,Chennai,Suburb,49,0.0,yes,furnished,6215231.0
+1612.0,1,1.0,1,Bangalore,Suburb,51,2.0,yes,semi-furnished,13686089.0
+350.0,3,3.0,1,Delhi,Outskirts,25,0.0,yes,semi-furnished,3944828.0
+1324.0,3,2.0,1,Bangalore,Outskirts,45,1.0,yes,semi-furnished,6143564.0
+1856.0,4,3.0,1,Kolkata,Outskirts,4,2.0,yes,unfurnished,8266299.0
+,1,1.0,1,Kolkata,Suburb,26,2.0,no,semi-furnished,9073183.0
+986.0,2,1.0,1,Delhi,Prime Suburb,53,2.0,no,semi-furnished,12772228.0
+727.0,5,5.0,3,Kolkata,Outskirts,2,3.0,yes,semi-furnished,5133633.0
+1051.0,2,2.0,1,Kolkata,Suburb,6,2.0,no,furnished,7036017.0
+1403.0,2,1.0,1,Kolkata,Premium Township,13,1.0,no,semi-furnished,12034449.0
+1155.0,2,2.0,1,Kolkata,Outskirts,5,1.0,yes,furnished,4450927.0
+1198.0,2,1.0,1,Chennai,Premium Township,4,3.0,yes,unfurnished,15947116.0
+1785.0,2,1.0,2,Kolkata,City Centre,51,1.0,no,furnished,18567227.0
+1410.0,2,2.0,2,Chennai,Suburb,15,3.0,yes,unfurnished,11764925.0
+1027.0,2,2.0,3,Delhi,Outskirts,49,1.0,no,semi-furnished,6841054.0
+1225.0,3,1.0,3,Bangalore,Suburb,33,1.0,yes,semi-furnished,11776586.0
+830.0,1,1.0,2,Bangalore,Prime Suburb,6,1.0,yes,unfurnished,9937494.0
+1665.0,2,2.0,2,Bangalore,Prime Suburb,58,1.0,yes,semi-furnished,18777283.0
+774.0,3,1.0,2,Mumbai,Suburb,4,1.0,yes,unfurnished,17941142.0
+1258.0,3,2.0,2,Chennai,Prime Suburb,48,0.0,yes,unfurnished,12198310.0
+738.0,3,3.0,2,Delhi,Outskirts,48,2.0,yes,unfurnished,5294419.0
+1300.0,1,1.0,3,Mumbai,Suburb,23,0.0,yes,semi-furnished,25721542.0
+1894.0,4,4.0,1,Delhi,Suburb,23,2.0,no,furnished,21359239.0
