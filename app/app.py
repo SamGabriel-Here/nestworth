@@ -8,6 +8,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
+INTERVAL_PATH = ROOT / "models" / "prediction_interval.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
 DATA_PATH = ROOT / "data" / "housing_clean.csv"
 
@@ -109,6 +110,22 @@ def load_data():
     if DATA_PATH.exists():
         return pd.read_csv(DATA_PATH)
     return None
+
+
+@st.cache_resource
+def load_interval():
+    if INTERVAL_PATH.exists():
+        return joblib.load(INTERVAL_PATH)
+    return None
+
+
+def prediction_interval(bundle, input_df, point):
+    """Conformalized [low, high] band, widened to always contain the point."""
+    lo = bundle["lo"].predict(input_df)[0] - bundle["q"]
+    hi = bundle["hi"].predict(input_df)[0] + bundle["q"]
+    lo, hi = min(lo, hi), max(lo, hi)
+    lo, hi = min(lo, point), max(hi, point)
+    return max(lo, 0.0), hi
 
 
 @st.cache_data
@@ -228,6 +245,7 @@ if not MODEL_PATH.exists():
 model = load_model()
 metrics = load_metrics()
 data = load_data()
+interval = load_interval()
 
 with st.form("house"):
     col1, col2 = st.columns(2)
@@ -276,7 +294,11 @@ if submitted:
     r2 = metrics.iloc[0]["R2"] if metrics is not None else None
 
     sub_bits = [f"₹{price_per_sqft:,.0f} / sq ft"]
-    if mae is not None:
+    if interval is not None:
+        lo, hi = prediction_interval(interval, input_df, predicted_price)
+        cov = int(interval["coverage"] * 100)
+        sub_bits.append(f"{cov}% interval {inr(lo)} – {inr(hi)}")
+    elif mae is not None:
         sub_bits.append(
             f"likely {inr(predicted_price - mae)} – {inr(predicted_price + mae)}"
         )

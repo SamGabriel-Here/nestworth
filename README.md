@@ -82,9 +82,18 @@ The tree models win clearly here because city and locality change the price
 *per square foot* — an interaction a plain linear model can't capture.
 Exact numbers vary slightly by library version.
 
+Training also fits a **90% prediction interval** via conformalized quantile
+regression (CQR): gradient-boosted regressors for the 5th and 95th percentiles,
+then a conformal calibration step on held-out data that corrects the bounds to
+hit the target coverage regardless of how well the quantile models are
+specified. On the test set it lands at ~90% empirical coverage, and the interval
+is *adaptive* — a few lakh wide for a budget flat, over a crore for a premium
+home. The point model's own train/test split is untouched, so the headline R²
+is unaffected.
+
 **App** (`app/app.py`) — a Streamlit form for the house features. On submit it
-returns the estimate as a headline figure with price per sq ft, a likely range
-(± the model's test-set MAE), and the model's R². Below that:
+returns the estimate as a headline figure with price per sq ft, the 90%
+prediction interval, and the model's R². Below that:
 
 - **How it compares** — where the estimate sits within the 10th–90th-percentile
   price range of comparable homes in the same city and locality, shown as a bar.
@@ -97,8 +106,8 @@ returns the estimate as a headline figure with price per sq ft, a likely range
 
 - Hyperparameter tuning (`GridSearchCV`) and k-fold cross-validation
 - A real dataset (Ames / King County) with richer features
-- Calibrated prediction intervals (quantile regression / conformal) in place of
-  the ± MAE band, and proper SHAP/Shapley attributions for the explanation panel
+- Proper SHAP/Shapley attributions for the explanation panel (in place of the
+  single-feature ablation it uses now)
 
 ## Stack
 

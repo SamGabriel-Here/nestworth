@@ -24,9 +24,11 @@ from data_preprocessing import (
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
+INTERVAL_PATH = ROOT / "models" / "prediction_interval.pkl"
 REPORT_DIR = ROOT / "reports"
 
 RANDOM_SEED = 42
+INTERVAL_COVERAGE = 0.90
 
 
 def get_models() -> dict:
@@ -53,6 +55,64 @@ def evaluate(y_true, y_pred) -> dict:
         "MAE": mean_absolute_error(y_true, y_pred),
         "RMSE": np.sqrt(mean_squared_error(y_true, y_pred)),
         "R2": r2_score(y_true, y_pred),
+    }
+
+
+def build_quantile_regressor(alpha: float):
+    """A gradient-boosted regressor trained on the quantile (pinball) loss."""
+    try:
+        from xgboost import XGBRegressor
+        return XGBRegressor(
+            objective="reg:quantileerror", quantile_alpha=alpha,
+            n_estimators=300, learning_rate=0.05, max_depth=5,
+            subsample=0.9, colsample_bytree=0.9, random_state=RANDOM_SEED,
+        )
+    except ImportError:
+        from sklearn.ensemble import GradientBoostingRegressor
+        return GradientBoostingRegressor(
+            loss="quantile", alpha=alpha, n_estimators=300,
+            learning_rate=0.05, max_depth=3, subsample=0.9,
+            random_state=RANDOM_SEED,
+        )
+
+
+def fit_prediction_interval(X_train, y_train, X_test, y_test, coverage):
+    """Conformalized Quantile Regression (Romano et al., 2019).
+
+    Fits lower/upper quantile regressors, then calibrates them on a held-out
+    split so the interval has ~`coverage` marginal coverage regardless of how
+    well the quantile models are specified. Returns the two pipelines, the
+    conformal correction, and measured coverage/width on the test set.
+    """
+    alpha = 1 - coverage
+    lo_q, hi_q = alpha / 2, 1 - alpha / 2
+
+    X_fit, X_cal, y_fit, y_cal = train_test_split(
+        X_train, y_train, test_size=0.25, random_state=RANDOM_SEED
+    )
+
+    pipe_lo = Pipeline([("preprocessor", build_preprocessor()),
+                        ("model", build_quantile_regressor(lo_q))])
+    pipe_hi = Pipeline([("preprocessor", build_preprocessor()),
+                        ("model", build_quantile_regressor(hi_q))])
+    pipe_lo.fit(X_fit, y_fit)
+    pipe_hi.fit(X_fit, y_fit)
+
+    y_cal = y_cal.to_numpy()
+    scores = np.maximum(pipe_lo.predict(X_cal) - y_cal, y_cal - pipe_hi.predict(X_cal))
+    n = len(scores)
+    level = min(1.0, np.ceil((n + 1) * coverage) / n)
+    q = float(np.quantile(scores, level, method="higher"))
+
+    lo_test = pipe_lo.predict(X_test) - q
+    hi_test = pipe_hi.predict(X_test) + q
+    y_test = y_test.to_numpy()
+    emp_coverage = float(np.mean((y_test >= lo_test) & (y_test <= hi_test)))
+    mean_width = float(np.mean(hi_test - lo_test))
+
+    return {
+        "lo": pipe_lo, "hi": pipe_hi, "q": q, "coverage": coverage,
+        "empirical_coverage": emp_coverage, "mean_width": mean_width,
     }
 
 
@@ -109,6 +169,18 @@ def main() -> None:
 
     print(f"Best model: {best_name}")
     print(f"Saved to:   {MODEL_PATH}")
+
+    interval = fit_prediction_interval(
+        X_train, y_train, X_test, y_test, INTERVAL_COVERAGE
+    )
+    joblib.dump(
+        {k: interval[k] for k in ("lo", "hi", "q", "coverage")}, INTERVAL_PATH
+    )
+    pct = int(INTERVAL_COVERAGE * 100)
+    print(f"\n{pct}% prediction interval (conformalized quantile regression):")
+    print(f"  Coverage on test set: {interval['empirical_coverage']:.1%} (target {pct}%)")
+    print(f"  Mean interval width:  {interval['mean_width'] / 1_00_000:,.1f} Lakh")
+    print(f"  Saved to: {INTERVAL_PATH}")
 
 
 if __name__ == "__main__":
