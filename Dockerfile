@@ -18,4 +18,4 @@ COPY reports/model_comparison.csv reports/model_comparison.csv
 COPY web/ web/
 
 EXPOSE 7860
-CMD ["uvicorn", "web.server:app", "--host", "0.0.0.0", "--port", "7860"]
+CMD ["python", "-u", "-c", "import web.server, uvicorn; uvicorn.run(web.server.app, host='0.0.0.0', port=7860, log_level='info')"]
