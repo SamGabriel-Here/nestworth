@@ -20,7 +20,7 @@ function setTheme(name) {
 document.querySelectorAll(".theme-toggle button").forEach((b) =>
   b.addEventListener("click", () => setTheme(b.dataset.themeSet))
 );
-try { setTheme(localStorage.getItem("nw-theme") || "ledger"); } catch (e) {}
+try { setTheme(localStorage.getItem("nw-theme") === "dark" ? "dark" : "light"); } catch (e) {}
 
 /* ---- form widgets ---- */
 const ageInput = $('input[name="house_age"]');

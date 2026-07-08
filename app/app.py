@@ -154,7 +154,7 @@ button[kind="primaryFormSubmit"]:hover { background-color: #2CA97B; border-color
 
 st.markdown(BASE_CSS, unsafe_allow_html=True)
 st.markdown(
-    LEDGER_CSS if st.session_state.get("theme", "Ledger") == "Ledger" else INSTRUMENT_CSS,
+    LEDGER_CSS if st.session_state.get("theme", "Light") == "Light" else INSTRUMENT_CSS,
     unsafe_allow_html=True,
 )
 
@@ -317,7 +317,7 @@ st.markdown(
 _, theme_col = st.columns([4, 1])
 with theme_col:
     st.segmented_control(
-        "Theme", ["Ledger", "Instrument"], default="Ledger",
+        "Theme", ["Light", "Dark"], default="Light",
         key="theme", label_visibility="collapsed",
     )
 
