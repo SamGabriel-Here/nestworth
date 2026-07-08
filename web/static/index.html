@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" data-theme="ledger">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NestWorth — home valuation</title>
+<meta name="description" content="Instant home price estimates for Indian metro cities, with a 90% confidence range and the reasons behind every number.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="#top">Nest<b>Worth</b></a>
+  <nav class="nav">
+    <a href="#how">How it works</a>
+    <a href="https://github.com/SamGabriel-Here/nestworth" target="_blank" rel="noopener">Source ↗</a>
+    <div class="theme-toggle" role="radiogroup" aria-label="Theme">
+      <button data-theme-set="ledger" class="on" role="radio" aria-checked="true">Ledger</button>
+      <button data-theme-set="instrument" role="radio" aria-checked="false">Instrument</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1>What's your home worth?</h1>
+    <p class="lede">Instant price estimates for five Indian metro cities — with a 90% confidence range and the reasons behind every number.</p>
+  </section>
+
+  <form id="form" class="panel">
+    <div class="grid">
+      <label class="field">
+        <span class="flabel">Area (sq ft)</span>
+        <input type="number" name="area" value="1100" min="300" max="9000" step="50">
+      </label>
+      <label class="field">
+        <span class="flabel">City</span>
+        <select name="city">
+          <option>Mumbai</option><option>Delhi</option><option>Bangalore</option>
+          <option>Chennai</option><option>Kolkata</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="flabel">Bedrooms</span>
+        <select name="bedrooms"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+      </label>
+      <label class="field">
+        <span class="flabel">Locality</span>
+        <select name="location">
+          <option>City Centre</option><option>Prime Suburb</option>
+          <option selected>Suburb</option><option>Outskirts</option><option>Premium Township</option>
+        </select>
+      </label>
+      <label class="field">
+        <span class="flabel">Bathrooms</span>
+        <select name="bathrooms"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+      </label>
+      <label class="field">
+        <span class="flabel">House age <span class="fval" id="age-val">10 yrs</span></span>
+        <input type="range" name="house_age" value="10" min="0" max="60" step="1">
+      </label>
+      <label class="field">
+        <span class="flabel">Stories</span>
+        <select name="stories"><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+      </label>
+      <label class="field">
+        <span class="flabel">Parking spots</span>
+        <select name="parking"><option>0</option><option selected>1</option><option>2</option><option>3</option></select>
+      </label>
+      <div class="field">
+        <span class="flabel">On a main road?</span>
+        <div class="seg" id="main-road" data-value="yes">
+          <button type="button" data-val="yes" class="on">Yes</button>
+          <button type="button" data-val="no">No</button>
+        </div>
+      </div>
+      <label class="field">
+        <span class="flabel">Furnishing</span>
+        <select name="furnishing_status">
+          <option>furnished</option><option selected>semi-furnished</option><option>unfurnished</option>
+        </select>
+      </label>
+    </div>
+    <button type="submit" class="cta">Estimate price</button>
+  </form>
+
+  <section id="result" class="result" hidden>
+    <div class="panel card">
+      <div class="card-head">
+        <span class="wm">Nest<b>Worth</b></span>
+        <span class="kicker" id="kicker">Valuation · Mumbai</span>
+      </div>
+      <div class="card-grid">
+        <div class="spec">
+          <div class="eyebrow">The property</div>
+          <div id="spec-rows"></div>
+        </div>
+        <div class="valuation">
+          <div class="eyebrow">Estimated value</div>
+          <div class="price" id="price">—</div>
+          <div class="ppsf" id="ppsf">—</div>
+          <div class="rail">
+            <div class="rail-track">
+              <div class="rail-band" id="rail-band"></div>
+              <div class="rail-diamond" id="rail-diamond"></div>
+              <div class="rail-flag" id="rail-flag">—</div>
+            </div>
+            <div class="rail-ends"><span id="rail-lo">—</span><span id="rail-hi">—</span></div>
+          </div>
+          <div class="rail-cap" id="rail-cap"></div>
+          <span class="badge" id="badge"></span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="section-h">Why this price</h2>
+    <div id="factors"></div>
+    <p class="note">How much each feature adds to or subtracts from the estimate, versus a typical listing.</p>
+
+    <h2 class="section-h" id="comps-h">Comparable homes</h2>
+    <div id="comps"></div>
+    <p class="note">Closest listings by size in the same city and locality.</p>
+
+    <p class="disclaimer">Trained on this project's dataset — not a real valuation.</p>
+  </section>
+
+  <section id="how" class="how">
+    <h2 class="section-h">How the model works</h2>
+    <p>A scikit-learn pipeline (imputation, one-hot encoding, scaling, and the best of three
+    compared regressors — XGBoost wins) trained on ~1,500 listings priced at Indian metro-city
+    rates. The 90% confidence range comes from conformalized quantile regression. Point-model
+    R² is <b id="r2-inline">0.91</b> on held-out test data.</p>
+    <p class="src">Source code and full pipeline: <a href="https://github.com/SamGabriel-Here/nestworth" target="_blank" rel="noopener">github.com/SamGabriel-Here/nestworth</a></p>
+  </section>
+</main>
+
+<script src="/app.js"></script>
+</body>
+</html>

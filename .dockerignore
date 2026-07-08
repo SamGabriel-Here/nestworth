@@ -1,0 +1,11 @@
+.venv/
+.git/
+__pycache__/
+*.pyc
+reports/figures/
+app/
+src/
+data/housing_data.csv
+data/bengaluru_house_data.csv
+.streamlit/
+.devcontainer/
