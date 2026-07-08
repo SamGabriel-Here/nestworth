@@ -1,10 +1,13 @@
 # NestWorth
 
-House price estimates for Indian metro cities. Predicts prices from property
-features (city, locality, area, bedrooms, age, parking, etc.) using
-scikit-learn, with a Streamlit app for making predictions interactively.
+House price estimates for Indian metro cities. A scikit-learn / XGBoost pipeline
+predicts prices from property features (city, locality, area, bedrooms, age,
+parking, etc.), returning a **90% confidence interval** and per-feature
+explanations — served through two front-ends over the same model.
 
-**Live demo:** https://nestworth.streamlit.app
+**Live demos**
+- **Custom app** (FastAPI + hand-built frontend): https://samgabrielofficially-nestworth.hf.space
+- **Streamlit app:** https://nestworth.streamlit.app
 
 ## Dataset
 
@@ -48,7 +51,9 @@ python src/generate_dataset.py     # create data/housing_data.csv
 python src/eda.py                  # save charts to reports/figures/
 python src/data_preprocessing.py   # clean -> data/housing_clean.csv
 python src/train_model.py          # train + compare -> models/house_price_model.pkl
-streamlit run app/app.py           # web app
+
+streamlit run app/app.py           # Streamlit app
+uvicorn web.server:app --port 7860 # FastAPI + custom frontend (http://localhost:7860)
 ```
 
 ## How it works
@@ -91,8 +96,7 @@ is *adaptive* — a few lakh wide for a budget flat, over a crore for a premium
 home. The point model's own train/test split is untouched, so the headline R²
 is unaffected.
 
-**App** (`app/app.py`) — a Streamlit web app with a site header and a light/dark
-theme toggle (Ledger / Instrument). Enter a property and it returns a valuation
+**Apps** — two front-ends over the same trained model. Both show a valuation
 card: a property spec sheet beside the estimate, price per sq ft, and a
 **confidence rail** — one instrument showing the estimate, its 90% prediction
 interval, and where it sits in the locality's price range. Below that:
@@ -101,6 +105,17 @@ interval, and where it sits in the locality's price range. Below that:
   setting that feature back to a typical value and re-predicting (single-feature
   ablation against a median/mode baseline listing).
 - **Comparable homes** — the closest listings by size in the same segment.
+
+Both carry a **light/dark theme toggle**.
+
+- **`app/app.py`** — a **Streamlit** app (quick to build, deployed on Streamlit
+  Community Cloud).
+- **`web/`** — a **hand-built frontend** (HTML/CSS/JS with custom typography and
+  form controls, pixel-matched to the design) served by a **FastAPI** backend
+  (`web/server.py`) that runs the model behind a `/api/predict` endpoint.
+  Containerised with the root `Dockerfile` and deployed to **Hugging Face
+  Spaces** — run locally with `uvicorn web.server:app --port 7860`; deploy notes
+  in [`web/DEPLOY.md`](web/DEPLOY.md).
 
 ## Possible improvements
 
@@ -111,4 +126,6 @@ interval, and where it sits in the locality's price range. Below that:
 
 ## Stack
 
-Python, pandas, NumPy, Matplotlib, Seaborn, scikit-learn, XGBoost (optional), Streamlit, joblib
+Python, pandas, NumPy, Matplotlib, Seaborn, scikit-learn, XGBoost, Streamlit,
+FastAPI, Docker, joblib. Deployed on Streamlit Community Cloud and Hugging Face
+Spaces.
