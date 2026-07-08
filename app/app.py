@@ -11,6 +11,7 @@ MODEL_PATH = ROOT / "models" / "house_price_model.pkl"
 INTERVAL_PATH = ROOT / "models" / "prediction_interval.pkl"
 METRICS_PATH = ROOT / "reports" / "model_comparison.csv"
 DATA_PATH = ROOT / "data" / "housing_clean.csv"
+GITHUB = "https://github.com/SamGabriel-Here/nestworth"
 
 NUMERIC_RAW = ["area", "bedrooms", "bathrooms", "stories", "house_age", "parking"]
 CATEGORICAL_RAW = ["city", "location", "main_road", "furnishing_status"]
@@ -28,47 +29,78 @@ FACTOR_LABELS = {
     "furnishing_status": lambda v: f"Furnishing · {v}",
 }
 
-st.set_page_config(page_title="NestWorth", page_icon="🏠", layout="centered")
+st.set_page_config(page_title="NestWorth — home valuation", page_icon="🏠",
+                   layout="wide")
 
 BASE_CSS = """
 <style>
-h1 { letter-spacing: -0.02em; }
-.nw-hero { border-radius: 14px; padding: 28px 24px; text-align: center; margin: 4px 0 6px; }
-.nw-hero-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
-.nw-hero-price { font-weight: 800; line-height: 1; font-size: clamp(2.4rem, 9vw, 3.3rem); margin: 8px 0 6px; letter-spacing: -0.02em; }
-.nw-hero-sub { font-size: 0.95rem; font-weight: 500; }
-.nw-badge { display: inline-block; margin-top: 15px; border-radius: 7px; padding: 5px 13px; font-size: 0.76rem; font-weight: 700; }
-.nw-bar-wrap { margin: 26px 0 2px; }
-.nw-bar-track { position: relative; height: 11px; border-radius: 999px; }
-.nw-bar-marker { position: absolute; top: -5px; width: 4px; height: 21px; border-radius: 2px; }
-.nw-bar-mark-label { position: absolute; top: -31px; transform: translateX(-50%); white-space: nowrap; font-size: 0.72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; }
-.nw-bar-ends { display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 600; margin-top: 9px; }
-.nw-factor { margin: 10px 0; }
+.block-container { max-width: 1060px; padding-top: 0.4rem; padding-bottom: 3rem; }
+[data-testid="stHeader"] { background: transparent; }
+.nw-header { width: 100vw; margin-left: calc(-50vw + 50%); padding: 15px clamp(18px, 6vw, 64px); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid; margin-bottom: 8px; }
+.nw-logo { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.nw-nav { display: flex; gap: 26px; align-items: center; }
+.nw-nav a { font-size: 13.5px; text-decoration: none; }
+.nw-lede p { margin: 0; font-size: 1.02rem; line-height: 1.6; }
+.nw-card { border-radius: 16px; padding: 28px 30px; margin: 4px 0; }
+.nw-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 40px; }
+@media (max-width: 680px) { .nw-grid { grid-template-columns: 1fr; gap: 22px; } }
+.nw-spec-title, .nw-comp-title { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+.nw-spec-row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid; font-size: 14px; }
+.nw-spec-row .v { font-weight: 600; text-align: right; }
+.nw-vlabel { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; }
+.nw-price { font-weight: 800; line-height: 1; font-size: clamp(2.6rem, 6vw, 3.4rem); margin: 8px 0 4px; letter-spacing: -0.02em; }
+.nw-ppsf { font-size: 13px; font-variant-numeric: tabular-nums; }
+.nw-badge { display: inline-block; margin-top: 14px; border-radius: 7px; padding: 5px 12px; font-size: 0.74rem; font-weight: 700; }
+.nw-rail { margin: 24px 0 0; }
+.nw-rail-track { position: relative; height: 8px; border-radius: 999px; }
+.nw-rail-band { position: absolute; top: 0; height: 100%; border-radius: 999px; }
+.nw-rail-diamond { position: absolute; top: 50%; width: 13px; height: 13px; transform: translate(-50%, -50%) rotate(45deg); }
+.nw-rail-label { position: absolute; top: -27px; transform: translateX(-50%); white-space: nowrap; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
+.nw-rail-ends { display: flex; justify-content: space-between; margin-top: 12px; font-size: 11px; font-variant-numeric: tabular-nums; }
+.nw-rail-cap { margin-top: 12px; font-size: 13px; }
+.nw-h { font-size: 15px; font-weight: 700; margin: 32px 0 14px; }
+.nw-factor { margin: 11px 0; }
 .nw-factor-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 0.9rem; }
 .nw-factor-label { font-weight: 600; }
 .nw-factor-val { font-weight: 800; font-variant-numeric: tabular-nums; }
 .nw-factor-bar { height: 6px; border-radius: 999px; margin-top: 5px; overflow: hidden; }
 .nw-factor-fill { height: 100%; border-radius: 999px; }
-[data-testid="stHeader"] { background: transparent; }
+.nw-comp-row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-bottom: 1px solid; font-size: 13.5px; }
+.nw-comp-row b { font-weight: 700; font-variant-numeric: tabular-nums; }
+.nw-cap { font-size: 12px; margin-top: 9px; }
 </style>
 """
 
 LEDGER_CSS = """
 <style>
 .stApp { background-color: #F1F2EE; }
-h1, .nw-hero-price { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; font-weight: 700; color: #1B1E1C; }
-.nw-hero { background: #FBFBF8; border: 1px solid #E3E4DD; }
-.nw-hero-label { color: #9A9E94; }
-.nw-hero-sub { color: #6E736C; }
+h1 { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; font-weight: 700; color: #1B1E1C; }
+.nw-header { background: #FBFBF8; border-color: #E3E4DD; }
+.nw-logo { color: #1B1E1C; } .nw-logo b { color: #1F5C43; }
+.nw-nav a { color: #6E736C; } .nw-nav a:hover { color: #1F5C43; }
+.nw-lede p { color: #5C615A; }
+.nw-card { background: #FBFBF8; border: 1px solid #E3E4DD; }
+.nw-spec-title, .nw-comp-title { color: #9A9E94; }
+.nw-spec-row { border-color: #ECECE5; } .nw-spec-row .k { color: #77776F; } .nw-spec-row .v { color: #1B1E1C; }
+.nw-vlabel { color: #9A9E94; }
+.nw-price { font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; color: #1B1E1C; }
+.nw-ppsf { color: #6E736C; }
 .nw-badge { background: #E7EFEA; color: #1F5C43; }
-.nw-bar-track { background: linear-gradient(90deg,#2E7D5B,#C9A227,#C0563B); }
-.nw-bar-marker { background: #1B1E1C; box-shadow: 0 0 0 2px #FBFBF8; }
-.nw-bar-mark-label { background: #1B1E1C; color: #FBFBF8; }
-.nw-bar-ends { color: #9A9E94; }
+.nw-rail-track { background: #E6E7E0; }
+.nw-rail-band { background: #CFE1D6; }
+.nw-rail-band::before, .nw-rail-band::after { content: ""; position: absolute; top: -3px; height: 14px; width: 1.5px; background: #8FB6A2; }
+.nw-rail-band::before { left: 0; } .nw-rail-band::after { right: 0; }
+.nw-rail-diamond { background: #1F5C43; box-shadow: 0 0 0 3px #FBFBF8; }
+.nw-rail-label { background: #1F5C43; color: #FBFBF8; }
+.nw-rail-ends { color: #9A9E94; }
+.nw-rail-cap { color: #6E736C; } .nw-cap-b { color: #1F5C43; font-weight: 700; }
+.nw-h { color: #1B1E1C; }
 .nw-factor-label { color: #45463F; }
 .nw-factor-bar { background: #E7E8E0; }
 .nw-pos { color: #1F5C43; } .nw-neg { color: #9A3B34; }
 .nw-pos-bg { background: #2E7D5B; } .nw-neg-bg { background: #C06A5C; }
+.nw-comp-row { border-color: #ECECE5; color: #55554E; } .nw-comp-row b { color: #1B1E1C; }
+.nw-cap { color: #9A9E94; }
 [data-testid="stForm"] { border-color: #DEDFD8; }
 button[kind="primaryFormSubmit"] { background-color: #1F5C43; border-color: #1F5C43; color: #FBFBF8; }
 button[kind="primaryFormSubmit"]:hover { background-color: #17472F; border-color: #17472F; color: #FBFBF8; }
@@ -79,19 +111,30 @@ INSTRUMENT_CSS = """
 <style>
 .stApp { background: radial-gradient(130% 90% at 50% -10%, #15212C 0%, #0B0E13 58%) #0B0E13; }
 h1 { color: #F4F7FB; font-weight: 800; }
-.nw-hero-price { color: #F4F7FB; text-shadow: 0 0 30px rgba(70,224,166,0.18); }
-.nw-hero { background: #12161E; border: 1px solid rgba(70,224,166,0.16); }
-.nw-hero-label { color: #5C687A; }
-.nw-hero-sub { color: #8892A4; }
+.nw-header { background: rgba(11,14,19,0.55); border-color: #1C2430; }
+.nw-logo { color: #E9ECF2; } .nw-logo b { color: #46E0A6; }
+.nw-nav a { color: #8892A4; } .nw-nav a:hover { color: #46E0A6; }
+.nw-lede p { color: #8892A4; }
+.nw-card { background: #0F141C; border: 1px solid #1C2430; }
+.nw-spec-title, .nw-comp-title { color: #5C687A; }
+.nw-spec-row { border-color: #1A212B; } .nw-spec-row .k { color: #7E889A; } .nw-spec-row .v { color: #D3D8E2; }
+.nw-vlabel { color: #5C687A; }
+.nw-price { color: #F4F7FB; text-shadow: 0 0 30px rgba(70,224,166,0.18); }
+.nw-ppsf { color: #8892A4; }
 .nw-badge { background: rgba(70,224,166,0.14); color: #7CE9BE; }
-.nw-bar-track { background: linear-gradient(90deg,#1E5C43,#8A6B22,#8A3A2E); }
-.nw-bar-marker { background: #E9ECF2; box-shadow: 0 0 0 2px #0B0E13; }
-.nw-bar-mark-label { background: #46E0A6; color: #06231A; }
-.nw-bar-ends { color: #5C687A; }
+.nw-rail-track { background: linear-gradient(90deg,#1E5C43,#8A6B22,#8A3A2E); }
+.nw-rail-band { border: 1px solid rgba(70,224,166,0.5); background: rgba(70,224,166,0.08); top: -3px; height: 14px; border-radius: 5px; }
+.nw-rail-diamond { background: #46E0A6; box-shadow: 0 0 12px 2px rgba(70,224,166,0.6), 0 0 0 3px #0B0E13; }
+.nw-rail-label { background: #46E0A6; color: #06231A; }
+.nw-rail-ends { color: #5C687A; }
+.nw-rail-cap { color: #8892A4; } .nw-cap-b { color: #46E0A6; font-weight: 700; }
+.nw-h { color: #E9ECF2; }
 .nw-factor-label { color: #B7BECC; }
 .nw-factor-bar { background: #1A212B; }
 .nw-pos { color: #46E0A6; } .nw-neg { color: #FF8A7A; }
 .nw-pos-bg { background: #35C08C; } .nw-neg-bg { background: #E06A5A; }
+.nw-comp-row { border-color: #1A212B; color: #9AA3B4; } .nw-comp-row b { color: #E9ECF2; }
+.nw-cap { color: #5C687A; }
 [data-testid="stMain"], [data-testid="stMarkdownContainer"] { color: #E9ECF2; }
 [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] label, .stRadio label p, [data-testid="stExpander"] summary span { color: #C2C8DC !important; }
 [data-testid="stForm"] { background: #0E121A; border: 1px solid #1E2530; }
@@ -176,42 +219,52 @@ def build_input(raw: dict) -> pd.DataFrame:
     return row
 
 
-def market_position(df: pd.DataFrame, city: str, location: str, price: float):
-    """Position of an estimate within its city/location segment.
-
-    Returns (delta_pct, bar_html, n_listings), or (None, None, 0) if the
-    segment is too small to be meaningful.
-    """
+def segment_stats(df: pd.DataFrame, city: str, location: str):
+    """10th / 50th / 90th-percentile prices for the city+locality segment."""
     seg = df[(df["city"] == city) & (df["location"] == location)]
     if len(seg) < 8:
         seg = df[df["city"] == city]
     if len(seg) < 8:
-        return None, None, 0
-
+        return None
     low, mid, high = seg["price"].quantile([0.10, 0.50, 0.90])
-    span = max(high - low, 1.0)
-    pct = min(max((price - low) / span * 100, 4.0), 96.0)
-    delta_pct = (price - mid) / mid * 100
+    return float(low), float(mid), float(high), len(seg)
 
-    bar_html = (
-        '<div class="nw-bar-wrap">'
-        '<div class="nw-bar-track">'
-        f'<div class="nw-bar-marker" style="left:{pct:.1f}%"></div>'
-        f'<div class="nw-bar-mark-label" style="left:{pct:.1f}%">{inr(price)}</div>'
+
+def spec_html(raw: dict) -> str:
+    rows = [
+        ("Locality", f"{raw['location']}, {raw['city']}"),
+        ("Built-up area", f"{int(raw['area']):,} sq ft"),
+        ("Configuration", f"{int(raw['bedrooms'])} BHK · {int(raw['bathrooms'])} bath"),
+        ("Age", f"{int(raw['house_age'])} years"),
+        ("Furnishing", raw["furnishing_status"].capitalize()),
+    ]
+    body = "".join(
+        f'<div class="nw-spec-row"><span class="k">{k}</span>'
+        f'<span class="v">{v}</span></div>'
+        for k, v in rows
+    )
+    return f'<div class="nw-spec-title">The property</div>{body}'
+
+
+def rail_html(low, high, price, int_lo, int_hi) -> str:
+    span = max(high - low, 1.0)
+    pct = min(max((price - low) / span * 100, 2.0), 98.0)
+    band_l = min(max((max(int_lo, low) - low) / span * 100, 0.0), 100.0)
+    band_r = min(max((min(int_hi, high) - low) / span * 100, 0.0), 100.0)
+    band_w = max(band_r - band_l, 1.0)
+    return (
+        '<div class="nw-rail"><div class="nw-rail-track">'
+        f'<div class="nw-rail-band" style="left:{band_l:.1f}%;width:{band_w:.1f}%"></div>'
+        f'<div class="nw-rail-diamond" style="left:{pct:.1f}%"></div>'
+        f'<div class="nw-rail-label" style="left:{pct:.1f}%">{inr(price)}</div>'
         "</div>"
-        f'<div class="nw-bar-ends"><span>{inr(low)}</span><span>{inr(high)}</span></div>'
+        f'<div class="nw-rail-ends"><span>{inr(low)}</span><span>{inr(high)}</span></div>'
         "</div>"
     )
-    return delta_pct, bar_html, len(seg)
 
 
 def explain_prediction(_model, raw: dict, baseline: dict, full_pred: float, top=5):
-    """Per-feature contribution to the estimate.
-
-    Each feature is set back to its typical value one at a time; the resulting
-    change in the prediction is that feature's contribution versus a typical
-    listing.
-    """
+    """Per-feature contribution: set each feature to its typical value, re-predict."""
     factors = []
     for feat, label_fn in FACTOR_LABELS.items():
         probe = dict(raw)
@@ -230,11 +283,9 @@ def factors_html(factors) -> str:
         sign = "+" if delta >= 0 else "−"
         width = abs(delta) / max_abs * 100
         rows.append(
-            '<div class="nw-factor">'
-            '<div class="nw-factor-top">'
+            '<div class="nw-factor"><div class="nw-factor-top">'
             f'<span class="nw-factor-label">{label}</span>'
-            f'<span class="nw-factor-val {cls}">{sign}{inr(abs(delta))}</span>'
-            "</div>"
+            f'<span class="nw-factor-val {cls}">{sign}{inr(abs(delta))}</span></div>'
             '<div class="nw-factor-bar">'
             f'<div class="nw-factor-fill {cls}-bg" style="width:{width:.0f}%"></div>'
             "</div></div>"
@@ -242,33 +293,45 @@ def factors_html(factors) -> str:
     return "".join(rows)
 
 
-def comparable_homes(df: pd.DataFrame, city: str, location: str, area: float, k=5):
+def comps_html(df: pd.DataFrame, city: str, location: str, area: float, k=5) -> str:
     seg = df[(df["city"] == city) & (df["location"] == location)]
     if len(seg) < k:
         seg = df[df["city"] == city]
     if seg.empty:
-        return None
+        return ""
     seg = seg.assign(_d=(seg["area"] - area).abs()).sort_values("_d").head(k)
-    out = seg[["area", "bedrooms", "bathrooms", "house_age", "price"]].copy()
-    out.columns = ["Area (sq ft)", "Beds", "Baths", "Age (yrs)", "Price"]
-    return out
+    rows = []
+    for _, r in seg.iterrows():
+        desc = f"{int(r['area']):,} sq ft · {int(r['bedrooms'])} BHK · {int(r['house_age'])} yrs"
+        rows.append(f'<div class="nw-comp-row"><span>{desc}</span><b>{inr(r["price"])}</b></div>')
+    return "".join(rows)
 
 
-_, theme_col = st.columns([3, 1])
+st.markdown(
+    f'<div class="nw-header"><div class="nw-logo">Nest<b>Worth</b></div>'
+    f'<div class="nw-nav"><a href="#nw-about">How it works</a>'
+    f'<a href="{GITHUB}" target="_blank">Source ↗</a></div></div>',
+    unsafe_allow_html=True,
+)
+
+_, theme_col = st.columns([4, 1])
 with theme_col:
     st.segmented_control(
         "Theme", ["Ledger", "Instrument"], default="Ledger",
         key="theme", label_visibility="collapsed",
     )
 
-st.title("NestWorth")
-st.write("Know what a home is worth — price estimates for Indian metro cities.")
+st.title("What's your home worth?")
+st.markdown(
+    '<div class="nw-lede"><p>Instant price estimates for five Indian metro cities — '
+    "with a 90% confidence range and the reasons behind every number.</p></div>",
+    unsafe_allow_html=True,
+)
 
 if not MODEL_PATH.exists():
     st.error(
         "No trained model found. From the project root, run:\n\n"
-        "```\npython src/generate_dataset.py\npython src/data_preprocessing.py\n"
-        "python src/train_model.py\n```"
+        "```\npython src/data_preprocessing.py\npython src/train_model.py\n```"
     )
     st.stop()
 
@@ -277,6 +340,7 @@ metrics = load_metrics()
 data = load_data()
 interval = load_interval()
 
+st.write("")
 with st.form("house"):
     col1, col2 = st.columns(2)
 
@@ -309,6 +373,9 @@ with st.form("house"):
                                       width="stretch")
 
 if submitted:
+    st.session_state["estimated"] = True
+
+if st.session_state.get("estimated"):
     raw = {
         "area": area, "bedrooms": bedrooms, "bathrooms": bathrooms,
         "stories": stories, "city": city, "location": location,
@@ -316,85 +383,67 @@ if submitted:
         "furnishing_status": furnishing_status,
     }
     input_df = build_input(raw)
-
     predicted_price = model.predict(input_df)[0]
     price_per_sqft = predicted_price / area
-
-    mae = metrics.iloc[0]["MAE"] if metrics is not None else None
     r2 = metrics.iloc[0]["R2"] if metrics is not None else None
 
-    sub_bits = [f"₹{price_per_sqft:,.0f} / sq ft"]
+    stats = segment_stats(data, city, location) if data is not None else None
     if interval is not None:
-        lo, hi = prediction_interval(interval, input_df, predicted_price)
+        int_lo, int_hi = prediction_interval(interval, input_df, predicted_price)
         cov = int(interval["coverage"] * 100)
-        sub_bits.append(f"{cov}% interval {inr(lo)} – {inr(hi)}")
-    elif mae is not None:
-        sub_bits.append(
-            f"likely {inr(predicted_price - mae)} – {inr(predicted_price + mae)}"
-        )
-    sub_line = "&nbsp;&nbsp;·&nbsp;&nbsp;".join(sub_bits)
+    else:
+        int_lo, int_hi, cov = predicted_price, predicted_price, 90
+
+    low, high = (stats[0], stats[2]) if stats else (int_lo, int_hi)
+    rail = rail_html(low, high, predicted_price, int_lo, int_hi)
     badge = (
-        f'<span class="nw-badge">Model R² {r2:.2f} on held-out test data</span>'
+        f'<span class="nw-badge">Model R² {r2:.2f} on held-out data</span>'
         if r2 is not None else ""
     )
-
-    st.markdown(
-        f'<div class="nw-hero">'
-        f'<div class="nw-hero-label">Estimated value</div>'
-        f'<div class="nw-hero-price">{inr(predicted_price)}</div>'
-        f'<div class="nw-hero-sub">{sub_line}</div>'
+    valuation = (
+        '<div class="nw-vlabel">Estimated value</div>'
+        f'<div class="nw-price">{inr(predicted_price)}</div>'
+        f'<div class="nw-ppsf">₹{price_per_sqft:,.0f} per sq ft</div>'
+        f"{rail}"
+        f'<div class="nw-rail-cap"><span class="nw-cap-b">{cov}% confidence:</span> '
+        f"{inr(int_lo)} – {inr(int_hi)} · shown against typical {city} · {location} prices</div>"
         f"{badge}"
-        f"</div>",
+    )
+    st.markdown(
+        f'<div class="nw-card"><div class="nw-grid"><div>{spec_html(raw)}</div>'
+        f"<div>{valuation}</div></div></div>",
         unsafe_allow_html=True,
     )
 
     if data is not None:
-        delta_pct, bar_html, n_seg = market_position(
-            data, city, location, predicted_price
-        )
-        if bar_html:
-            direction = "above" if delta_pct >= 0 else "below"
-            st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-            st.markdown("###### How it compares")
-            st.markdown(
-                f"About **{abs(delta_pct):.0f}% {direction}** the typical price for "
-                f"**{city} · {location}** homes."
-            )
-            st.markdown(bar_html, unsafe_allow_html=True)
-            st.caption(
-                f"Bar spans the typical range (10th–90th percentile) of {n_seg} "
-                f"comparable {city} · {location} homes."
-            )
-
         factors = explain_prediction(
             model, raw, baseline_features(data), predicted_price
         )
-        st.markdown("<div style='height:18px'></div>", unsafe_allow_html=True)
-        st.markdown("###### Why this price?")
-        st.markdown(factors_html(factors), unsafe_allow_html=True)
-        st.caption(
-            "How much each feature adds to or subtracts from the estimate, "
-            "versus a typical listing."
+        st.markdown(
+            f'<div class="nw-h">Why this price</div>{factors_html(factors)}'
+            '<div class="nw-cap">How much each feature adds to or subtracts from the '
+            "estimate, versus a typical listing.</div>",
+            unsafe_allow_html=True,
         )
+        comps = comps_html(data, city, location, area)
+        if comps:
+            st.markdown(
+                f'<div class="nw-h">Comparable homes in {city} · {location}</div>{comps}'
+                '<div class="nw-cap">Closest listings by size in the same city and '
+                "locality.</div>",
+                unsafe_allow_html=True,
+            )
 
-        comps = comparable_homes(data, city, location, area)
-        if comps is not None:
-            with st.expander(f"Comparable homes in {city} · {location}"):
-                st.dataframe(
-                    comps.style.format({
-                        "Area (sq ft)": "{:,.0f}", "Beds": "{:.0f}",
-                        "Baths": "{:.0f}", "Age (yrs)": "{:.0f}", "Price": inr,
-                    }),
-                    hide_index=True,
-                    width="stretch",
-                )
-                st.caption("Closest listings by size in the same city and locality.")
+    st.markdown(
+        '<div class="nw-cap" style="margin-top:16px">Trained on this project\'s '
+        "dataset — not a real valuation.</div>",
+        unsafe_allow_html=True,
+    )
 
-    st.caption("Trained on this project's dataset — not a real valuation.")
-
+st.markdown('<div id="nw-about"></div>', unsafe_allow_html=True)
 st.divider()
 
-with st.expander("About the model"):
+with st.expander("How the model works"):
     st.write(
         "A scikit-learn pipeline (imputation, one-hot encoding, scaling, and "
         "the best of three compared regressors) trained on ~1,500 listings "
@@ -406,8 +455,4 @@ with st.expander("About the model"):
             hide_index=True,
             width="stretch",
         )
-    st.write(
-        "Source code and full pipeline: "
-        "[github.com/SamGabriel-Here/nestworth]"
-        "(https://github.com/SamGabriel-Here/nestworth)"
-    )
+    st.write(f"Source code and full pipeline: [{GITHUB.split('//')[1]}]({GITHUB})")

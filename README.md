@@ -91,12 +91,12 @@ is *adaptive* — a few lakh wide for a budget flat, over a crore for a premium
 home. The point model's own train/test split is untouched, so the headline R²
 is unaffected.
 
-**App** (`app/app.py`) — a Streamlit form for the house features. On submit it
-returns the estimate as a headline figure with price per sq ft, the 90%
-prediction interval, and the model's R². Below that:
+**App** (`app/app.py`) — a Streamlit web app with a site header and a light/dark
+theme toggle (Ledger / Instrument). Enter a property and it returns a valuation
+card: a property spec sheet beside the estimate, price per sq ft, and a
+**confidence rail** — one instrument showing the estimate, its 90% prediction
+interval, and where it sits in the locality's price range. Below that:
 
-- **How it compares** — where the estimate sits within the 10th–90th-percentile
-  price range of comparable homes in the same city and locality, shown as a bar.
 - **Why this price?** — each feature's contribution to the estimate, measured by
   setting that feature back to a typical value and re-predicting (single-feature
   ablation against a median/mode baseline listing).
