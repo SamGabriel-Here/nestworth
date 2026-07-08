@@ -3,6 +3,10 @@ FROM python:3.12-slim
 RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
+ENV PYTHONUNBUFFERED=1 \
+    OMP_NUM_THREADS=1 \
+    CUDA_VISIBLE_DEVICES=-1
+
 WORKDIR /app
 
 COPY web/requirements.txt web/requirements.txt
