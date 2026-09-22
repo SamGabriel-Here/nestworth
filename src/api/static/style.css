@@ -161,7 +161,8 @@ legend, .area > label, .age > label {
 .keys input:hover + span { background: var(--key-hover); }
 /* a chosen key gets painted: the fill sweeps across it */
 .keys span::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--key-on-bg);
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image: linear-gradient(var(--key-on-bg), var(--key-on-bg)); /* image, not colour: the key's real ground stays the sheet */
   transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease);
 }
 .keys input:checked + span { border-color: var(--key-on-bg); color: var(--key-on-fg); }
