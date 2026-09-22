@@ -2,10 +2,8 @@
 .git/
 __pycache__/
 *.pyc
-reports/figures/
-app/
-src/
+*.egg-info/
+.pytest_cache/
+tests/
+reports/
 data/housing_data.csv
-data/bengaluru_house_data.csv
-.streamlit/
-.devcontainer/

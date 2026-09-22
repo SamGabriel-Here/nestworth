@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NestWorth · Home valuation for Indian metros</title>
+<meta name="description" content="Value a home in Mumbai, Delhi, Bangalore, Chennai or Kolkata. A price, a calibrated 90% range, the reasons behind it, and the homes it resembles.">
+<meta name="theme-color" content="#16153a">
+<script>try{var t=localStorage.getItem("nw-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="bar">
+  <a class="mark" href="#top" aria-label="NestWorth, back to top"><span>Nest</span>Worth</a>
+  <nav class="nav" aria-label="Site">
+    <a href="#how">How it works</a>
+    <a href="https://github.com/SamGabriel-Here/nestworth" target="_blank" rel="noopener">Source
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7"/></svg></a>
+    <div class="theme" role="radiogroup" aria-label="Theme">
+      <button type="button" role="radio" data-theme-set="light">Light</button>
+      <button type="button" role="radio" data-theme-set="dark">Dark</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <div class="board">
+    <form id="form" class="sheet sheet-form" novalidate>
+      <h1>Value a home</h1>
+
+      <fieldset class="keys keys-5">
+        <legend>City</legend>
+        <label><input type="radio" name="city" value="Mumbai" checked><span>Mumbai</span></label>
+        <label><input type="radio" name="city" value="Delhi"><span>Delhi</span></label>
+        <label><input type="radio" name="city" value="Bangalore"><span>Bangalore</span></label>
+        <label><input type="radio" name="city" value="Chennai"><span>Chennai</span></label>
+        <label><input type="radio" name="city" value="Kolkata"><span>Kolkata</span></label>
+      </fieldset>
+
+      <fieldset class="keys keys-wrap">
+        <legend>Locality</legend>
+        <label><input type="radio" name="location" value="City Centre"><span>City Centre</span></label>
+        <label><input type="radio" name="location" value="Prime Suburb"><span>Prime Suburb</span></label>
+        <label><input type="radio" name="location" value="Suburb" checked><span>Suburb</span></label>
+        <label><input type="radio" name="location" value="Outskirts"><span>Outskirts</span></label>
+        <label><input type="radio" name="location" value="Premium Township"><span>Premium Township</span></label>
+      </fieldset>
+
+      <div class="area">
+        <label for="area">Built-up area</label>
+        <div class="area-read"><input id="area" name="area" type="number" inputmode="numeric" value="1100" min="300" max="9000" step="10" aria-describedby="area-hint"><span>sq ft</span></div>
+        <input type="range" id="area-range" min="300" max="4000" step="10" value="1100" aria-label="Built-up area, slider">
+        <p id="area-hint" class="hint">300 to 9,000 sq ft</p>
+      </div>
+
+      <div class="pairs">
+        <fieldset class="keys">
+          <legend>Bedrooms</legend>
+          <label><input type="radio" name="bedrooms" value="1"><span>1</span></label>
+          <label><input type="radio" name="bedrooms" value="2"><span>2</span></label>
+          <label><input type="radio" name="bedrooms" value="3" checked><span>3</span></label>
+          <label><input type="radio" name="bedrooms" value="4"><span>4</span></label>
+          <label><input type="radio" name="bedrooms" value="5"><span>5</span></label>
+        </fieldset>
+        <fieldset class="keys">
+          <legend>Bathrooms</legend>
+          <label><input type="radio" name="bathrooms" value="1"><span>1</span></label>
+          <label><input type="radio" name="bathrooms" value="2" checked><span>2</span></label>
+          <label><input type="radio" name="bathrooms" value="3"><span>3</span></label>
+          <label><input type="radio" name="bathrooms" value="4"><span>4</span></label>
+        </fieldset>
+        <fieldset class="keys">
+          <legend>Floors</legend>
+          <label><input type="radio" name="stories" value="1"><span>1</span></label>
+          <label><input type="radio" name="stories" value="2" checked><span>2</span></label>
+          <label><input type="radio" name="stories" value="3"><span>3</span></label>
+          <label><input type="radio" name="stories" value="4"><span>4</span></label>
+        </fieldset>
+        <fieldset class="keys">
+          <legend>Parking spots</legend>
+          <label><input type="radio" name="parking" value="0"><span>0</span></label>
+          <label><input type="radio" name="parking" value="1" checked><span>1</span></label>
+          <label><input type="radio" name="parking" value="2"><span>2</span></label>
+          <label><input type="radio" name="parking" value="3"><span>3</span></label>
+        </fieldset>
+      </div>
+
+      <div class="age">
+        <label for="age">Age of building</label>
+        <output id="age-out" for="age">8 years</output>
+        <input type="range" id="age" name="house_age" min="0" max="60" step="1" value="8">
+      </div>
+
+      <div class="pairs">
+        <fieldset class="keys">
+          <legend>On a main road</legend>
+          <label><input type="radio" name="main_road" value="yes" checked><span>Yes</span></label>
+          <label><input type="radio" name="main_road" value="no"><span>No</span></label>
+        </fieldset>
+        <fieldset class="keys">
+          <legend>Furnishing</legend>
+          <label><input type="radio" name="furnishing_status" value="unfurnished"><span>None</span></label>
+          <label><input type="radio" name="furnishing_status" value="semi-furnished" checked><span>Semi</span></label>
+          <label><input type="radio" name="furnishing_status" value="furnished"><span>Full</span></label>
+        </fieldset>
+      </div>
+    </form>
+
+    <section id="answer" class="sheet sheet-answer" aria-labelledby="answer-h" aria-busy="true">
+      <p class="sr-only" id="said" aria-live="polite"></p>
+      <p class="price" id="price">₹&thinsp;—</p>
+      <h2 id="answer-h" class="subject">3 BHK, 1,100 sq ft in Suburb, Mumbai</h2>
+      <p class="ppsf" id="ppsf">Valuing…</p>
+
+      <div class="range">
+        <p class="range-read"><b id="range-pct">90%</b> likely between <b id="range-lo">—</b> and <b id="range-hi">—</b></p>
+        <div class="track" aria-hidden="true">
+          <i class="band" id="band"></i>
+          <i class="pin" id="pin"></i>
+        </div>
+        <div class="ticks" aria-hidden="true">
+          <span id="t-low">—</span><span id="t-mid">—</span><span id="t-high">—</span>
+        </div>
+        <p class="range-cap" id="range-cap">Dark track: the middle 80% of listings nearby. Marigold: this home's 90% range. White line: the estimate.</p>
+      </div>
+
+      <h3 class="why-h">What moves the price</h3>
+      <p class="legend"><i class="sw up"></i>Adds <i class="sw down"></i>Takes away <span>vs a typical listing</span></p>
+      <ol class="factors" id="factors"></ol>
+
+      <p class="status" id="status" role="status"></p>
+    </section>
+  </div>
+
+  <p class="strip" id="strip">
+    <b>Synthetic data. Not a real valuation.</b>
+    <span>Model XGBoost</span>
+    <span>R² <b id="r2">0.91</b> on held-out homes</span>
+    <span>The 90% range held <b id="cov">90%</b> of test prices</span>
+    <span>1,500 listings, 5 metros</span>
+  </p>
+
+  <div class="lower">
+  <section class="rate" aria-labelledby="rate-h">
+    <h2 id="rate-h">Homes like this one</h2>
+    <p class="sub" id="rate-sub">The five closest in size from the same locality.</p>
+    <table class="rate-card">
+      <thead><tr><th scope="col">Area</th><th scope="col">Bedrooms</th><th scope="col">Age</th><th scope="col">Price</th><th scope="col">vs this home</th></tr></thead>
+      <tbody id="comps"></tbody>
+    </table>
+  </section>
+
+  <section id="how" class="how" aria-labelledby="how-h">
+    <h2 id="how-h">How the number is made</h2>
+    <dl>
+      <div><dt>Data</dt><dd>1,500 listings generated at metro-city rates per square foot, with gaps, duplicates and outliers left in, then cleaned.</dd></div>
+      <div><dt>Model</dt><dd>A scikit-learn pipeline feeds XGBoost, chosen over Random Forest and Linear Regression on held-out homes.</dd></div>
+      <div><dt>Range</dt><dd>Conformalized quantile regression: two quantile models, widened on a calibration split until 90% of unseen prices fall inside.</dd></div>
+      <div><dt>Reasons</dt><dd>Each feature is reset to a typical listing's value in turn; the change in price is that feature's share.</dd></div>
+    </dl>
+    <p class="src">Code, data pipeline and tests: <a href="https://github.com/SamGabriel-Here/nestworth" target="_blank" rel="noopener">github.com/SamGabriel-Here/nestworth</a></p>
+  </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <span>NestWorth, built by Sam Gabriel</span>
+  <a href="#top">Back to top</a>
+</footer>
+
+<a class="dock" id="dock" href="#answer" aria-hidden="true" tabindex="-1">
+  <b id="dock-price">₹ —</b><span id="dock-range">Valuing…</span>
+</a>
+
+<noscript><p class="status">The valuation board needs JavaScript to reach the model.</p></noscript>
+<script src="/app.js"></script>
+</body>
+</html>
