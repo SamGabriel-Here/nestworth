@@ -50,8 +50,8 @@ let shown = 0;
 function paintPrice(target) {
   const el = $("#price"), from = shown;
   shown = target;
-  if (calm.matches || !from) { el.textContent = inr(target); return; }
-  const t0 = performance.now(), dur = 450;
+  if (calm.matches) { el.textContent = inr(target); return; }
+  const t0 = performance.now(), dur = from ? 450 : 1100; // the first figure counts up from zero
   (function step(t) {
     const k = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(2, -10 * k);
     el.textContent = inr(from + (target - from) * (k === 1 ? 1 : e));
@@ -124,6 +124,7 @@ let inflight, timer;
 async function value() {
   const p = readForm();
   if (!areaOk(p)) return;
+  Scene.paint(p);
   inflight?.abort();
   const ctl = (inflight = new AbortController());
   const answer = $("#answer"), status = $("#status");
@@ -147,7 +148,12 @@ async function value() {
     if (inflight === ctl) { delete answer.dataset.slow; answer.setAttribute("aria-busy", "false"); }
   }
 }
-form.addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(value, 160); });
+Scene.init($("#scene"));
+form.addEventListener("input", () => {
+  const p = readForm();
+  if (area.value !== "" && p.area >= 300 && p.area <= 9000) Scene.paint(p); // the drawing answers at once
+  clearTimeout(timer); timer = setTimeout(value, 160);
+});
 form.addEventListener("submit", (e) => { e.preventDefault(); value(); });
 value();
 

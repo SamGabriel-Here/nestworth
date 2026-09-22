@@ -3,7 +3,9 @@
 Home valuations for five Indian metros: Mumbai, Delhi, Bangalore, Chennai and Kolkata.
 Describe a home and NestWorth returns a price in lakh or crore, a **calibrated 90% range**,
 the features pushing the price up or down, and the five most similar listings. Every
-control repaints the valuation live.
+control repaints the valuation live and redraws a cutaway of the home: a bed per bedroom,
+a floor per storey, a car per parking spot, rooms that fill up with furniture, and the
+city's landmark on the skyline.
 
 **Live:** https://samgabrielofficially-nestworth.hf.space
 
@@ -43,7 +45,7 @@ src/
   predictor.py           loads artifacts once; one home -> full valuation
   api/
     app.py               FastAPI: POST /api/predict + the static frontend
-    static/              index.html, style.css, app.js
+    static/              index.html, style.css, app.js, scene.js (the drawn home), fonts/
 artifacts/               model.pkl, interval.pkl, metrics.csv
 data/                    housing_data.csv (raw), housing_clean.csv
 tests/                   test_pipeline.py, test_api.py

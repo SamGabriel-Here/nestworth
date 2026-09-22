@@ -7,9 +7,8 @@
 <meta name="description" content="Value a home in Mumbai, Delhi, Bangalore, Chennai or Kolkata. A price, a calibrated 90% range, the reasons behind it, and the homes it resembles.">
 <meta name="theme-color" content="#16153a">
 <script>try{var t=localStorage.getItem("nw-theme");document.documentElement.dataset.theme=t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/archivo-latin-ext.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -112,6 +111,10 @@
 
     <section id="answer" class="sheet sheet-answer" aria-labelledby="answer-h" aria-busy="true">
       <p class="sr-only" id="said" aria-live="polite"></p>
+      <figure class="scene">
+        <svg id="scene" viewBox="0 0 800 300" role="img" aria-label="Illustration of the home"></svg>
+        <figcaption>Artist's impression</figcaption>
+      </figure>
       <p class="price" id="price">₹&thinsp;—</p>
       <h2 id="answer-h" class="subject">3 BHK, 1,100 sq ft in Suburb, Mumbai</h2>
       <p class="ppsf" id="ppsf">Valuing…</p>
@@ -177,6 +180,7 @@
 </a>
 
 <noscript><p class="status">The valuation board needs JavaScript to reach the model.</p></noscript>
+<script src="/scene.js"></script>
 <script src="/app.js"></script>
 </body>
 </html>

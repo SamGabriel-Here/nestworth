@@ -1,5 +1,17 @@
 /* NestWorth: a builder's site hoarding. Flat painted sheets, hard seams, no radius, no shadow. */
 
+/* Archivo (SIL OFL 1.1, fonts/OFL.txt), variable width 62-125 and weight 400-900. */
+@font-face {
+  font-family: "Archivo"; src: url("/fonts/archivo-latin-ext.woff2") format("woff2");
+  font-weight: 400 900; font-stretch: 62% 125%; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Archivo"; src: url("/fonts/archivo-latin.woff2") format("woff2");
+  font-weight: 400 900; font-stretch: 62% 125%; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --marigold: #f5b400;
   --indigo: #16153a;
@@ -28,6 +40,14 @@
   --rule: #c4c7cd;
   --bar: var(--indigo);
 
+  /* the drawn home: daytime paints */
+  --s-sky: #e7e5fa; --s-far: #cbc7ef; --s-win: #cbc7ef; --s-lm: #ada7e2; --s-sun: var(--marigold);
+  --s-cut: var(--indigo); --s-room: #fffaf0; --s-tile: #dde8f2; --s-ghost: #6f6cae;
+  --s-road: #2b2a4f; --s-kerb: #8d8bb0; --s-grass: #5a9f6f; --s-path: #d9d3c1;
+  --s-mg: var(--marigold); --s-rg: #f7cf5c; --s-wd: #c17f2a; --s-dk: #5b3a0c; --s-wh: #ffffff; --s-ln: #cbc7ef;
+  --s-fb: #3b3880; --s-fl: #5a56b0; --s-mt: #8d8bb0; --s-gl: #bfe3f5; --s-sc: #1d1c40;
+  --s-lf: #3f8f5a; --s-ld: #2c6b42; --s-pt: #7a4a14;
+
   --seam: 4px;
   --gut: clamp(16px, 3.2vw, 56px);
   --ease: cubic-bezier(.16, 1, .3, 1);
@@ -54,6 +74,10 @@
   --on-page-2: #aeabd2;
   --rule: #2a2856;
   --bar: #0d0c24;
+  /* the drawn home at night: lamplit rooms, lit windows across the skyline */
+  --s-sky: #1b1a46; --s-far: #121136; --s-win: rgb(245 180 0 / .7); --s-lm: #0c0b28; --s-sun: #f6f5ff;
+  --s-cut: #07061a; --s-room: #ffe6a3; --s-tile: #cdd5ea; --s-ghost: #8a6a22;
+  --s-road: #0b0a1d; --s-kerb: #3a3960; --s-grass: #1e4a31; --s-path: #4a4560; --s-ln: #e2cc91;
   color-scheme: dark;
 }
 
@@ -129,12 +153,19 @@ legend, .area > label, .age > label {
 .keys label { position: relative; display: block; }
 .keys input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
 .keys span {
+  position: relative; isolation: isolate;
   display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 6px;
   border: 2px solid var(--key-line); font-stretch: 87.5%; font-weight: 650; font-size: 1rem;
   text-align: center; line-height: 1.1; transition: background-color .15s, color .15s;
 }
 .keys input:hover + span { background: var(--key-hover); }
-.keys input:checked + span { background: var(--key-on-bg); border-color: var(--key-on-bg); color: var(--key-on-fg); }
+/* a chosen key gets painted: the fill sweeps across it */
+.keys span::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--key-on-bg);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease);
+}
+.keys input:checked + span { border-color: var(--key-on-bg); color: var(--key-on-fg); }
+.keys input:checked + span::before { transform: scaleX(1); }
 .keys input:focus-visible + span { outline: 3px solid var(--focus-a); outline-offset: 2px; }
 .keys input:active + span { transform: translateY(1px); }
 
@@ -169,6 +200,39 @@ input[type="range"]::-moz-range-thumb {
   background: var(--key-on-bg); border: 3px solid var(--sheet-a); outline: 2px solid var(--key-on-bg);
 }
 input[type="range"]:focus-visible { outline: 3px solid var(--focus-a); outline-offset: 4px; }
+
+/* ---------- the drawn home ---------- */
+.scene { position: relative; margin: 0 0 28px; }
+.scene svg { display: block; width: 100%; height: auto; aspect-ratio: 800 / 300; background: var(--s-sky); }
+.scene figcaption { margin-top: 6px; text-align: right; font-size: .75rem; color: var(--on-b-2); }
+.scene .sky { fill: var(--s-sky); } .scene .sun { fill: var(--s-sun); }
+.scene .far { fill: var(--s-far); } .scene .far .wn { fill: var(--s-win); }
+.scene .lm { fill: var(--s-lm); } .scene .lm .st { fill: none; stroke: var(--s-lm); stroke-width: 3; }
+.scene .room { fill: var(--s-room); } .scene .tile { fill: var(--s-tile); } .scene .ct { fill: var(--s-cut); }
+.scene .road { fill: var(--s-road); } .scene .kerb { fill: var(--s-kerb); }
+.scene .lane { fill: none; stroke: var(--marigold); stroke-width: 2; stroke-dasharray: 16 12; }
+.scene .grass { fill: var(--s-grass); } .scene .path { fill: var(--s-path); }
+.scene .mg { fill: var(--s-mg); } .scene .rg { fill: var(--s-rg); } .scene .wd { fill: var(--s-wd); } .scene .dk { fill: var(--s-dk); }
+.scene .wh { fill: var(--s-wh); } .scene .ln { fill: var(--s-ln); } .scene .fb { fill: var(--s-fb); } .scene .fl { fill: var(--s-fl); }
+.scene .mt { fill: var(--s-mt); } .scene .gl { fill: var(--s-gl); } .scene .sc { fill: var(--s-sc); }
+.scene .lf { fill: var(--s-lf); } .scene .ld { fill: var(--s-ld); } .scene .pt { fill: var(--s-pt); }
+.scene .cb { fill: var(--s-mg); } .scene .cb.c1 { fill: var(--s-wh); } .scene .cb.c2 { fill: var(--s-fl); }
+.scene .ty { fill: var(--indigo); } .scene .hb { fill: var(--s-mt); }
+.scene .plq { fill: var(--marigold); font: 800 9px "Archivo", sans-serif; font-stretch: 75%; letter-spacing: .08em; }
+/* unfurnished: loose furniture shown as floor-tape outlines */
+.scene .ghost .in * { fill: none; stroke: var(--s-ghost); stroke-width: 1; stroke-dasharray: 2.5 2; }
+
+.scene [data-layer] > g { transition: transform .6s var(--ease), opacity .35s; }
+.scene .gone { opacity: 0; }
+.scene .in { transform-box: fill-box; }
+.scene .in.drop { animation: drop .55s var(--ease) backwards; }
+.scene .in.rise { transform-origin: bottom; animation: rise .6s var(--ease) backwards; }
+.scene .in.roll { animation: roll .8s var(--ease) backwards; }
+.scene .in.fade { animation: fade .6s ease backwards; }
+@keyframes drop { from { transform: translateY(-18px); opacity: 0; } }
+@keyframes rise { from { transform: scaleY(0); } }
+@keyframes roll { from { transform: translateX(120px); opacity: 0; } }
+@keyframes fade { from { opacity: 0; } }
 
 /* ---------- answer sheet: the billboard ---------- */
 .subject { margin-top: 16px; font-size: 1.25rem; font-weight: 650; line-height: 1.3; }
@@ -301,5 +365,5 @@ main { display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
