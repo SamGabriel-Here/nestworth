@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <style>path { fill: none; stroke: #121211; stroke-width: 4; stroke-linejoin: miter; stroke-linecap: square; } @media (prefers-color-scheme: dark) { path { stroke: #ecebe6; } }</style>
+  <path d="M9 43V19L24 7L39 19V43"/>
+  <path d="M9 19L39 43"/>
+</svg>

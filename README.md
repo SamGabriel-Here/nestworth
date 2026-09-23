@@ -146,7 +146,9 @@ Out-of-range input returns 422.
 A formal, editorial layout on a 12-column grid: a full-bleed photograph, a numbered
 specification form beside a sticky estimate, and a live section drawing of the home in
 architectural line style. Light and Dark themes swap the photographs (day and night).
-Archivo is self-hosted (SIL Open Font License, `src/api/static/fonts/OFL.txt`).
+Type is Gloock for headlines and figures with Schibsted Grotesk for text, both self-hosted
+(SIL Open Font License, `src/api/static/fonts/OFL-*.txt`). The mark is an N whose walls meet
+in a roof pitch (`src/api/static/favicon.svg`).
 
 Photography, all free under the [Unsplash License](https://unsplash.com/license):
 
