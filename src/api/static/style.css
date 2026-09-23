@@ -101,7 +101,7 @@ h1, h2, h3, p, dl, dd, figure { margin: 0; }
   padding-top: 14px; border-top: 1px solid rgb(255 255 255 / .55); font-size: .875rem; line-height: 1.35;
 }
 .hero-foot p { opacity: .92; }
-.go { justify-self: end; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 500; }
+.go { justify-self: end; display: inline-flex; align-items: center; gap: 8px; padding: 13px 0; margin: -13px 0; font-weight: 500; } /* a 44px tap target that keeps the text on the row's baseline */
 .go svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.4; }
 
 /* ---------- valuation: sticky estimate beside the numbered spec ---------- */
