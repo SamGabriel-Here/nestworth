@@ -176,7 +176,8 @@ value();
 
 /* ---- page motion: the top bar over the photograph, a slow parallax on the hero ---- */
 const topBar = $(".top"), hero = $(".hero"), media = $(".hero-media");
-new IntersectionObserver(([e]) => topBar.classList.toggle("over", e.isIntersecting), { rootMargin: "-64px 0px 0px 0px" }).observe(hero);
+// transparent only while real photograph sits behind it; solid before the hero's fact line slides under
+new IntersectionObserver(([e]) => topBar.classList.toggle("over", e.isIntersecting), { rootMargin: "-160px 0px 0px 0px" }).observe(hero);
 // one scroll pass per frame: the phone dock (checked by position, so jumps via links count too) and the hero parallax
 const dock = $("#dock"), price = $("#price");
 let ticking = false;

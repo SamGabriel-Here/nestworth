@@ -11,7 +11,9 @@ furnishing, a car per parking spot, and the city's landmark on the skyline.
 
 ![NestWorth: a full-bleed photograph of a residential tower under the headline "What is your home worth?"](docs/screenshot-form.png)
 
-![The valuation in the dark theme: room photograph, estimate and 90% range beside the numbered specification, then the section drawing and the reasons](docs/screenshot-estimate.png)
+![The valuation: room photograph, estimate and 90% range beside the numbered specification](docs/screenshot-estimate.png)
+
+![The section drawing in the dark theme: floors, rooms, furniture, parking and the city's landmark, with a title block and level datums](docs/screenshot-drawing.png)
 
 A scikit-learn pipeline with XGBoost, served by FastAPI with a hand-built HTML/CSS/JS
 frontend, running in Docker on Hugging Face Spaces.
