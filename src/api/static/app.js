@@ -136,13 +136,13 @@ function render(d, p) {
 const kindOf = (p) => p.property_type === "Studio" ? "Studio" : `${p.bedrooms} BHK ${p.property_type.toLowerCase()}`;
 
 /* ---- price against size: the same home at other areas, its band, and a hover readout ---- */
-const phone = matchMedia("(max-width: 560px)"), M = { l: 64, r: 16, t: 16, b: 36 };
+const M = { l: 64, r: 16, t: 16, b: 36 };
 let CW = 800, CH = 340, curvePts = [], lastCurve;
-phone.addEventListener("change", () => lastCurve && paintCurve(...lastCurve));
+new ResizeObserver(() => lastCurve && Math.round($("#curve").getBoundingClientRect().width) !== CW && paintCurve(...lastCurve)).observe($("#curve"));
 function paintCurve(d, p) {
   const pts = (curvePts = d.curve), svg = $("#curve");
   lastCurve = [d, p];
-  [CW, CH, M.l] = phone.matches ? [400, 300, 72] : [800, 340, 64]; // a phone gets a smaller sheet, so the chart shrinks less and its words stay legible
+  CW = Math.round(svg.getBoundingClientRect().width) || 800; CH = Math.round(Math.max(260, CW * 0.425)); // drawn at its size on screen, so its words are real pixels
   svg.setAttribute("viewBox", `0 0 ${CW} ${CH}`);
   const xMax = pts.at(-1).area, yMax = Math.max(...pts.map((q) => q.hi)) * 1.05;
   const x = (a) => M.l + ((a - 300) / (xMax - 300)) * (CW - M.l - M.r);

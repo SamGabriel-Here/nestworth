@@ -65,7 +65,7 @@ h1, h2, h3, p, dl, dd, figure { margin: 0; }
 .brand b { font-family: var(--display); font-weight: 400; font-size: 1.375rem; letter-spacing: -.01em; }
 .brand span { font-size: .75rem; line-height: 1.15; opacity: .72; }
 .nav { display: flex; gap: clamp(14px, 2vw, 28px); font-size: .875rem; }
-.nav a { text-decoration: none; opacity: .85; }
+.nav a { padding-block: 12px; text-decoration: none; opacity: .85; } /* inline padding: a taller tap target, same line */
 .nav a:hover { opacity: 1; text-decoration: underline; }
 .theme { justify-self: end; display: flex; align-items: center; gap: 6px; font-size: .875rem; }
 .theme span { opacity: .5; }
@@ -220,10 +220,10 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .scene [data-layer] .mg, .scene [data-layer] .rg { fill: var(--accent); }
 .scene [data-layer] .gl { fill: var(--bg-2); }
 /* drafting: labels, levels, dimension string, title block */
-.scene .tag, .scene .lvl, .scene .ttl { fill: var(--ink-2); font: 500 6.5px var(--text); letter-spacing: .06em; }
+.scene .tag, .scene .lvl, .scene .ttl { fill: var(--ink-2); font: 500 calc(6.5px * var(--k, 1)) var(--text); letter-spacing: .06em; } /* --k: set by scene.js from the drawing's width on screen */
 .scene .tag { paint-order: stroke; stroke: var(--bg); stroke-width: 2.5px; stroke-linejoin: round; } /* a halo where a label crosses furniture */
-.scene .lvl { font-size: 7px; letter-spacing: .02em; }
-.scene .ttl { fill: var(--ink); font-size: 9px; font-weight: 600; letter-spacing: .14em; }
+.scene .lvl { font-size: calc(7px * var(--k, 1)); letter-spacing: .02em; }
+.scene .ttl { fill: var(--ink); font-size: calc(9px * var(--k, 1)); font-weight: 600; letter-spacing: .14em; }
 .scene .dim { fill: var(--ink-2); stroke: var(--ink-2); stroke-width: .8; vector-effect: non-scaling-stroke; }
 
 .scene [data-layer] > g { transition: transform .7s var(--ease), opacity .35s; }
@@ -268,9 +268,9 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .curve .here, .curve .here-label { transition: transform .7s var(--ease); }
 .curve .line { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .curve .grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.curve .axis { fill: var(--ink-2); font: 400 11px var(--text); }
+.curve .axis { fill: var(--ink-2); font: 400 13px var(--text); }
 .curve .here { fill: var(--accent); stroke: var(--bg); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.curve .here-label { fill: var(--ink); font: 600 12px var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.curve .here-label { fill: var(--ink); font: 600 14px var(--text); paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
 .curve .cross { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
 .curve .dot { fill: var(--ink); stroke: var(--bg); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .tip {
@@ -389,10 +389,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .bhk { display: inline; }
   .comps td { font-size: .875rem; }
   .comps .p { font-size: 1.125rem; }
-  .curve .axis { font-size: 14px; }
   .key { display: flex; margin: 8px 0 0; } /* on its own line, flush with the note above */
   .key i:first-child { margin-left: 0; }
-  .curve .here-label { font-size: 15px; }
   .comps th:nth-child(n+5), .comps td:nth-child(n+5) { padding-left: 8px; }
   .ticks { display: flex; flex-direction: column; gap: 2px; height: auto; }
   .ticks span { position: static; transform: none !important; }
@@ -400,7 +398,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   /* the cropped drawing keeps its title and dimension at a readable size; room labels and datums step aside */
   .scene .tag, .scene .datum { display: none; }
   .scene .ttl { font-size: calc(8.3px * var(--k, 2.3)); }
-  .scene .lvl { font-size: calc(7px * var(--k, 2.3)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

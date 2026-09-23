@@ -2,7 +2,7 @@
    Every piece is keyed, so a change moves, adds or removes only what changed. */
 const Scene = (() => {
   const NS = "http://www.w3.org/2000/svg";
-  const W = 800, GROUND = 266, FLOOR = 58, SLAB = 6, CLEAR = FLOOR - SLAB, LABEL = 12;
+  const W = 800, GROUND = 266, FLOOR = 58, SLAB = 6, CLEAR = FLOOR - SLAB;
 
   // Furniture in side elevation: [width, height, markup], drawn standing on y = height.
   const F = {
@@ -31,9 +31,9 @@ const Scene = (() => {
   };
   const LOOSE = new Set(["sofa", "bed"]); // drawn as floor-tape outlines when unfurnished
   const DROP = ["plant", "lamp", "dining", "wardrobe", "tv", "basin"]; // left out first when a room is tight
-  const S = 0.8, PAD = 6, GAP = 6; // one furniture scale for the whole sheet (tallest piece clears the label band); clearance from partitions
+  const PAD = 6, GAP = 6; // clearance from partitions, and between pieces
   const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1], studio: () => "STUDIO" };
-  const narrow = matchMedia("(max-width: 560px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
+  const narrow = matchMedia("(max-width: 900px)"), phone = matchMedia("(max-width: 560px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
 
   // The drafter's pen: a new piece is inked along its outline, then its fill washes in.
   function pen(g) {
@@ -100,6 +100,8 @@ const Scene = (() => {
   let svg, layers, first = true;
   function init(el) {
     svg = el;
+    let seen; // the words are sized to the drawing's width on screen, so a new width repaints it
+    new ResizeObserver(([e]) => { if (last && e.contentRect.width !== seen) { seen = e.contentRect.width; paint(last); } }).observe(el);
     svg.innerHTML = '<rect class="sky" width="800" height="266"/>'
       + ["far", "ground", "rooms", "rugs", "furniture", "shell", "front", "annot"].map((n) => `<g data-layer="${n}"></g>`).join("");
     layers = Object.fromEntries([...svg.querySelectorAll("[data-layer]")].map((g) => [g.dataset.layer, { g, map: new Map() }]));
@@ -135,7 +137,6 @@ const Scene = (() => {
   }
 
   let last;
-  narrow.addEventListener("change", () => last && paint(last));
   function paint(p) {
     last = p;
     const kind = p.property_type, floors = p.stories;
@@ -167,6 +168,18 @@ const Scene = (() => {
     const carGap = kind === "Row House" ? 74 : 16, cap = tower ? 620 : Math.max(290, W - x0 - carGap - p.parking * 70 - 6);
     const bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290, 12 + 36 * Math.max(...load)), cap)), iw = bw - 12;
 
+    // frame: the full sheet on wide screens; on tablets and phones, just the building and its parking so the furniture reads
+    const pitch = kind === "Villa" ? 34 : 0, lift = pitch + (kind === "Penthouse" ? 14 : 0);
+    const carX = x0 + bw + carGap, shown = narrow.matches && !tower ? Math.min(p.parking, 1) : p.parking; // cropped: one car beside the house, and a count
+    const datumX = x0 - (kind === "Row House" ? 64 : 6); // level marks stand left of the building (hidden on phones)
+    const left = !narrow.matches ? 0 : phone.matches ? (kind === "Row House" ? x0 - 64 : 34) : datumX - 50;
+    const right = narrow.matches ? Math.max(x0 + bw + (kind === "Row House" ? 64 : 12), shown && !tower ? carX + 70 : 0) : W;
+    // k sizes the words to the sheet as it appears on screen, so they read the same at any width (a phone sets them larger)
+    const k = phone.matches ? 2.3 * (right - left) / 413 : 1.7 * (right - left) / (svg.getBoundingClientRect().width || 1353);
+    const ly = 2 + 7 * k; // label baseline below a ceiling
+    const S = Math.min(0.8, (CLEAR - 6 - 7 * (phone.matches ? 1 : k)) / 50); // one furniture scale for the whole sheet; the tallest piece clears the label band (phones hide the labels)
+    svg.style.setProperty("--k", k);
+
     const rooms = [], parts = [], rugs = [], furniture = [], labels = [];
     let n = 0;
     plan.forEach((list, f) => {
@@ -176,8 +189,8 @@ const Scene = (() => {
         rooms.push({ key: "room-" + room.k, x, y: ceiling(f), sx: rw, sy: CLEAR, anim: "rise", delay: (f + below) * 140,
           html: `<rect class="${room.t === "bath" ? "tile" : "room"}" width="1" height="1"/>` });
         const name = NAMES[room.t](room.k);
-        if (rw > name.length * 4.4 + 6) // a label only where its room can hold it
-          labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + 9, anim: "fade", delay: 420,
+        if (rw > name.length * 4.4 * k + 6) // a label only where its room can hold it
+          labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + ly, anim: "fade", delay: 420,
             html: `<text class="tag">${name}</text>` });
         if (j < list.length - 1) parts.push({ key: "part-" + room.k, x: x + rw - 1.5, y: ceiling(f), anim: "rise", delay: (f + below) * 140,
           html: '<rect class="ct" width="3" height="15"/>' });
@@ -209,21 +222,20 @@ const Scene = (() => {
       if (mine || (tower && L === 0)) continue;
       others.push({ key: "nb-" + L, x: x0 + 6, y: GROUND - (L + 1) * FLOOR, sx: iw, sy: CLEAR, anim: "rise", delay: L * 140,
         html: '<rect class="nbr" width="1" height="1"/>' });
-      labels.push({ key: "nblabel-" + L, x: x0 + 10, y: GROUND - (L + 1) * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">OTHER FLATS</text>' });
+      labels.push({ key: "nblabel-" + L, x: x0 + 10, y: GROUND - (L + 1) * FLOOR + ly, anim: "fade", delay: 420, html: '<text class="tag">OTHER FLATS</text>' });
     }
     const bays = Math.max(p.parking, 2, Math.round((bw - 16) / 120)), bay = (bw - 16) / bays;
     if (tower) {
       const cols = Array.from({ length: bays + 1 }, (_, i) => `<rect class="ct" x="${6 + i * bay}" y="0" width="4" height="${CLEAR}"/>`).join("");
       others.push({ key: "stilt", x: x0, y: GROUND - FLOOR, anim: "rise", html: cols });
-      labels.push({ key: "stiltlabel", x: x0 + 14, y: GROUND - FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">STILT PARKING</text>' });
+      labels.push({ key: "stiltlabel", x: x0 + 14, y: GROUND - FLOOR + ly, anim: "fade", delay: 420, html: '<text class="tag">STILT PARKING</text>' });
     }
     if (kind === "Row House")
       for (const [key, nx] of [["row-l", x0 - 58], ["row-r", x0 + bw + 6]]) {
         others.push({ key, x: nx, y: GROUND - floors * FLOOR, sx: 52, sy: floors * FLOOR, anim: "rise", html: '<rect class="nbr" width="1" height="1"/>' });
-        labels.push({ key: key + "-label", x: nx + 4, y: GROUND - floors * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">NEIGHBOUR</text>' });
+        labels.push({ key: key + "-label", x: nx + 4, y: GROUND - floors * FLOOR + ly, anim: "fade", delay: 420, html: '<text class="tag">NEIGHBOUR</text>' });
       }
 
-    const carX = x0 + bw + carGap, shown = narrow.matches && !tower ? Math.min(p.parking, 1) : p.parking; // a phone keeps one car beside the house, and a count
     const cars = Array.from({ length: shown }, (_, j) => ({
       key: "car-" + j, x: tower ? x0 + 8 + j * bay + bay / 2 - 32 : carX + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
       anim: "roll", delay: 900 + j * 140 }));
@@ -240,7 +252,6 @@ const Scene = (() => {
     sync("rooms", [...others, ...rooms, ...parts]);
     sync("rugs", rugs);
     sync("furniture", furniture);
-    const pitch = kind === "Villa" ? 34 : 0;
     sync("shell", [
       ...Array.from({ length: levels + 1 }, (_, i) => ({ key: "slab-" + i, x: x0, y: GROUND - i * FLOOR - SLAB, sx: bw, anim: "rise", delay: i * 140,
         html: `<rect class="ct" width="1" height="${SLAB}"/>` })),
@@ -254,20 +265,14 @@ const Scene = (() => {
     ]);
     sync("front", [...(kind === "Row House" ? [] : [{ key: "tree", x: 0, y: GROUND - 60, html: F.tree[2], anim: "rise", delay: 200 }]), ...cars]);
 
-    // frame: the full sheet on wide screens; on a phone, just the building and its parking so the furniture reads
-    const lift = pitch + (kind === "Penthouse" ? 14 : 0);
-    const left = narrow.matches ? (kind === "Row House" ? x0 - 64 : 34) : 0;
-    const right = narrow.matches ? Math.max(x0 + bw + (kind === "Row House" ? 64 : 12), shown && !tower ? carX + 70 : 0) : W;
-    const k = narrow.matches ? 2.3 * (right - left) / 413 : 1; // the phone crop shrinks the sheet; scale its words with the crop so they read the same size
-    svg.style.setProperty("--k", k);
-    const top = narrow.matches ? roofY - lift - 24 - 52 * k : Math.min(roofY - 70 - lift, 120); // phone: headroom for the enlarged title
+    const top = narrow.matches ? roofY - lift - 24 - 52 * k : Math.min(roofY - lift - 18 - 52 * k, 120); // headroom for the title block
     svg.setAttribute("viewBox", `${left} ${top} ${right - left} ${300 - top}`);
 
     // drafting: level datums, the built-up area as a dimension string, room labels, a title block
     const datums = Array.from({ length: levels + 1 }, (_, i) => ({
-      key: "datum-" + i, x: x0 - (kind === "Row House" ? 64 : 6), y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
+      key: "datum-" + i, x: datumX, y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
       html: `<g class="datum"><path class="dim" d="M0 0H-4M-4 0L-7 -4H-1Z"/><text class="lvl" x="-9" y="2" text-anchor="end">${i ? "+" + (i * 3).toFixed(2) : "±0.00"}</text></g>` }));
-    const dimY = roofY - lift - (narrow.matches ? 12 + 10 * k : 22);
+    const dimY = roofY - lift - 12 - 10 * k;
     const dimension = { key: "dimension", x: x0, y: dimY, anim: "fade", delay: levels * 140 + 200,
       html: `<path class="dim" d="M0 0H${bw}M0 -4V4M${bw} -4V${4}"/><text class="lvl" x="${bw / 2}" y="-3" text-anchor="middle">${p.area.toLocaleString("en-IN")} sq ft built-up</text>` };
     const title = { key: "title", x: right - 8, y: top + 14 * k, anim: "fade",
