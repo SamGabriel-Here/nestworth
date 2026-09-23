@@ -26,10 +26,12 @@ const Scene = (() => {
     living: { w: 2.3, furnished: ["plant", "sofa", "lamp", "tv"], "semi-furnished": ["sofa", "tv"], unfurnished: ["sofa"] },
     kitchen: { w: 1.5, furnished: ["kitchen", "dining"], "semi-furnished": ["kitchen"], unfurnished: ["kitchen"] },
     bed: { w: 1.7, furnished: ["wardrobe", "bed", "plant"], "semi-furnished": ["wardrobe", "bed"], unfurnished: ["bed"] },
-    bath: { w: 1.0, furnished: ["bath", "basin"], "semi-furnished": ["bath", "basin"], unfurnished: ["bath", "basin"] },
+    bath: { w: 1.3, furnished: ["bath", "basin"], "semi-furnished": ["bath", "basin"], unfurnished: ["bath", "basin"] },
     studio: { w: 3.2, furnished: ["bed", "sofa", "kitchen"], "semi-furnished": ["bed", "kitchen"], unfurnished: ["bed", "kitchen"] },
   };
   const LOOSE = new Set(["sofa", "bed"]); // drawn as floor-tape outlines when unfurnished
+  const DROP = ["plant", "lamp", "dining", "wardrobe", "tv", "basin"]; // left out first when a room is tight
+  const S = 0.8, PAD = 6, GAP = 6; // one furniture scale for the whole sheet (tallest piece clears the label band); clearance from partitions
   const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1], studio: () => "STUDIO" };
   const narrow = matchMedia("(max-width: 560px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -141,8 +143,7 @@ const Scene = (() => {
     const below = tower ? (kind === "Penthouse" ? 2 : 1) : 0;          // stilt parking, and flats under a penthouse
     const above = kind === "Apartment" || kind === "Studio" ? 1 : 0;     // the flat upstairs
     const levels = below + floors + above;
-    const bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290), 480));
-    const x0 = kind === "Row House" ? 110 : 70, iw = bw - 12, roofY = GROUND - levels * FLOOR;
+    const x0 = kind === "Row House" ? 110 : 70, roofY = GROUND - levels * FLOOR;
     const surface = (i) => GROUND - (i + below) * FLOOR - SLAB, ceiling = (i) => GROUND - (i + below + 1) * FLOOR;
     const kindText = kind === "Studio" ? "Studio" : `${p.bedrooms} BHK ${kind.toLowerCase()}`;
 
@@ -162,6 +163,9 @@ const Scene = (() => {
       plan[best].push(room);
       load[best] += ROOMS[room.t].w;
     }
+    // wide enough for its busiest floor (about 36 units per room weight), and never pushing the cars off the sheet
+    const carGap = kind === "Row House" ? 74 : 16, cap = tower ? 620 : Math.max(290, W - x0 - carGap - p.parking * 70 - 6);
+    const bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290, 12 + 36 * Math.max(...load)), cap)), iw = bw - 12;
 
     const rooms = [], parts = [], rugs = [], furniture = [], labels = [];
     let n = 0;
@@ -172,16 +176,18 @@ const Scene = (() => {
         rooms.push({ key: "room-" + room.k, x, y: ceiling(f), sx: rw, sy: CLEAR, anim: "rise", delay: (f + below) * 140,
           html: `<rect class="${room.t === "bath" ? "tile" : "room"}" width="1" height="1"/>` });
         const name = NAMES[room.t](room.k);
-        if (rw > name.length * 4.4 + 10) // a label only where its room can hold it
+        if (rw > name.length * 4.4 + 6) // a label only where its room can hold it
           labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + 9, anim: "fade", delay: 420,
             html: `<text class="tag">${name}</text>` });
         if (j < list.length - 1) parts.push({ key: "part-" + room.k, x: x + rw - 1.5, y: ceiling(f), anim: "rise", delay: (f + below) * 140,
           html: '<rect class="ct" width="3" height="15"/>' });
-        const items = ROOMS[room.t][p.furnishing_status];
-        const total = items.reduce((s, it) => s + F[it][0], 0) + 6 * (items.length - 1);
-        const tallest = Math.max(...items.map((it) => F[it][1]));
-        const s = Math.min(1, (rw - 10) / total, (CLEAR - LABEL) / tallest), gap = (rw - total * s) / 2; // clear the label band
-        let ix = x + gap;
+        const items = [...ROOMS[room.t][p.furnishing_status]];
+        const width = () => items.reduce((w, it) => w + F[it][0], 0);
+        for (const d of DROP) // a tight room keeps its essentials at full scale rather than shrinking everything
+          if (items.length > 1 && items.includes(d) && width() * S + 2 * PAD + GAP * (items.length - 1) > rw) items.splice(items.indexOf(d), 1);
+        const s = Math.min(S, (rw - 2 * PAD - GAP * (items.length - 1)) / width());
+        const space = (rw - 2 * PAD - width() * s) / (items.length + 1); // spread evenly across the room
+        let ix = x + PAD + space;
         for (const it of items) {
           const [w, h, html] = F[it];
           const ghost = p.furnishing_status === "unfurnished" && LOOSE.has(it);
@@ -190,7 +196,7 @@ const Scene = (() => {
           furniture.push(node);
           if (it === "sofa" && p.furnishing_status === "furnished")
             rugs.push({ key: room.k + ":rug", x: ix + (w * s - F.rug[0] * s) / 2, y: floorY - 3 * s, s, html: F.rug[2], anim: "draw", delay: node.delay });
-          ix += (w + 6) * s;
+          ix += w * s + space;
         }
         x += rw;
       });
@@ -205,10 +211,10 @@ const Scene = (() => {
         html: '<rect class="nbr" width="1" height="1"/>' });
       labels.push({ key: "nblabel-" + L, x: x0 + 10, y: GROUND - (L + 1) * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">OTHER FLATS</text>' });
     }
+    const bays = Math.max(p.parking, 2, Math.round((bw - 16) / 120)), bay = (bw - 16) / bays;
     if (tower) {
-      let cols = "";
-      for (let cx = 6; cx <= bw - 10; cx += Math.max(80, (bw - 16) / 4)) cols += `<rect class="ct" x="${cx}" y="0" width="4" height="${CLEAR}"/>`;
-      others.push({ key: "stilt", x: x0, y: GROUND - FLOOR, anim: "rise", html: cols + `<rect class="ct" x="${bw - 10}" y="0" width="4" height="${CLEAR}"/>` });
+      const cols = Array.from({ length: bays + 1 }, (_, i) => `<rect class="ct" x="${6 + i * bay}" y="0" width="4" height="${CLEAR}"/>`).join("");
+      others.push({ key: "stilt", x: x0, y: GROUND - FLOOR, anim: "rise", html: cols });
       labels.push({ key: "stiltlabel", x: x0 + 14, y: GROUND - FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">STILT PARKING</text>' });
     }
     if (kind === "Row House")
@@ -217,9 +223,9 @@ const Scene = (() => {
         labels.push({ key: key + "-label", x: nx + 4, y: GROUND - floors * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">NEIGHBOUR</text>' });
       }
 
-    const carX = tower ? x0 + 24 : x0 + bw + (kind === "Row House" ? 74 : 16);
+    const carX = x0 + bw + carGap;
     const cars = Array.from({ length: p.parking }, (_, j) => ({
-      key: "car-" + j, x: carX + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
+      key: "car-" + j, x: tower ? x0 + 8 + j * bay + bay / 2 - 32 : carX + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
       anim: "roll", delay: 900 + j * 140 }));
 
     const year = new Date().getFullYear() - p.house_age;
