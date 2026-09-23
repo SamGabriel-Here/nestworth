@@ -14,7 +14,7 @@ terrace, a villa's roof, a floor per storey, a bed per bedroom and a car per par
 The answers live in the URL, so a valuation can be shared by link, and **Download report**
 prints a one-page A4 summary.
 
-**Live:** https://samgabrielofficially-nestworth.hf.space
+**Live:** https://nestworthindia.vercel.app
 
 ![NestWorth: a full-bleed photograph of a residential tower under the headline "What is your home worth?"](docs/screenshot-form.png)
 
