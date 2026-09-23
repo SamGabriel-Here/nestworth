@@ -22,6 +22,8 @@ prints a one-page A4 summary.
 
 ![The section drawing in the dark theme: floors, rooms, furniture, parking and the city's landmark, with a title block and level datums](docs/screenshot-drawing.png)
 
+<img src="docs/screenshot-phone.png" width="300" alt="The same drawing on a phone: cropped to the building and its parking, with the title block and dimension set large enough to read, and the price docked at the bottom">
+
 A scikit-learn pipeline with XGBoost, served by FastAPI with a hand-built HTML/CSS/JS
 frontend, running in Docker on Hugging Face Spaces.
 
