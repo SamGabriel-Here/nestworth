@@ -394,8 +394,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .stats, .steps { grid-template-columns: 1fr; }
   /* the cropped drawing keeps its title and dimension at a readable size; room labels and datums step aside */
   .scene .tag, .scene .datum { display: none; }
-  .scene .ttl { font-size: 19px; }
-  .scene .lvl { font-size: 16px; }
+  .scene .ttl { font-size: calc(8.3px * var(--k, 2.3)); }
+  .scene .lvl { font-size: calc(7px * var(--k, 2.3)); }
 }
 
 @media (prefers-reduced-motion: reduce) {

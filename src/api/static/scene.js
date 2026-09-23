@@ -223,8 +223,8 @@ const Scene = (() => {
         labels.push({ key: key + "-label", x: nx + 4, y: GROUND - floors * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">NEIGHBOUR</text>' });
       }
 
-    const carX = x0 + bw + carGap;
-    const cars = Array.from({ length: p.parking }, (_, j) => ({
+    const carX = x0 + bw + carGap, shown = narrow.matches && !tower ? Math.min(p.parking, 1) : p.parking; // a phone keeps one car beside the house, and a count
+    const cars = Array.from({ length: shown }, (_, j) => ({
       key: "car-" + j, x: tower ? x0 + 8 + j * bay + bay / 2 - 32 : carX + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
       anim: "roll", delay: 900 + j * 140 }));
 
@@ -256,24 +256,27 @@ const Scene = (() => {
 
     // frame: the full sheet on wide screens; on a phone, just the building and its parking so the furniture reads
     const lift = pitch + (kind === "Penthouse" ? 14 : 0);
-    const top = narrow.matches ? roofY - 140 - lift : Math.min(roofY - 70 - lift, 120); // phone: headroom for the enlarged title
     const left = narrow.matches ? (kind === "Row House" ? x0 - 64 : 34) : 0;
-    const right = narrow.matches ? Math.max(x0 + bw + (kind === "Row House" ? 64 : 12), p.parking && !tower ? carX + p.parking * 70 : 0) : W;
+    const right = narrow.matches ? Math.max(x0 + bw + (kind === "Row House" ? 64 : 12), shown && !tower ? carX + 70 : 0) : W;
+    const k = narrow.matches ? 2.3 * (right - left) / 413 : 1; // the phone crop shrinks the sheet; scale its words with the crop so they read the same size
+    svg.style.setProperty("--k", k);
+    const top = narrow.matches ? roofY - lift - 24 - 52 * k : Math.min(roofY - 70 - lift, 120); // phone: headroom for the enlarged title
     svg.setAttribute("viewBox", `${left} ${top} ${right - left} ${300 - top}`);
 
     // drafting: level datums, the built-up area as a dimension string, room labels, a title block
     const datums = Array.from({ length: levels + 1 }, (_, i) => ({
       key: "datum-" + i, x: x0 - (kind === "Row House" ? 64 : 6), y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
       html: `<g class="datum"><path class="dim" d="M0 0H-4M-4 0L-7 -4H-1Z"/><text class="lvl" x="-9" y="2" text-anchor="end">${i ? "+" + (i * 3).toFixed(2) : "±0.00"}</text></g>` }));
-    const dimY = roofY - lift - (narrow.matches ? 34 : 22);
+    const dimY = roofY - lift - (narrow.matches ? 12 + 10 * k : 22);
     const dimension = { key: "dimension", x: x0, y: dimY, anim: "fade", delay: levels * 140 + 200,
       html: `<path class="dim" d="M0 0H${bw}M0 -4V4M${bw} -4V${4}"/><text class="lvl" x="${bw / 2}" y="-3" text-anchor="middle">${p.area.toLocaleString("en-IN")} sq ft built-up</text>` };
-    const k = narrow.matches ? 2.3 : 1; // the phone crop shrinks the sheet; set its words big enough to read
     const title = { key: "title", x: right - 8, y: top + 14 * k, anim: "fade",
       html: `<text class="ttl" text-anchor="end">SECTION A–A</text>`
         + `<text class="lvl" y="${11 * k}" text-anchor="end">${kindText} · ${floors} floor${floors > 1 ? "s" : ""} · ${p.house_age === 0 ? "new build" : "built " + year}</text>`
         + `<text class="lvl" y="${21 * k}" text-anchor="end">Schematic, not to scale</text>` };
-    sync("annot", [...labels, ...datums, dimension, title]);
+    const count = shown < p.parking ? [{ key: "car-count", x: carX + 32, y: GROUND - 32, anim: "fade", delay: 900,
+      html: `<text class="lvl" text-anchor="middle">${p.parking} cars</text>` }] : [];
+    sync("annot", [...labels, ...datums, dimension, title, ...count]);
 
     svg.setAttribute("aria-label", `Illustration: a ${kindText.toLowerCase()}, ${floors} floor${floors > 1 ? "s" : ""}, with ${p.bathrooms} `
       + `bathroom${p.bathrooms > 1 ? "s" : ""}, ${p.furnishing_status}, ${p.parking} parking spot${p.parking === 1 ? "" : "s"}, `
