@@ -8,7 +8,7 @@ function inr(v) {
   if (a >= 1e5) return "₹" + (v / 1e5).toFixed(1) + " L";
   return "₹" + Math.round(v).toLocaleString("en-IN");
 }
-const signed = (v) => (v >= 0 ? "+" : "−") + inr(Math.abs(v));
+const signed = (v) => `<span class="sg">${v >= 0 ? "+" : "−"}</span>${inr(Math.abs(v))}`; // the sign in the text face: the display face draws it faint and tight
 const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
 
 /* ---- theme ---- */
@@ -81,7 +81,7 @@ function paintFactors(factors) {
   rows.forEach((li, i) => {
     const f = factors[i], w = f.delta ? Math.max(Math.abs(f.delta) / max, 0.04) : 0; // small effects still draw as a bar
     li.querySelector(".fl").textContent = f.label;
-    li.querySelector(".fv").textContent = signed(f.delta);
+    li.querySelector(".fv").innerHTML = signed(f.delta);
     li.querySelector(".up").style.transform = `scaleX(${f.delta >= 0 ? w : 0})`;
     li.querySelector(".down").style.transform = `scaleX(${f.delta < 0 ? w : 0})`;
   });
@@ -136,16 +136,21 @@ function render(d, p) {
 const kindOf = (p) => p.property_type === "Studio" ? "Studio" : `${p.bedrooms} BHK ${p.property_type.toLowerCase()}`;
 
 /* ---- price against size: the same home at other areas, its band, and a hover readout ---- */
-const CW = 800, CH = 340, M = { l: 64, r: 16, t: 16, b: 36 };
-let curvePts = [];
+const phone = matchMedia("(max-width: 560px)"), M = { l: 64, r: 16, t: 16, b: 36 };
+let CW = 800, CH = 340, curvePts = [], lastCurve;
+phone.addEventListener("change", () => lastCurve && paintCurve(...lastCurve));
 function paintCurve(d, p) {
   const pts = (curvePts = d.curve), svg = $("#curve");
+  lastCurve = [d, p];
+  [CW, CH, M.l] = phone.matches ? [400, 300, 72] : [800, 340, 64]; // a phone gets a smaller sheet, so the chart shrinks less and its words stay legible
+  svg.setAttribute("viewBox", `0 0 ${CW} ${CH}`);
   const xMax = pts.at(-1).area, yMax = Math.max(...pts.map((q) => q.hi)) * 1.05;
   const x = (a) => M.l + ((a - 300) / (xMax - 300)) * (CW - M.l - M.r);
   const y = (v) => CH - M.b - (v / yMax) * (CH - M.t - M.b);
   if (!svg.firstChild) // built once; later valuations morph these shapes rather than redrawing them
     svg.innerHTML = '<g class="axes"></g><path class="cband"/><path class="line"/><circle class="here" r="6"/><text class="here-label"></text>'
       + `<g id="cross" visibility="hidden"><line class="cross" y1="${M.t}" y2="${CH - M.b}"/><circle class="dot" r="5"/></g>`;
+  svg.querySelector(".cross").setAttribute("y2", CH - M.b);
   const step = [1e5, 5e5, 1e6, 2.5e6, 5e6, 1e7, 2.5e7, 5e7, 1e8].find((s) => yMax / s <= 5) || 2e8;
   let g = "";
   for (let v = 0; v <= yMax; v += step)

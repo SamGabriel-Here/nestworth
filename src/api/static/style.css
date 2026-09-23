@@ -101,7 +101,7 @@ h1, h2, h3, p, dl, dd, figure { margin: 0; }
   padding-top: 14px; border-top: 1px solid rgb(255 255 255 / .55); font-size: .875rem; line-height: 1.35;
 }
 .hero-foot p { opacity: .92; }
-.go { justify-self: end; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.go { justify-self: end; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 500; }
 .go svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.4; }
 
 /* ---------- valuation: sticky estimate beside the numbered spec ---------- */
@@ -303,12 +303,13 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .print-head { display: none; }
 
 /* ---------- comparables ---------- */
-.comps { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.comps { width: 100%; border-collapse: collapse; }
 .comps th { padding: 16px 12px 12px 0; text-align: left; font-size: .8125rem; font-weight: 500; color: var(--ink-2); border-bottom: 1px solid var(--line); }
 .comps td { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); white-space: nowrap; font-size: 1.0625rem; }
 .comps th:nth-child(n+5), .comps td:nth-child(n+5) { text-align: right; padding-right: 0; padding-left: 12px; }
 .comps .p { font-family: var(--display); font-size: clamp(1.375rem, 2.2vw, 2rem); font-weight: 400; letter-spacing: -.02em; }
 .comps .d { color: var(--ink-2); }
+.sg { margin-right: .15em; font-family: var(--text); font-weight: 400; }
 .bhk { display: none; }
 
 /* ---------- method ---------- */
@@ -388,6 +389,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .bhk { display: inline; }
   .comps td { font-size: .875rem; }
   .comps .p { font-size: 1.125rem; }
+  .curve .axis { font-size: 14px; }
+  .curve .here-label { font-size: 15px; }
   .comps th:nth-child(n+5), .comps td:nth-child(n+5) { padding-left: 8px; }
   .ticks { display: flex; flex-direction: column; gap: 2px; height: auto; }
   .ticks span { position: static; transform: none !important; }
