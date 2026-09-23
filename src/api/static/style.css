@@ -390,6 +390,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .comps td { font-size: .875rem; }
   .comps .p { font-size: 1.125rem; }
   .curve .axis { font-size: 14px; }
+  .key { display: flex; margin: 8px 0 0; } /* on its own line, flush with the note above */
+  .key i:first-child { margin-left: 0; }
   .curve .here-label { font-size: 15px; }
   .comps th:nth-child(n+5), .comps td:nth-child(n+5) { padding-left: 8px; }
   .ticks { display: flex; flex-direction: column; gap: 2px; height: auto; }
