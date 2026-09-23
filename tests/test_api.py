@@ -33,5 +33,8 @@ def test_predict_rejects_unknown_values():
     assert client.post("/api/predict", json={**HOME, "property_type": "Castle"}).status_code == 422
 
 
-def test_frontend_is_served():
-    assert client.get("/").status_code == 200
+def test_frontend_is_served_and_revalidated():
+    r = client.get("/")
+    assert r.status_code == 200
+    assert r.headers["cache-control"] == "no-cache"  # a deploy must reach returning visitors at once
+    assert "max-age" in client.get("/fonts/gloock-latin.woff2").headers["cache-control"]

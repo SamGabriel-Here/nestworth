@@ -70,7 +70,7 @@ h1, h2, h3, p, dl, dd, figure { margin: 0; }
 .theme { justify-self: end; display: flex; align-items: center; gap: 6px; font-size: .875rem; }
 .theme span { opacity: .5; }
 .theme button { font: inherit; color: inherit; background: none; border: 0; padding: 6px 2px; cursor: pointer; opacity: .55; }
-.theme button[aria-checked="true"] { opacity: 1; text-decoration: underline; text-underline-offset: .3em; }
+.theme button[aria-pressed="true"] { opacity: 1; text-decoration: underline; text-underline-offset: .3em; }
 
 /* ---------- hero ---------- */
 .hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; color: #fff; background: #1a1a1a; }
@@ -364,6 +364,10 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .dock b { font-family: var(--display); font-size: 1.75rem; font-weight: 400; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
   .dock span { font-size: .8125rem; opacity: .8; text-align: right; }
   .foot { padding-bottom: 96px; }
+}
+@media (max-width: 400px) {
+  .brand span { display: none; } /* the tagline yields to the theme switch on the smallest phones */
+  .comps td:first-child { white-space: normal; } /* area and BHK may stack; the figures never wrap */
 }
 @media (max-width: 560px) {
   .comps th:nth-child(2), .comps td:nth-child(2), .comps th:nth-child(4), .comps td:nth-child(4) { display: none; }

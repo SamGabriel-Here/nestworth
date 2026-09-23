@@ -28,6 +28,16 @@ class Property(BaseModel):
 app = FastAPI(title="NestWorth")
 
 
+@app.middleware("http")
+async def cache_policy(request, call_next):
+    """Pages, CSS and JS revalidate on every load (cheap 304s via ETag), so a deploy is seen at once;
+    fonts and photographs rarely change and may be kept for a week."""
+    response = await call_next(request)
+    long_lived = request.url.path.startswith(("/fonts/", "/img/"))
+    response.headers.setdefault("Cache-Control", "public, max-age=604800" if long_lived else "no-cache")
+    return response
+
+
 @app.post("/api/predict")
 def predict(prop: Property) -> dict:
     return predictor.value(prop.model_dump())

@@ -15,7 +15,7 @@ const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
 function setTheme(name) {
   document.documentElement.dataset.theme = name;
   document.querySelectorAll("[data-theme-set]").forEach((b) =>
-    b.setAttribute("aria-checked", String(b.dataset.themeSet === name)));
+    b.setAttribute("aria-pressed", String(b.dataset.themeSet === name)));
   try { localStorage.setItem("nw-theme", name); } catch (e) {}
 }
 document.querySelectorAll("[data-theme-set]").forEach((b) =>

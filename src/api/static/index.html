@@ -21,8 +21,8 @@
   <nav class="nav" aria-label="Sections">
     <a href="#value">Valuation</a><a href="#reasons">Reasons</a><a href="#cities">Cities</a><a href="#homes">Comparables</a><a href="#method">Method</a>
   </nav>
-  <div class="theme" role="radiogroup" aria-label="Theme">
-    <button type="button" role="radio" data-theme-set="light">Light</button><span aria-hidden="true">/</span><button type="button" role="radio" data-theme-set="dark">Dark</button>
+  <div class="theme" role="group" aria-label="Theme">
+    <button type="button" data-theme-set="light">Light</button><span aria-hidden="true">/</span><button type="button" data-theme-set="dark">Dark</button>
   </div>
 </header>
 
@@ -42,7 +42,7 @@
   </section>
 
   <section id="value" class="value" aria-labelledby="value-h">
-    <aside class="estimate" aria-labelledby="price-label">
+    <div class="estimate">
       <figure class="room">
         <img data-room="unfurnished" src="/img/room-unfurnished.webp" alt="" width="1400" height="933" loading="lazy">
         <img data-room="semi-furnished" src="/img/room-semi.webp" alt="" width="1400" height="933" loading="lazy">
@@ -62,7 +62,7 @@
       <div class="actions"><button type="button" id="share">Copy link to this valuation</button><button type="button" id="report">Download report (PDF)</button></div>
       <p class="status" id="status" role="status"></p>
       <p class="sr-only" id="said" aria-live="polite"></p>
-    </aside>
+    </div>
 
     <form id="form" class="spec" novalidate>
       <h2 id="value-h" class="h2">Describe the home</h2>
@@ -206,7 +206,7 @@
     <figure class="curve">
       <svg id="curve" viewBox="0 0 800 340" role="img" aria-labelledby="sizes-h"></svg>
       <div class="tip" id="tip" hidden></div>
-      <table class="sr-only" id="curve-table"><caption>Estimated price by built-up area</caption><thead><tr><th scope="col">Area (sq ft)</th><th scope="col">Estimate</th><th scope="col">90% range</th></tr></thead><tbody></tbody></table>
+      <div class="sr-only"><table id="curve-table"><caption>Estimated price by built-up area</caption><thead><tr><th scope="col">Area (sq ft)</th><th scope="col">Estimate</th><th scope="col">90% range</th></tr></thead><tbody></tbody></table></div>
     </figure>
   </section>
 
