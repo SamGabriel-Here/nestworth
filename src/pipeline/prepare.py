@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -13,7 +14,7 @@ CLEAN_DATA_PATH = ROOT / "data" / "housing_clean.csv"
 
 TARGET = "price"
 NUMERIC_COLS = ["area", "bedrooms", "bathrooms", "stories", "house_age", "parking"]
-CATEGORICAL_COLS = ["city", "location", "main_road", "furnishing_status"]
+CATEGORICAL_COLS = ["city", "location", "property_type", "main_road", "furnishing_status"]
 INPUT_COLS = NUMERIC_COLS + CATEGORICAL_COLS
 ENGINEERED_COLS = ["total_rooms", "is_new"]
 
@@ -25,10 +26,12 @@ def clean_dataset(df: pd.DataFrame) -> pd.DataFrame:
     for col in CATEGORICAL_COLS:
         df[col] = df[col].fillna(df[col].mode()[0])
     df = df.drop_duplicates().reset_index(drop=True)
+    # prices and areas are right-skewed (villas, Mumbai): cap outliers on the log scale so luxury homes survive
     for col in ("price", "area"):
-        q1, q3 = df[col].quantile([0.25, 0.75])
+        logs = np.log(df[col])
+        q1, q3 = logs.quantile([0.25, 0.75])
         iqr = q3 - q1
-        df[col] = df[col].clip(q1 - 1.5 * iqr, q3 + 1.5 * iqr)
+        df[col] = np.exp(logs.clip(q1 - 1.5 * iqr, q3 + 1.5 * iqr)).round(0)
     return df
 
 

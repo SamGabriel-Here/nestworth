@@ -186,7 +186,7 @@ input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border: 0; bo
 input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 /* ---------- shared section frame ---------- */
-.drawing, .reasons, .homes, .method { padding: clamp(56px, 7vw, 112px) var(--gut) 0; }
+.drawing, .reasons, .sizes, .cities, .homes, .method { padding: clamp(56px, 7vw, 112px) var(--gut) 0; }
 .sec-head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px var(--gap); align-items: end; padding-bottom: 28px; border-bottom: 1px solid var(--ink); }
 .sec-head .h2 { grid-column: 1 / span 7; }
 .sec-head .note { grid-column: 8 / span 5; }
@@ -202,6 +202,9 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .scene .lm .st { fill: none; }
 .scene .room { fill: var(--bg); }
 .scene .tile { fill: var(--bg-2); }
+.scene .nbr { fill: var(--bg-2); opacity: .7; } /* the rest of the building: not this home */
+.scene .rail { fill: none; stroke: var(--ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.scene .far .wv { fill: none; stroke: var(--ink-2); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .scene .ct { fill: var(--ink); }
 .scene .kerb { fill: var(--ink); }
 .scene .road, .scene .grass { fill: var(--bg-2); }
@@ -252,11 +255,51 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .key i.up { background: var(--ink); }
 .key i.down { background: var(--neg); }
 
+/* ---------- price against size: one series, its 90% band, a mark for this home ---------- */
+.curve { position: relative; margin-top: 28px; }
+.curve svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
+.curve .cband { fill: var(--bg-2); }
+.curve .line { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.curve .grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.curve .axis { fill: var(--ink-2); font: 400 11px "Archivo", sans-serif; font-variant-numeric: tabular-nums; }
+.curve .here { fill: var(--accent); stroke: var(--bg); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.curve .here-label { fill: var(--ink); font: 600 12px "Archivo", sans-serif; paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.curve .cross { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.curve .dot { fill: var(--ink); stroke: var(--bg); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.tip {
+  position: absolute; top: 0; pointer-events: none; padding: 8px 10px; background: var(--ink); color: var(--bg);
+  font-size: .8125rem; line-height: 1.35; white-space: nowrap; font-variant-numeric: tabular-nums; transform: translateX(-50%);
+}
+.tip b { font-weight: 600; }
+
+/* ---------- the same home, city by city ---------- */
+.city-list { list-style: none; margin: 0; padding: 0; }
+.city-list li {
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap); align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+}
+.city-list .cn { grid-column: 1 / span 3; font-size: 1.0625rem; }
+.city-list .cb { grid-column: 4 / span 6; height: 10px; position: relative; }
+.city-list .cb i { position: absolute; inset: 0; background: var(--ink); transform-origin: left; transition: transform .8s var(--ease); }
+.city-list .cv { grid-column: 10 / span 3; text-align: right; font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 300; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.city-list li.me .cn { font-weight: 600; }
+.city-list li.me .cn::after { content: " · your city"; font-weight: 400; color: var(--ink-2); font-size: .875rem; }
+.city-list li.me .cb i { background: var(--accent); }
+
+/* ---------- share and report ---------- */
+.actions { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 16px; }
+.actions button {
+  font: inherit; font-size: .875rem; font-weight: 500; color: var(--ink); background: none; border: 0; padding: 4px 0; cursor: pointer;
+  text-decoration: underline; text-underline-offset: .25em; text-decoration-thickness: 1px;
+}
+.actions button:hover { text-decoration-thickness: 2px; }
+.print-head { display: none; }
+
 /* ---------- comparables ---------- */
 .comps { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
 .comps th { padding: 16px 12px 12px 0; text-align: left; font-size: .8125rem; font-weight: 500; color: var(--ink-2); border-bottom: 1px solid var(--line); }
 .comps td { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); white-space: nowrap; font-size: 1.0625rem; }
-.comps th:nth-child(n+4), .comps td:nth-child(n+4) { text-align: right; padding-right: 0; padding-left: 12px; }
+.comps th:nth-child(n+5), .comps td:nth-child(n+5) { text-align: right; padding-right: 0; padding-left: 12px; }
 .comps .p { font-size: clamp(1.375rem, 2.2vw, 2rem); font-weight: 300; letter-spacing: -.02em; }
 .comps .d { color: var(--ink-2); }
 .bhk { display: none; }
@@ -319,7 +362,10 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
   .foot { padding-bottom: 96px; }
 }
 @media (max-width: 560px) {
-  .comps th:nth-child(2), .comps td:nth-child(2) { display: none; }
+  .comps th:nth-child(2), .comps td:nth-child(2), .comps th:nth-child(4), .comps td:nth-child(4) { display: none; }
+  .city-list .cn { grid-column: 1 / span 7; }
+  .city-list .cv { grid-column: 8 / span 5; }
+  .city-list .cb { grid-column: 1 / -1; grid-row: 2; }
   .bhk { display: inline; }
   .comps td { font-size: .9375rem; }
   .ticks { display: flex; flex-direction: column; gap: 2px; height: auto; }
@@ -334,4 +380,26 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- print: a one-page report, ink on paper ---------- */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  :root, :root[data-theme="dark"] { --bg: #fff; --bg-2: #eeeeea; --ink: #111; --ink-2: #555; --line: #ccc; --accent: #a2432a; --neg: #a4a49d; }
+  body { background: #fff; font-size: 10pt; }
+  .top, .hero, .spec, .dock, .actions, .status, .foot .word, .room, .tip { display: none !important; }
+  .print-head { display: block; font-size: 9pt; color: var(--ink-2); border-bottom: 1px solid var(--ink); padding-bottom: 6px; margin-bottom: 12px; }
+  .value { display: block; padding: 0; }
+  .estimate { position: static; }
+  .price { margin-top: 0; font-size: 34pt; }
+  .drawing, .reasons, .sizes, .cities, .homes, .method { padding: 16px 0 0; break-inside: avoid; }
+  .h2 { font-size: 16pt; }
+  .sec-head { padding-bottom: 8px; }
+  .scene { margin-top: 8px; }
+  .factors li, .city-list li { padding: 5px 0; }
+  .comps td { padding: 6px 12px 6px 0; }
+  .stats dd { font-size: 20pt; }
+  .steps { display: none; }
+  .foot { margin-top: 16px; border: 0; padding: 0; }
+  * { animation: none !important; transition: none !important; }
 }

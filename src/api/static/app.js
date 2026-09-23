@@ -99,19 +99,22 @@ function paintRange(d) {
 function paintComps(d) {
   $("#comps").innerHTML = d.comparables.map((c) =>
     `<tr><td>${c.area.toLocaleString("en-IN")} sq ft<span class="bhk"> · ${c.bedrooms} BHK</span></td><td>${c.bedrooms} BHK</td>`
-    + `<td>${c.age} yrs</td><td class="p">${inr(c.price)}</td><td class="d">${signed(c.price - d.estimate)}</td></tr>`).join("");
+    + `<td>${c.age} yrs</td><td>${c.type}</td><td class="p">${inr(c.price)}</td><td class="d">${signed(c.price - d.estimate)}</td></tr>`).join("");
 }
 
 function render(d, p) {
   const where = `${p.location}, ${p.city}`;
-  $("#price-label").textContent = `${p.bedrooms} BHK, ${p.area.toLocaleString("en-IN")} sq ft in ${where}`;
+  $("#price-label").textContent = `${kindOf(p)}, ${p.area.toLocaleString("en-IN")} sq ft in ${where}`;
   paintPrice(d.estimate);
   $("#ppsf").textContent = `₹${Math.round(d.price_per_sqft).toLocaleString("en-IN")} per sq ft`;
   paintRange(d);
   $("#range-cap").textContent = `Track: the middle 80% of ${d.segment.n} listings near ${where}. Band: this home's ${d.interval.coverage}% range. Mark: the estimate.`;
   paintFactors(d.factors);
   paintComps(d);
-  $("#rate-sub").textContent = `The five closest in size among ${d.segment.n} listings near ${where}.`;
+  $("#rate-sub").textContent = `The five closest in size among ${d.segment.n} similar listings near ${where}.`;
+  paintCurve(d, p);
+  paintCities(d, p);
+  saveToUrl(p);
   $("#r2").textContent = d.r2.toFixed(3);
   $("#mae").textContent = inr(d.mae);
   $("#cov").textContent = d.interval.coverage + "%";
@@ -119,6 +122,109 @@ function render(d, p) {
   $("#dock-range").textContent = `${d.interval.coverage}% range ${inr(d.interval.lo)} – ${inr(d.interval.hi)}`;
   $("#said").textContent = `Estimated ${inr(d.estimate)}. ${d.interval.coverage}% likely between ${inr(d.interval.lo)} and ${inr(d.interval.hi)}.`;
 }
+
+const kindOf = (p) => p.property_type === "Studio" ? "Studio" : `${p.bedrooms} BHK ${p.property_type.toLowerCase()}`;
+
+/* ---- price against size: the same home at other areas, its band, and a hover readout ---- */
+const CW = 800, CH = 340, M = { l: 64, r: 16, t: 16, b: 36 };
+let curvePts = [];
+function paintCurve(d, p) {
+  const pts = (curvePts = d.curve), svg = $("#curve");
+  const xMax = pts.at(-1).area, yMax = Math.max(...pts.map((q) => q.hi)) * 1.05;
+  const x = (a) => M.l + ((a - 300) / (xMax - 300)) * (CW - M.l - M.r);
+  const y = (v) => CH - M.b - (v / yMax) * (CH - M.t - M.b);
+  const step = [1e5, 5e5, 1e6, 2.5e6, 5e6, 1e7, 2.5e7, 5e7, 1e8].find((s) => yMax / s <= 5) || 2e8;
+  let g = "";
+  for (let v = 0; v <= yMax; v += step)
+    g += `<line class="grid" x1="${M.l}" x2="${CW - M.r}" y1="${y(v)}" y2="${y(v)}"/><text class="axis" x="${M.l - 8}" y="${y(v) + 4}" text-anchor="end">${v ? inr(v) : "0"}</text>`;
+  const aStep = [250, 500, 1000, 2000].find((s) => (xMax - 300) / s <= 6);
+  for (let a = Math.ceil(300 / aStep) * aStep; a <= xMax; a += aStep)
+    g += `<text class="axis" x="${x(a)}" y="${CH - M.b + 20}" text-anchor="middle">${a.toLocaleString("en-IN")}</text>`;
+  g += `<text class="axis" x="${CW - M.r}" y="${CH - 2}" text-anchor="end">sq ft</text>`;
+  const band = pts.map((q) => `${x(q.area)},${y(q.hi)}`).join(" ") + " " + [...pts].reverse().map((q) => `${x(q.area)},${y(q.lo)}`).join(" ");
+  const line = pts.map((q) => `${x(q.area)},${y(q.estimate)}`).join(" ");
+  const me = pts.find((q) => q.area === p.area) || pts[0];
+  svg.innerHTML = g + `<polygon class="cband" points="${band}"/><polyline class="line" points="${line}"/>`
+    + `<circle class="here" cx="${x(me.area)}" cy="${y(me.estimate)}" r="6"/>`
+    + (x(me.area) > CW - 200 // keep the label inside the plot near the right edge
+      ? `<text class="here-label" x="${x(me.area) - 12}" y="${y(me.estimate) - 10}" text-anchor="end">This home · ${inr(me.estimate)}</text>`
+      : `<text class="here-label" x="${x(me.area) + 12}" y="${y(me.estimate) - 10}">This home · ${inr(me.estimate)}</text>`)
+    + `<g id="cross" visibility="hidden"><line class="cross" y1="${M.t}" y2="${CH - M.b}"/><circle class="dot" r="5"/></g>`;
+  svg.dataset.xmax = xMax; svg.dataset.ymax = yMax;
+  $("#curve-table tbody").innerHTML = pts.map((q) =>
+    `<tr><td>${q.area.toLocaleString("en-IN")}</td><td>${inr(q.estimate)}</td><td>${inr(q.lo)} – ${inr(q.hi)}</td></tr>`).join("");
+  $("#sizes-note").textContent = `This ${p.property_type === "Studio" ? "studio" : kindOf(p)} in ${p.location}, ${p.city} at other sizes, with its 90% range. The mark is your home.`;
+}
+function showTip(e) {
+  const svg = $("#curve"), box = svg.getBoundingClientRect(), tip = $("#tip");
+  if (!curvePts.length) return;
+  const xMax = +svg.dataset.xmax, yMax = +svg.dataset.ymax;
+  const sx = ((e.clientX - box.left) / box.width) * CW;
+  const area = 300 + ((sx - M.l) / (CW - M.l - M.r)) * (xMax - 300);
+  const q = curvePts.reduce((a, b) => (Math.abs(b.area - area) < Math.abs(a.area - area) ? b : a));
+  const px = M.l + ((q.area - 300) / (xMax - 300)) * (CW - M.l - M.r), py = CH - M.b - (q.estimate / yMax) * (CH - M.t - M.b);
+  const cross = $("#cross");
+  cross.setAttribute("visibility", "visible");
+  cross.querySelector("line").setAttribute("x1", px); cross.querySelector("line").setAttribute("x2", px);
+  cross.querySelector("circle").setAttribute("cx", px); cross.querySelector("circle").setAttribute("cy", py);
+  tip.hidden = false;
+  tip.innerHTML = `<b>${q.area.toLocaleString("en-IN")} sq ft</b> · ${inr(q.estimate)}<br>90%: ${inr(q.lo)} – ${inr(q.hi)}`;
+  tip.style.left = clamp((px / CW) * box.width, 90, box.width - 90) + "px";
+  tip.style.top = Math.max((py / CH) * box.height - 64, 0) + "px";
+}
+$("#curve").addEventListener("pointermove", showTip);
+$("#curve").addEventListener("pointerleave", () => { $("#tip").hidden = true; $("#cross")?.setAttribute("visibility", "hidden"); });
+
+/* ---- the same home, city by city ---- */
+function paintCities(d, p) {
+  const max = d.cities[0].estimate, list = $("#city-list");
+  if (list.children.length !== d.cities.length)
+    list.innerHTML = d.cities.map(() => '<li><span class="cn"></span><span class="cb"><i></i></span><span class="cv"></span></li>').join("");
+  [...list.children].forEach((li, i) => {
+    const c = d.cities[i];
+    li.classList.toggle("me", c.city === p.city);
+    li.querySelector(".cn").textContent = c.city;
+    li.querySelector(".cv").textContent = inr(c.estimate);
+    li.querySelector("i").style.transform = `scaleX(${c.estimate / max})`;
+  });
+  const rank = d.cities.findIndex((c) => c.city === p.city) + 1;
+  $("#cities-note").textContent = `Everything else held equal. ${p.city} ranks ${rank} of ${d.cities.length}.`;
+}
+
+/* ---- shareable link: the answers live in the URL ---- */
+const FIELDS = ["city", "location", "property_type", "area", "bedrooms", "bathrooms", "stories", "parking", "house_age", "main_road", "furnishing_status"];
+function saveToUrl(p) {
+  const q = new URLSearchParams(FIELDS.map((k) => [k, p[k]]));
+  history.replaceState(null, "", `${location.pathname}?${q}${location.hash}`);
+}
+function loadFromUrl() {
+  const q = new URLSearchParams(location.search);
+  for (const k of FIELDS) {
+    if (!q.has(k)) continue;
+    const el = form.elements[k], v = q.get(k);
+    if (el instanceof RadioNodeList) { const r = [...el].find((r) => r.value === v); if (r) r.checked = true; }
+    else if (el && v !== "" && !isNaN(+v)) el.value = v;
+  }
+  areaRange.value = area.value;
+  $("#age").dispatchEvent(new Event("input"));
+}
+$("#share").addEventListener("click", async () => {
+  const status = $("#status");
+  try { await navigator.clipboard.writeText(location.href); status.textContent = "Link copied. It reopens this exact valuation."; }
+  catch { status.textContent = `Copy this link: ${location.href}`; }
+  status.classList.remove("err");
+});
+$("#report").addEventListener("click", () => {
+  $("#print-head").textContent = `NestWorth valuation report · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} · ${location.href}`;
+  print();
+});
+
+/* a studio is one room: keep its answers consistent */
+form.addEventListener("change", (e) => {
+  if (e.target.name !== "property_type" || e.target.value !== "Studio") return;
+  for (const k of ["bedrooms", "bathrooms", "stories"]) [...form.elements[k]].find((r) => r.value === "1").checked = true;
+  if (+area.value > 800) area.value = areaRange.value = 450; // studios in the data run 300-650 sq ft
+});
 
 /* ---- live valuation: every change repaints the board ---- */
 let inflight, timer;
@@ -172,6 +278,7 @@ form.addEventListener("input", () => {
   clearTimeout(timer); timer = setTimeout(value, 160);
 });
 form.addEventListener("submit", (e) => { e.preventDefault(); value(); });
+loadFromUrl();
 value();
 
 /* ---- page motion: the top bar over the photograph, a slow parallax on the hero ---- */

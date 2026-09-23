@@ -14,6 +14,7 @@ def test_clean_dataset_fills_gaps_and_drops_duplicates():
         "parking": [1, 0, 2, 2],
         "city": ["Mumbai", "Delhi", "Chennai", "Chennai"],
         "location": ["Suburb", "Outskirts", "Suburb", "Suburb"],
+        "property_type": ["Apartment", None, "Villa", "Villa"],
         "main_road": ["yes", "no", "yes", "yes"],
         "furnishing_status": ["furnished", None, "unfurnished", "unfurnished"],
         "price": [9e6, 7e6, 8e6, 8e6],

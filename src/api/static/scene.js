@@ -27,9 +27,10 @@ const Scene = (() => {
     kitchen: { w: 1.5, furnished: ["kitchen", "dining"], "semi-furnished": ["kitchen"], unfurnished: ["kitchen"] },
     bed: { w: 1.7, furnished: ["wardrobe", "bed", "plant"], "semi-furnished": ["wardrobe", "bed"], unfurnished: ["bed"] },
     bath: { w: 1.0, furnished: ["bath", "basin"], "semi-furnished": ["bath", "basin"], unfurnished: ["bath", "basin"] },
+    studio: { w: 3.2, furnished: ["bed", "sofa", "kitchen"], "semi-furnished": ["bed", "kitchen"], unfurnished: ["bed", "kitchen"] },
   };
   const LOOSE = new Set(["sofa", "bed"]); // drawn as floor-tape outlines when unfurnished
-  const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1] };
+  const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1], studio: () => "STUDIO" };
   const narrow = matchMedia("(max-width: 560px)");
 
   // Landmarks in the far distance, one per city: [width, height, markup].
@@ -38,6 +39,14 @@ const Scene = (() => {
     Delhi: [52, 92, '<path d="M6 92V20H46V92H33V56A7 7 0 0 0 19 56V92Z"/><rect x="3" y="14" width="46" height="6"/><rect x="16" y="6" width="20" height="8"/><path d="M19 6A7 6 0 0 1 33 6Z"/>'],
     Bangalore: [124, 62, '<rect y="32" width="124" height="30"/><rect x="40" y="24" width="44" height="8"/><rect x="52" y="13" width="20" height="11"/><path d="M50 13A12 12 0 0 1 74 13Z"/><rect x="6" y="25" width="12" height="7"/><circle cx="12" cy="25" r="5"/><rect x="106" y="25" width="12" height="7"/><circle cx="112" cy="25" r="5"/>'],
     Chennai: [60, 92, '<path d="M0 92L4 74H8L11 58H15L18 42H22L25 28H35L38 42H42L45 58H49L52 74H56L60 92Z"/><rect x="22" y="18" width="16" height="10"/><path d="M22 18A8 6 0 0 1 38 18Z"/><circle cx="24" cy="10" r="2"/><circle cx="30" cy="8" r="2"/><circle cx="36" cy="10" r="2"/>'],
+    Hyderabad: [80, 80, '<path d="M10 80V34H70V80H48V58A8 8 0 0 0 32 58V80Z"/><rect x="4" y="6" width="8" height="74"/><rect x="68" y="6" width="8" height="74"/><circle cx="8" cy="6" r="5"/><circle cx="72" cy="6" r="5"/><rect x="6" y="34" width="68" height="4"/>'],
+    Pune: [80, 60, '<path d="M0 60V20H14V10H26V20H54V10H66V20H80V60H48V38A8 8 0 0 0 32 38V60Z"/>'],
+    Ahmedabad: [90, 70, '<rect x="10" y="40" width="70" height="30"/><path d="M28 40A17 17 0 0 1 62 40Z"/><rect x="4" y="10" width="6" height="60"/><rect x="80" y="10" width="6" height="60"/><circle cx="7" cy="10" r="4"/><circle cx="83" cy="10" r="4"/>'],
+    Chandigarh: [60, 70, '<rect x="28" y="38" width="4" height="32"/><path d="M18 40L14 14 20 14 22 30 24 8 30 8 31 28 34 6 40 6 39 30 44 14 50 16 44 40Z"/>'],
+    Kochi: [80, 60, '<path class="st" d="M5 60L40 10 75 60M40 10V60M20 38Q40 30 60 38M12 50Q40 40 68 50"/>'],
+    Jaipur: [80, 70, '<path d="M0 70V40H8V30H16V20H24V10H56V20H64V30H72V40H80V70Z"/>'],
+    Lucknow: [80, 70, '<path d="M0 70V20H10V8H70V20H80V70H56V40A16 16 0 0 0 24 40V70Z"/><path d="M34 8A6 6 0 0 1 46 8Z"/>'],
+    Indore: [80, 70, '<path d="M0 70V30H6V22H74V30H80V70Z"/><rect x="14" y="14" width="52" height="8"/><rect x="24" y="6" width="32" height="8"/>'],
     Kolkata: [170, 70, '<rect x="20" width="8" height="70"/><rect x="142" width="8" height="70"/><path class="st" d="M0 50L24 4 85 34 146 4 170 50M0 50H170M24 4V50M146 4V50M54 19V50M85 34V50M116 19V50M24 50L54 19 85 50 116 19 146 50"/>'],
   };
 
@@ -59,6 +68,16 @@ const Scene = (() => {
     else if (loc === "Prime Suburb") for (let x = 0; x < W;) { const w = 28 + r() * 22; out.push(tower(x, w, 60 + r() * 60)); x += w + 8 + r() * 14; }
     else if (loc === "Premium Township") for (let x = 10; x < W; x += 92) out.push(tower(x, 44, 128), tree(x + 68, 1.2));
     else if (loc === "Suburb") for (let x = 0; x < W;) { const w = 30 + r() * 20; out.push(r() > 0.3 ? house(x, w, 22 + r() * 30) : tower(x, w, 60 + r() * 30)); if (r() > 0.5) out.push(tree(x + w + 10, 0.9)); x += w + 18 + r() * 18; }
+    else if (loc === "Gated Community") for (let x = 0; x < W;) { const w = 34 + r() * 10; out.push(house(x, w, 30 + r() * 10), tree(x + w + 12, 0.8)); x += w + 34; }
+    else if (loc === "Near Metro") {
+      for (let x = 0; x < W;) { const w = 26 + r() * 24; out.push(tower(x, w, 80 + r() * 70)); x += w + 10 + r() * 12; }
+      out.push(`<rect x="0" y="${GROUND - 46}" width="${W}" height="7"/>`); // the elevated line
+      for (let x = 40; x < W; x += 120) out.push(`<rect x="${x}" y="${GROUND - 40}" width="6" height="40"/>`);
+    }
+    else if (loc === "Waterfront") {
+      for (let x = 0; x < W;) { const w = 24 + r() * 20; out.push(tower(x, w, 70 + r() * 70)); x += w + 16 + r() * 16; }
+      out.push(`<path class="wv" d="M0 ${GROUND - 8}q20 -6 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0"/>`);
+    }
     else { out.push(`<path d="M0 ${GROUND}C120 ${GROUND - 70} 260 ${GROUND - 40} 380 ${GROUND - 10}S640 ${GROUND - 90} ${W} ${GROUND - 30}V${GROUND}Z"/>`);
       for (let x = 30; x < W; x += 110 + r() * 60) out.push(tree(x, 0.8 + r() * 0.5)); }
     return out.join("");
@@ -104,17 +123,24 @@ const Scene = (() => {
   narrow.addEventListener("change", () => last && paint(last));
   function paint(p) {
     last = p;
-    const floors = p.stories, bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290), 480));
-    const x0 = 70, iw = bw - 12, roofY = GROUND - floors * FLOOR;
-    const surface = (i) => GROUND - i * FLOOR - SLAB, ceiling = (i) => GROUND - (i + 1) * FLOOR;
+    const kind = p.property_type, floors = p.stories;
+    const tower = kind === "Apartment" || kind === "Studio" || kind === "Penthouse";
+    const below = tower ? (kind === "Penthouse" ? 2 : 1) : 0;          // stilt parking, and flats under a penthouse
+    const above = kind === "Apartment" || kind === "Studio" ? 1 : 0;     // the flat upstairs
+    const levels = below + floors + above;
+    const bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290), 480));
+    const x0 = kind === "Row House" ? 110 : 70, iw = bw - 12, roofY = GROUND - levels * FLOOR;
+    const surface = (i) => GROUND - (i + below) * FLOOR - SLAB, ceiling = (i) => GROUND - (i + below + 1) * FLOOR;
+    const kindText = kind === "Studio" ? "Studio" : `${p.bedrooms} BHK ${kind.toLowerCase()}`;
 
-    // Share rooms across floors: living and kitchen on the ground, the rest wherever there is least.
+    // Share rooms across the home's floors: living and kitchen on its lowest, the rest wherever there is least.
     const plan = Array.from({ length: floors }, () => []), load = Array(floors).fill(0);
-    plan[0].push({ t: "living", k: "living" }, { t: "kitchen", k: "kitchen" });
-    load[0] = ROOMS.living.w + ROOMS.kitchen.w;
+    const firstRooms = kind === "Studio" ? [{ t: "studio", k: "studio" }] : [{ t: "living", k: "living" }, { t: "kitchen", k: "kitchen" }];
+    plan[0].push(...firstRooms);
+    load[0] = firstRooms.reduce((w, r) => w + ROOMS[r.t].w, 0);
     const queue = [];
     for (let i = 1; i <= Math.max(p.bedrooms, p.bathrooms); i++) {
-      if (i <= p.bedrooms) queue.push({ t: "bed", k: "bed-" + i });
+      if (i <= p.bedrooms && kind !== "Studio") queue.push({ t: "bed", k: "bed-" + i });
       if (i <= p.bathrooms) queue.push({ t: "bath", k: "bath-" + i });
     }
     for (const room of queue) {
@@ -130,11 +156,13 @@ const Scene = (() => {
       let x = x0 + 6;
       list.forEach((room, j) => {
         const rw = (iw * ROOMS[room.t].w) / load[f], floorY = surface(f);
-        rooms.push({ key: "room-" + room.k, x, y: ceiling(f), sx: rw, sy: CLEAR, anim: "rise", delay: f * 140,
+        rooms.push({ key: "room-" + room.k, x, y: ceiling(f), sx: rw, sy: CLEAR, anim: "rise", delay: (f + below) * 140,
           html: `<rect class="${room.t === "bath" ? "tile" : "room"}" width="1" height="1"/>` });
-        labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + 9, anim: "fade", delay: 420,
-          html: `<text class="tag">${NAMES[room.t](room.k)}</text>` });
-        if (j < list.length - 1) parts.push({ key: "part-" + room.k, x: x + rw - 1.5, y: ceiling(f), anim: "rise", delay: f * 140,
+        const name = NAMES[room.t](room.k);
+        if (rw > name.length * 4.4 + 10) // a label only where its room can hold it
+          labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + 9, anim: "fade", delay: 420,
+            html: `<text class="tag">${name}</text>` });
+        if (j < list.length - 1) parts.push({ key: "part-" + room.k, x: x + rw - 1.5, y: ceiling(f), anim: "rise", delay: (f + below) * 140,
           html: '<rect class="ct" width="3" height="15"/>' });
         const items = ROOMS[room.t][p.furnishing_status];
         const total = items.reduce((s, it) => s + F[it][0], 0) + 6 * (items.length - 1);
@@ -154,8 +182,30 @@ const Scene = (() => {
       });
     });
 
+    // the rest of the building: other flats, stilt parking, a row's neighbours
+    const others = [];
+    for (let L = 0; L < levels; L++) {
+      const mine = L >= below && L < below + floors;
+      if (mine || (tower && L === 0)) continue;
+      others.push({ key: "nb-" + L, x: x0 + 6, y: GROUND - (L + 1) * FLOOR, sx: iw, sy: CLEAR, anim: "rise", delay: L * 140,
+        html: '<rect class="nbr" width="1" height="1"/>' });
+      labels.push({ key: "nblabel-" + L, x: x0 + 10, y: GROUND - (L + 1) * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">OTHER FLATS</text>' });
+    }
+    if (tower) {
+      let cols = "";
+      for (let cx = 6; cx <= bw - 10; cx += Math.max(80, (bw - 16) / 4)) cols += `<rect class="ct" x="${cx}" y="0" width="4" height="${CLEAR}"/>`;
+      others.push({ key: "stilt", x: x0, y: GROUND - FLOOR, anim: "rise", html: cols + `<rect class="ct" x="${bw - 10}" y="0" width="4" height="${CLEAR}"/>` });
+      labels.push({ key: "stiltlabel", x: x0 + 14, y: GROUND - FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">STILT PARKING</text>' });
+    }
+    if (kind === "Row House")
+      for (const [key, nx] of [["row-l", x0 - 58], ["row-r", x0 + bw + 6]]) {
+        others.push({ key, x: nx, y: GROUND - floors * FLOOR, sx: 52, sy: floors * FLOOR, anim: "rise", html: '<rect class="nbr" width="1" height="1"/>' });
+        labels.push({ key: key + "-label", x: nx + 4, y: GROUND - floors * FLOOR + 9, anim: "fade", delay: 420, html: '<text class="tag">NEIGHBOUR</text>' });
+      }
+
+    const carX = tower ? x0 + 24 : x0 + bw + (kind === "Row House" ? 74 : 16);
     const cars = Array.from({ length: p.parking }, (_, j) => ({
-      key: "car-" + j, x: x0 + bw + 16 + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
+      key: "car-" + j, x: carX + j * 70, y: GROUND - 25, html: F.car[2].replace('class="cb"', `class="cb c${j}"`),
       anim: "roll", delay: 900 + j * 140 }));
 
     const year = new Date().getFullYear() - p.house_age;
@@ -167,39 +217,45 @@ const Scene = (() => {
     sync("ground", [p.main_road === "yes"
       ? { key: "road", x: 0, y: GROUND, anim: "fade", html: '<rect class="kerb" width="800" height="5"/><rect class="road" y="5" width="800" height="29"/><path class="lane" d="M0 20H800"/>' }
       : { key: "lane", x: 0, y: GROUND, anim: "fade", html: '<rect class="grass" width="800" height="34"/><rect class="path" y="12" width="800" height="8"/>' }]);
-    sync("rooms", [...rooms, ...parts]);
+    sync("rooms", [...others, ...rooms, ...parts]);
     sync("rugs", rugs);
     sync("furniture", furniture);
+    const pitch = kind === "Villa" ? 34 : 0;
     sync("shell", [
-      ...Array.from({ length: floors + 1 }, (_, i) => ({ key: "slab-" + i, x: x0, y: GROUND - i * FLOOR - SLAB, sx: bw, anim: "rise", delay: i * 140,
+      ...Array.from({ length: levels + 1 }, (_, i) => ({ key: "slab-" + i, x: x0, y: GROUND - i * FLOOR - SLAB, sx: bw, anim: "rise", delay: i * 140,
         html: `<rect class="ct" width="1" height="${SLAB}"/>` })),
-      { key: "wall-l", x: x0, y: roofY, sy: floors * FLOOR, html: '<rect class="ct" width="6" height="1"/>', anim: "rise" },
-      { key: "wall-r", x: x0 + bw - 6, y: roofY, sy: floors * FLOOR, html: '<rect class="ct" width="6" height="1"/>', anim: "rise" },
-      { key: "roof", x: x0 - 5, y: roofY - 14, sx: bw + 10, html: '<rect class="ct" width="1" height="14"/>', anim: "rise", delay: floors * 140 },
+      { key: "wall-l", x: x0, y: roofY, sy: levels * FLOOR, html: '<rect class="ct" width="6" height="1"/>', anim: "rise" },
+      { key: "wall-r", x: x0 + bw - 6, y: roofY, sy: levels * FLOOR, html: '<rect class="ct" width="6" height="1"/>', anim: "rise" },
+      { key: "roof", x: x0 - 5, y: roofY - 14, sx: bw + 10, html: '<rect class="ct" width="1" height="14"/>', anim: "rise", delay: levels * 140 },
+      ...(pitch ? [{ key: "pitch", x: x0 - 12, y: roofY - 14, anim: "rise", delay: levels * 140 + 100,
+        html: `<path class="ct" d="M0 0L${(bw + 24) / 2} -${pitch}L${bw + 24} 0Z"/>` }] : []),
+      ...(kind === "Penthouse" ? [{ key: "terrace", x: x0, y: roofY - 14, anim: "fade", delay: levels * 140 + 100,
+        html: `<path class="rail" d="${Array.from({ length: 9 }, (_, i) => `M${bw * 0.55 + i * bw * 0.45 / 8} 0V-12`).join("")}M${bw * 0.55} -12H${bw}"/>` }] : []),
     ]);
-    sync("front", [{ key: "tree", x: 0, y: GROUND - 60, html: F.tree[2], anim: "rise", delay: 200 }, ...cars]);
+    sync("front", [...(kind === "Row House" ? [] : [{ key: "tree", x: 0, y: GROUND - 60, html: F.tree[2], anim: "rise", delay: 200 }]), ...cars]);
 
-    // frame: the full sheet on wide screens; on a phone, just the house and its parking so the furniture reads
-    const top = narrow.matches ? roofY - 140 : Math.max(0, Math.min(roofY - 70, 120)); // phone: headroom for the enlarged title
-    const left = narrow.matches ? 34 : 0;
-    const right = narrow.matches ? x0 + bw + (p.parking ? 16 + p.parking * 70 : 12) : W;
+    // frame: the full sheet on wide screens; on a phone, just the building and its parking so the furniture reads
+    const lift = pitch + (kind === "Penthouse" ? 14 : 0);
+    const top = narrow.matches ? roofY - 140 - lift : Math.min(roofY - 70 - lift, 120); // phone: headroom for the enlarged title
+    const left = narrow.matches ? (kind === "Row House" ? x0 - 64 : 34) : 0;
+    const right = narrow.matches ? Math.max(x0 + bw + (kind === "Row House" ? 64 : 12), p.parking && !tower ? carX + p.parking * 70 : 0) : W;
     svg.setAttribute("viewBox", `${left} ${top} ${right - left} ${300 - top}`);
 
     // drafting: level datums, the built-up area as a dimension string, room labels, a title block
-    const datums = Array.from({ length: floors + 1 }, (_, i) => ({
-      key: "datum-" + i, x: x0 - 6, y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
+    const datums = Array.from({ length: levels + 1 }, (_, i) => ({
+      key: "datum-" + i, x: x0 - (kind === "Row House" ? 64 : 6), y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
       html: `<g class="datum"><path class="dim" d="M0 0H-4M-4 0L-7 -4H-1Z"/><text class="lvl" x="-9" y="2" text-anchor="end">${i ? "+" + (i * 3).toFixed(2) : "±0.00"}</text></g>` }));
-    const dimY = roofY - (narrow.matches ? 34 : 22);
-    const dimension = { key: "dimension", x: x0, y: dimY, anim: "fade", delay: floors * 140 + 200,
+    const dimY = roofY - lift - (narrow.matches ? 34 : 22);
+    const dimension = { key: "dimension", x: x0, y: dimY, anim: "fade", delay: levels * 140 + 200,
       html: `<path class="dim" d="M0 0H${bw}M0 -4V4M${bw} -4V${4}"/><text class="lvl" x="${bw / 2}" y="-3" text-anchor="middle">${p.area.toLocaleString("en-IN")} sq ft built-up</text>` };
     const k = narrow.matches ? 2.3 : 1; // the phone crop shrinks the sheet; set its words big enough to read
     const title = { key: "title", x: right - 8, y: top + 14 * k, anim: "fade",
       html: `<text class="ttl" text-anchor="end">SECTION A–A</text>`
-        + `<text class="lvl" y="${11 * k}" text-anchor="end">${p.bedrooms} BHK · ${floors} floor${floors > 1 ? "s" : ""} · ${p.house_age === 0 ? "new build" : "built " + year}</text>`
+        + `<text class="lvl" y="${11 * k}" text-anchor="end">${kindText} · ${floors} floor${floors > 1 ? "s" : ""} · ${p.house_age === 0 ? "new build" : "built " + year}</text>`
         + `<text class="lvl" y="${21 * k}" text-anchor="end">Schematic, not to scale</text>` };
     sync("annot", [...labels, ...datums, dimension, title]);
 
-    svg.setAttribute("aria-label", `Illustration: a ${floors}-floor, ${p.bedrooms}-bedroom home with ${p.bathrooms} `
+    svg.setAttribute("aria-label", `Illustration: a ${kindText.toLowerCase()}, ${floors} floor${floors > 1 ? "s" : ""}, with ${p.bathrooms} `
       + `bathroom${p.bathrooms > 1 ? "s" : ""}, ${p.furnishing_status}, ${p.parking} parking spot${p.parking === 1 ? "" : "s"}, `
       + `${p.main_road === "yes" ? "on a main road" : "off the main road"} in ${p.location}, ${p.city}; built ${p.house_age === 0 ? "new" : "in " + year}.`);
     first = false;

@@ -8,41 +8,68 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "data" / "housing_data.csv"
 
-N_ROWS = 1500
+N_ROWS = 6000
 RANDOM_SEED = 42
+
+# average residential rate per sq ft (INR) and share of listings
+CITIES = {
+    "Mumbai": (18_000, .12), "Delhi": (11_000, .11), "Bangalore": (8_500, .11), "Pune": (8_000, .08),
+    "Hyderabad": (7_500, .09), "Chennai": (7_000, .08), "Chandigarh": (6_500, .05), "Kochi": (6_000, .05),
+    "Ahmedabad": (5_500, .07), "Kolkata": (5_500, .08), "Jaipur": (5_000, .06), "Lucknow": (4_800, .05),
+    "Indore": (4_500, .05),
+}
+# price multiplier on the city rate and share of listings
+LOCATIONS = {
+    "City Centre": (1.8, .12), "Prime Suburb": (1.25, .16), "Suburb": (1.0, .24), "Outskirts": (0.55, .14),
+    "Premium Township": (1.5, .08), "Gated Community": (1.3, .10), "Near Metro": (1.15, .10), "Waterfront": (1.65, .06),
+}
+# price multiplier and share of listings
+TYPES = {
+    "Apartment": (1.0, .42), "Studio": (1.08, .10), "Row House": (1.05, .12),
+    "Independent House": (1.12, .18), "Villa": (1.35, .11), "Penthouse": (1.5, .07),
+}
+
+
+def pick(rng, table: dict, n: int):
+    names = list(table)
+    p = np.array([v[1] for v in table.values()])
+    return rng.choice(names, n, p=p / p.sum())
 
 
 def generate_houses(n: int, seed: int) -> pd.DataFrame:
     rng = np.random.default_rng(seed)
 
-    area = rng.normal(1150, 420, n).clip(350, 3500).round(0)
+    city = pick(rng, CITIES, n)
+    location = pick(rng, LOCATIONS, n)
+    kind = pick(rng, TYPES, n)
+
+    area = rng.normal(1150, 420, n).clip(350, 3500)
     bedrooms = rng.choice([1, 2, 3, 4, 5], n, p=[0.15, 0.35, 0.32, 0.14, 0.04])
-    bathrooms = np.clip(bedrooms - rng.choice([0, 1, 2], n, p=[0.5, 0.4, 0.1]), 1, None)
     stories = rng.choice([1, 2, 3, 4], n, p=[0.35, 0.40, 0.20, 0.05])
-    house_age = rng.integers(0, 61, n)
     parking = rng.choice([0, 1, 2, 3], n, p=[0.25, 0.45, 0.22, 0.08])
 
-    cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Kolkata"]
-    city = rng.choice(cities, n, p=[0.22, 0.22, 0.22, 0.17, 0.17])
+    # each type has its own shape: studios are one small room, villas and penthouses are large
+    studio, villa, pent = kind == "Studio", kind == "Villa", kind == "Penthouse"
+    flat, row = kind == "Apartment", kind == "Row House"
+    area = np.where(studio, rng.uniform(300, 650, n), area)
+    area = np.where(villa, rng.normal(2800, 700, n).clip(1600, 6000), area)
+    area = np.where(pent, rng.normal(2400, 600, n).clip(1500, 4500), area)
+    bedrooms = np.where(studio, 1, np.where(villa | pent, np.maximum(bedrooms, 3), bedrooms))
+    stories = np.where(studio, 1, stories)
+    stories = np.where(flat, rng.choice([1, 2], n, p=[0.8, 0.2]), stories)          # duplexes are rarer
+    stories = np.where(pent, rng.choice([1, 2], n, p=[0.6, 0.4]), stories)
+    stories = np.where(villa | row, np.maximum(stories, 2), stories)
+    parking = np.where(villa, np.maximum(parking, 1), parking)
+    bathrooms = np.clip(bedrooms - rng.choice([0, 1, 2], n, p=[0.5, 0.4, 0.1]), 1, 4)
+    area = area.round(0)
 
-    locations = ["City Centre", "Prime Suburb", "Suburb", "Outskirts", "Premium Township"]
-    location = rng.choice(locations, n, p=[0.15, 0.22, 0.33, 0.20, 0.10])
+    house_age = rng.integers(0, 61, n)
     main_road = rng.choice(["yes", "no"], n, p=[0.70, 0.30])
-    furnishing = rng.choice(
-        ["furnished", "semi-furnished", "unfurnished"], n, p=[0.20, 0.45, 0.35]
-    )
+    furnishing = rng.choice(["furnished", "semi-furnished", "unfurnished"], n, p=[0.20, 0.45, 0.35])
 
-    # average city rates in rupees per sq ft, adjusted by locality
-    city_rate = pd.Series(city).map(
-        {"Mumbai": 18_000, "Delhi": 11_000, "Bangalore": 8_500,
-         "Chennai": 7_000, "Kolkata": 5_500}
-    ).to_numpy()
-
-    location_multiplier = pd.Series(location).map(
-        {"City Centre": 1.8, "Prime Suburb": 1.25, "Suburb": 1.0,
-         "Outskirts": 0.55, "Premium Township": 1.5}
-    ).to_numpy()
-
+    city_rate = np.array([CITIES[c][0] for c in city])
+    location_multiplier = np.array([LOCATIONS[l][0] for l in location])
+    type_multiplier = np.array([TYPES[k][0] for k in kind])
     furnishing_bonus = pd.Series(furnishing).map(
         {"furnished": 6_00_000, "semi-furnished": 2_50_000, "unfurnished": 0}
     ).to_numpy()
@@ -52,7 +79,7 @@ def generate_houses(n: int, seed: int) -> pd.DataFrame:
 
     price = (
         3_00_000
-        + area * city_rate * location_multiplier
+        + area * city_rate * location_multiplier * type_multiplier
         + (
             bedrooms * 3_00_000
             + bathrooms * 2_00_000
@@ -72,6 +99,7 @@ def generate_houses(n: int, seed: int) -> pd.DataFrame:
         "stories": stories,
         "city": city,
         "location": location,
+        "property_type": kind,
         "house_age": house_age,
         "parking": parking,
         "main_road": main_road,
@@ -89,14 +117,14 @@ def add_real_world_messiness(df: pd.DataFrame, seed: int) -> pd.DataFrame:
         idx = rng.choice(df.index, size=int(len(df) * frac), replace=False)
         df.loc[idx, col] = np.nan
 
-    duplicates = df.sample(25, random_state=seed)
+    duplicates = df.sample(100, random_state=seed)
     df = pd.concat([df, duplicates], ignore_index=True)
 
-    outlier_idx = rng.choice(df.index, size=10, replace=False)
-    df.loc[outlier_idx, "price"] = df.loc[outlier_idx, "price"] * rng.uniform(3.5, 5.0, 10)
+    outlier_idx = rng.choice(df.index, size=40, replace=False)
+    df.loc[outlier_idx, "price"] = df.loc[outlier_idx, "price"] * rng.uniform(3.5, 5.0, 40)
 
-    big_area_idx = rng.choice(df.index, size=5, replace=False)
-    df.loc[big_area_idx, "area"] = rng.uniform(6000, 9000, 5).round(0)
+    big_area_idx = rng.choice(df.index, size=20, replace=False)
+    df.loc[big_area_idx, "area"] = rng.uniform(9000, 14000, 20).round(0)
 
     return df.sample(frac=1, random_state=seed).reset_index(drop=True)
 

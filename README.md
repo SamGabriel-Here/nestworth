@@ -1,11 +1,18 @@
 # NestWorth
 
-Home valuations for five Indian metros: Mumbai, Delhi, Bangalore, Chennai and Kolkata.
-Describe a home and NestWorth returns a price in lakh or crore, a **calibrated 90% range**,
-the features pushing the price up or down, and the five most similar listings. Every
-control updates the valuation live, swaps the room photograph to match the furnishing, and
-redraws a section through the home: a floor per storey, a bed per bedroom, furniture by
-furnishing, a car per parking spot, and the city's landmark on the skyline.
+Home valuations across 13 Indian cities, eight kinds of locality and six home types,
+from a studio to a villa. Describe a home and NestWorth returns:
+
+- a price in lakh or crore with a **calibrated 90% range**;
+- the features pushing the price up or down;
+- the same home priced **in every city**, and **at other sizes** (a price-against-size chart);
+- the five most similar listings.
+
+Every control updates the valuation live, swaps the room photograph to match the furnishing,
+and redraws a section through the home: stilt parking under an apartment, a penthouse's
+terrace, a villa's roof, a floor per storey, a bed per bedroom and a car per parking spot.
+The answers live in the URL, so a valuation can be shared by link, and **Download report**
+prints a one-page A4 summary.
 
 **Live:** https://samgabrielofficially-nestworth.hf.space
 
@@ -24,13 +31,14 @@ Three models compared on the same 80/20 split (`artifacts/metrics.csv`):
 
 | Model | MAE (₹) | RMSE (₹) | R² |
 |---|---:|---:|---:|
-| **XGBoost** | 14.2 L | 27.9 L | **0.907** |
-| Random Forest | 16.2 L | 29.6 L | 0.896 |
-| Linear Regression | 24.1 L | 36.7 L | 0.840 |
+| **XGBoost** | 19.6 L | 46.5 L | **0.915** |
+| Random Forest | 25.6 L | 57.0 L | 0.873 |
+| Linear Regression | 46.0 L | 76.6 L | 0.771 |
 
-The tree models win because city and locality change the price *per square foot*, an
-interaction a linear model can't capture. The 90% interval covers **90.0%** of held-out
-prices.
+The tree models win because city, locality and home type multiply the price *per square
+foot*, an interaction a linear model can't capture. The 90% interval held **88.9%** of
+held-out prices (the conformal guarantee is 90% on average; one test split of about 1,200
+homes lands within sampling noise of it).
 
 ## Project layout
 
@@ -78,9 +86,10 @@ Or run the container: `docker build -t nestworth . && docker run -p 7860:7860 ne
 
 ## How it works
 
-**Data.** `generate.py` creates about 1,500 listings priced at each city's rate per square
-foot (from about ₹5,500 in Kolkata to about ₹18,000 in Mumbai), adjusted by locality, rooms,
-age, parking, road access and furnishing. It deliberately adds missing values, duplicates
+**Data.** `generate.py` creates about 6,000 listings priced at each city's rate per square
+foot (from about ₹4,500 in Indore to about ₹18,000 in Mumbai), multiplied by locality and
+home type, then adjusted for rooms, age, parking, road access and furnishing. Each type has
+its own shape: studios are one small room, villas and penthouses are large. It deliberately adds missing values, duplicates
 and outliers so the cleaning step has real work to do. The data is synthetic; the site
 says so on every valuation.
 
@@ -88,8 +97,9 @@ says so on every valuation.
 |---|---|
 | `area` | Built-up area in sq ft |
 | `bedrooms`, `bathrooms`, `stories` | Room and floor counts |
-| `city` | Mumbai, Delhi, Bangalore, Chennai, Kolkata |
-| `location` | City Centre, Prime Suburb, Suburb, Outskirts, Premium Township |
+| `city` | Mumbai, Delhi, Bangalore, Pune, Hyderabad, Chennai, Chandigarh, Kochi, Ahmedabad, Kolkata, Jaipur, Lucknow, Indore |
+| `location` | City Centre, Prime Suburb, Suburb, Outskirts, Premium Township, Gated Community, Near Metro, Waterfront |
+| `property_type` | Apartment, Studio, Row House, Independent House, Villa, Penthouse |
 | `house_age` | Age in years |
 | `parking` | Parking spots |
 | `main_road` | Faces a main road (yes/no) |
@@ -99,7 +109,7 @@ says so on every valuation.
 **Cleaning** (`prepare.py`):
 - missing values are filled with the median (numeric) or mode (categorical);
 - duplicates are dropped;
-- `price` and `area` outliers are capped with the IQR rule.
+- `price` and `area` outliers are capped with the IQR rule on the log scale, so genuine luxury homes survive.
 
 **Model pipeline.** Everything the model needs happens inside one scikit-learn `Pipeline`,
 so the saved model handles raw input exactly as it did in training:
@@ -113,17 +123,21 @@ so the saved model handles raw input exactly as it did in training:
 
 The range adapts to the home: a few lakh wide for a budget flat, over a crore for a premium one.
 
-**Reasons.** Each feature is reset in turn to a typical listing's value (median or mode) and
-the home is re-priced. The change is that feature's contribution. The top five by size are shown.
+**Reasons.** Each number is reset in turn to its median, and each category (city, locality,
+type, road, furnishing) is averaged over all its options; the home is re-priced each time.
+The change is that feature's contribution. The top five by size are shown.
 
-**Comparables.** The five listings closest in area within the same city and locality
-(falling back to the whole city when the locality has fewer than 8).
+**Comparables.** The five listings closest in area of the same type, city and locality
+(widening to the city, then the whole city, when there are fewer than 8).
 
 **API.** `POST /api/predict` validates input with Pydantic and returns:
 - `estimate` and `price_per_sqft`;
 - `interval` (`lo`, `hi`, `coverage`);
 - the locality's price spread, `segment` (10th, 50th and 90th percentile);
-- `factors` and `comparables`.
+- `factors` and `comparables`;
+- `curve`, the estimate and 90% range at 25 areas;
+- `cities`, the same home priced in every city, highest first;
+- `r2` and `mae` from the trained model.
 
 Out-of-range input returns 422.
 
