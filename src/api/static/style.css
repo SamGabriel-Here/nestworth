@@ -225,7 +225,6 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .scene .lvl { font-size: 7px; letter-spacing: .02em; }
 .scene .ttl { fill: var(--ink); font-size: 9px; font-weight: 600; letter-spacing: .14em; }
 .scene .dim { fill: var(--ink-2); stroke: var(--ink-2); stroke-width: .8; vector-effect: non-scaling-stroke; }
-.scene .ghost .in * { fill: none !important; stroke: var(--ink-2); stroke-dasharray: 3 2; }
 
 .scene [data-layer] > g { transition: transform .7s var(--ease), opacity .35s; }
 .scene .gone { opacity: 0; }
@@ -235,6 +234,10 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .scene .in.roll { animation: roll .9s var(--ease) backwards; }
 .scene .in.fade { animation: fade .7s ease backwards; }
 @keyframes drop { from { transform: translateY(-16px); opacity: 0; } }
+/* the drafter's pen: outline inked first, fill washed in after */
+.scene .in.draw * { stroke-dasharray: 1 1; stroke-dashoffset: 1; fill-opacity: 0; animation: pen .9s cubic-bezier(.65, 0, .35, 1) forwards; animation-delay: var(--d, 0ms); }
+@keyframes pen { 55% { fill-opacity: 0; } to { stroke-dashoffset: 0; fill-opacity: 1; } }
+.scene .ghost .in * { fill: none !important; stroke: var(--ink-2); stroke-dasharray: 3 2; }
 @keyframes rise { from { transform: scaleY(0); } }
 @keyframes roll { from { transform: translateX(110px); opacity: 0; } }
 @keyframes fade { from { opacity: 0; } }
@@ -261,6 +264,8 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .curve { position: relative; margin-top: 28px; }
 .curve svg { display: block; width: 100%; height: auto; overflow: visible; touch-action: pan-y; }
 .curve .cband { fill: var(--bg-2); }
+.curve .line, .curve .cband { transition: d .7s var(--ease); } /* the curve re-forms as the home changes */
+.curve .here, .curve .here-label { transition: transform .7s var(--ease); }
 .curve .line { fill: none; stroke: var(--ink); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .curve .grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
 .curve .axis { fill: var(--ink-2); font: 400 11px var(--text); }
@@ -282,7 +287,7 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 }
 .city-list .cn { grid-column: 1 / span 3; font-size: 1.0625rem; }
 .city-list .cb { grid-column: 4 / span 6; height: 10px; position: relative; }
-.city-list .cb i { position: absolute; inset: 0; background: var(--ink); transform-origin: left; transition: transform .8s var(--ease); }
+.city-list .cb i { position: absolute; inset: 0; background: var(--ink); transform-origin: left; transition: transform .8s var(--ease), background-color .3s; }
 .city-list .cv { grid-column: 10 / span 3; text-align: right; font-family: var(--display); font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 400; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .city-list li.me .cn { font-weight: 600; }
 .city-list li.me .cn::after { content: " · your city"; font-weight: 400; color: var(--ink-2); font-size: .875rem; }
@@ -330,6 +335,12 @@ input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-of
 .js .hero-media { animation: settle 1.8s var(--ease) both; }
 @keyframes lift { from { transform: translateY(105%); } }
 @keyframes settle { from { transform: scale(1.08); } }
+
+/* ---------- Light / Dark: night falls (or day breaks) from the switch you pressed ---------- */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-new(root) { animation: dusk .8s var(--ease); }
+@keyframes dusk { from { clip-path: circle(0 at var(--vx, 100%) var(--vy, 0)); } to { clip-path: circle(150vmax at var(--vx, 100%) var(--vy, 0)); } }
+.vt *, .vt *::before, .vt *::after { transition: none !important; }
 
 /* ---------- phone ---------- */
 .dock { display: none; }

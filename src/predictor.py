@@ -76,7 +76,9 @@ def value(raw: dict) -> dict:
 
     # The same home at other sizes: where extra area stops paying.
     top = min(9000, max(1500, raw["area"] * 2.5))
-    areas = sorted({*np.linspace(300, top, 24).round(-1), float(raw["area"])})
+    areas = np.linspace(300, top, 25).round(-1)
+    areas[np.abs(areas - raw["area"]).argmin()] = raw["area"]  # always 25 points, one of them this home, so the curve can morph
+    areas = [float(a) for a in areas]
     sized = [{**raw, "area": a} for a in areas]
     curve_est = _predict(sized)
     curve_lo, curve_hi = _range(sized, curve_est)

@@ -18,8 +18,18 @@ function setTheme(name) {
     b.setAttribute("aria-pressed", String(b.dataset.themeSet === name)));
   try { localStorage.setItem("nw-theme", name); } catch (e) {}
 }
-document.querySelectorAll("[data-theme-set]").forEach((b) =>
-  b.addEventListener("click", () => setTheme(b.dataset.themeSet)));
+document.querySelectorAll("[data-theme-set]").forEach((b) => b.addEventListener("click", () => {
+  const name = b.dataset.themeSet, root = document.documentElement;
+  if (name === root.dataset.theme) return;
+  if (!document.startViewTransition || calm.matches) return setTheme(name);
+  const r = b.getBoundingClientRect(); // night falls (or day breaks) from the switch that was pressed
+  root.style.setProperty("--vx", r.left + r.width / 2 + "px");
+  root.style.setProperty("--vy", r.top + r.height / 2 + "px");
+  root.classList.add("vt");
+  const t = document.startViewTransition(() => setTheme(name));
+  t.ready.catch(() => {}); // skipped in a hidden tab: the theme still changes, only the wipe is dropped
+  t.finished.finally(() => root.classList.remove("vt"));
+}));
 setTheme(document.documentElement.dataset.theme || "light");
 
 /* ---- inputs ---- */
@@ -133,6 +143,9 @@ function paintCurve(d, p) {
   const xMax = pts.at(-1).area, yMax = Math.max(...pts.map((q) => q.hi)) * 1.05;
   const x = (a) => M.l + ((a - 300) / (xMax - 300)) * (CW - M.l - M.r);
   const y = (v) => CH - M.b - (v / yMax) * (CH - M.t - M.b);
+  if (!svg.firstChild) // built once; later valuations morph these shapes rather than redrawing them
+    svg.innerHTML = '<g class="axes"></g><path class="cband"/><path class="line"/><circle class="here" r="6"/><text class="here-label"></text>'
+      + `<g id="cross" visibility="hidden"><line class="cross" y1="${M.t}" y2="${CH - M.b}"/><circle class="dot" r="5"/></g>`;
   const step = [1e5, 5e5, 1e6, 2.5e6, 5e6, 1e7, 2.5e7, 5e7, 1e8].find((s) => yMax / s <= 5) || 2e8;
   let g = "";
   for (let v = 0; v <= yMax; v += step)
@@ -141,15 +154,16 @@ function paintCurve(d, p) {
   for (let a = Math.ceil(300 / aStep) * aStep; a <= xMax; a += aStep)
     g += `<text class="axis" x="${x(a)}" y="${CH - M.b + 20}" text-anchor="middle">${a.toLocaleString("en-IN")}</text>`;
   g += `<text class="axis" x="${CW - M.r}" y="${CH - 2}" text-anchor="end">sq ft</text>`;
-  const band = pts.map((q) => `${x(q.area)},${y(q.hi)}`).join(" ") + " " + [...pts].reverse().map((q) => `${x(q.area)},${y(q.lo)}`).join(" ");
-  const line = pts.map((q) => `${x(q.area)},${y(q.estimate)}`).join(" ");
-  const me = pts.find((q) => q.area === p.area) || pts[0];
-  svg.innerHTML = g + `<polygon class="cband" points="${band}"/><polyline class="line" points="${line}"/>`
-    + `<circle class="here" cx="${x(me.area)}" cy="${y(me.estimate)}" r="6"/>`
-    + (x(me.area) > CW - 200 // keep the label inside the plot near the right edge
-      ? `<text class="here-label" x="${x(me.area) - 12}" y="${y(me.estimate) - 10}" text-anchor="end">This home · ${inr(me.estimate)}</text>`
-      : `<text class="here-label" x="${x(me.area) + 12}" y="${y(me.estimate) - 10}">This home · ${inr(me.estimate)}</text>`)
-    + `<g id="cross" visibility="hidden"><line class="cross" y1="${M.t}" y2="${CH - M.b}"/><circle class="dot" r="5"/></g>`;
+  svg.querySelector(".axes").innerHTML = g;
+  const band = "M" + pts.map((q) => `${x(q.area)},${y(q.hi)}`).join("L") + "L" + [...pts].reverse().map((q) => `${x(q.area)},${y(q.lo)}`).join("L") + "Z";
+  svg.querySelector(".cband").style.d = `path("${band}")`;
+  svg.querySelector(".line").style.d = `path("M${pts.map((q) => `${x(q.area)},${y(q.estimate)}`).join("L")}")`;
+  const me = pts.find((q) => q.area === p.area) || pts[0], mx = x(me.area), my = y(me.estimate);
+  svg.querySelector(".here").style.transform = `translate(${mx}px, ${my}px)`;
+  const label = svg.querySelector(".here-label"), right = mx > CW - 200; // keep the label inside the plot near the right edge
+  label.textContent = `This home · ${inr(me.estimate)}`;
+  label.setAttribute("text-anchor", right ? "end" : "start");
+  label.style.transform = `translate(${mx + (right ? -12 : 12)}px, ${my - 10}px)`;
   svg.dataset.xmax = xMax; svg.dataset.ymax = yMax;
   $("#curve-table tbody").innerHTML = pts.map((q) =>
     `<tr><td>${q.area.toLocaleString("en-IN")}</td><td>${inr(q.estimate)}</td><td>${inr(q.lo)} – ${inr(q.hi)}</td></tr>`).join("");

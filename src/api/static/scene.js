@@ -31,7 +31,19 @@ const Scene = (() => {
   };
   const LOOSE = new Set(["sofa", "bed"]); // drawn as floor-tape outlines when unfurnished
   const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1], studio: () => "STUDIO" };
-  const narrow = matchMedia("(max-width: 560px)");
+  const narrow = matchMedia("(max-width: 560px)"), still = matchMedia("(prefers-reduced-motion: reduce)");
+
+  // The drafter's pen: a new piece is inked along its outline, then its fill washes in.
+  function pen(g) {
+    if (still.matches) { g.classList.replace("draw", "fade"); return; }
+    const shapes = g.querySelectorAll("path, rect, circle");
+    shapes.forEach((s) => s.setAttribute("pathLength", "1"));
+    g.style.setProperty("--d", g.style.animationDelay);
+    g.addEventListener("animationend", () => { // hand the outline back to normal styling (floor-tape dashes need real units)
+      shapes.forEach((s) => s.removeAttribute("pathLength"));
+      g.classList.remove("draw");
+    }, { once: true });
+  }
 
   // Landmarks in the far distance, one per city: [width, height, markup].
   const MARKS = {
@@ -103,6 +115,7 @@ const Scene = (() => {
         el.style.transform = t;
         el.innerHTML = `<g class="in ${n.anim || "drop"}">${n.html}</g>`;
         el.firstChild.style.animationDelay = (first ? n.delay || 0 : 0) + "ms";
+        if (n.anim === "draw") pen(el.firstChild);
         layer.g.append(el);
         layer.map.set(n.key, el);
       } else {
@@ -171,11 +184,12 @@ const Scene = (() => {
         let ix = x + gap;
         for (const it of items) {
           const [w, h, html] = F[it];
-          const node = { key: `${room.k}:${it}`, x: ix, y: floorY - h * s, s, html, delay: 420 + n++ * 45,
-            ghost: p.furnishing_status === "unfurnished" && LOOSE.has(it) };
+          const ghost = p.furnishing_status === "unfurnished" && LOOSE.has(it);
+          const node = { key: `${room.k}:${it}`, x: ix, y: floorY - h * s, s, html, ghost, anim: ghost ? "fade" : "draw",
+            delay: 420 + Math.min(n++ * 35, 900) }; // the whole house is inked within about 1.3s
           furniture.push(node);
           if (it === "sofa" && p.furnishing_status === "furnished")
-            rugs.push({ key: room.k + ":rug", x: ix + (w * s - F.rug[0] * s) / 2, y: floorY - 3 * s, s, html: F.rug[2], delay: node.delay });
+            rugs.push({ key: room.k + ":rug", x: ix + (w * s - F.rug[0] * s) / 2, y: floorY - 3 * s, s, html: F.rug[2], anim: "draw", delay: node.delay });
           ix += (w + 6) * s;
         }
         x += rw;
