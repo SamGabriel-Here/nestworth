@@ -124,7 +124,7 @@ function render(d, p) {
   $("#rate-sub").textContent = `The five closest in size among ${d.segment.n} similar listings near ${where}.`;
   paintCurve(d, p);
   paintCities(d, p);
-  saveToUrl(p);
+  answers = p;
   $("#r2").textContent = d.r2.toFixed(3);
   $("#mae").textContent = inr(d.mae);
   $("#cov").textContent = d.interval.coverage + "%";
@@ -210,11 +210,13 @@ function paintCities(d, p) {
   $("#cities-note").textContent = `Everything else held equal. ${p.city} ranks ${rank} of ${d.cities.length}.`;
 }
 
-/* ---- shareable link: the answers live in the URL ---- */
+/* ---- shareable link: a short URL that reopens this valuation; the address bar itself stays clean ---- */
 const FIELDS = ["city", "location", "property_type", "area", "bedrooms", "bathrooms", "stories", "parking", "house_age", "main_road", "furnishing_status"];
-function saveToUrl(p) {
-  const q = new URLSearchParams(FIELDS.map((k) => [k, p[k]]));
-  history.replaceState(null, "", `${location.pathname}?${q}${location.hash}`);
+const START = Object.fromEntries(FIELDS.map((k) => [k, form.elements[k].value])); // the form as the page first draws it
+let answers;
+function link(p) { // only the answers that differ from the starting form, so a shared link stays short
+  const q = new URLSearchParams(FIELDS.filter((k) => String(p[k]) !== START[k]).map((k) => [k, p[k]]));
+  return location.origin + location.pathname + (q.size ? "?" + q : "");
 }
 function loadFromUrl() {
   const q = new URLSearchParams(location.search);
@@ -226,15 +228,17 @@ function loadFromUrl() {
   }
   areaRange.value = area.value;
   $("#age").dispatchEvent(new Event("input"));
+  if (location.search) history.replaceState(null, "", location.pathname + location.hash); // answers read; the address bar stays clean
 }
 $("#share").addEventListener("click", async () => {
   const status = $("#status");
-  try { await navigator.clipboard.writeText(location.href); status.textContent = "Link copied. It reopens this exact valuation."; }
-  catch { status.textContent = `Copy this link: ${location.href}`; }
+  const url = link(answers);
+  try { await navigator.clipboard.writeText(url); status.textContent = "Link copied. It reopens this exact valuation."; }
+  catch { status.textContent = `Copy this link: ${url}`; }
   status.classList.remove("err");
 });
 $("#report").addEventListener("click", () => {
-  $("#print-head").textContent = `NestWorth valuation report · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} · ${location.href}`;
+  $("#print-head").textContent = `NestWorth valuation report · ${new Date().toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" })} · ${link(answers)}`;
   print();
 });
 
