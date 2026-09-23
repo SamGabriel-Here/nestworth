@@ -15,6 +15,7 @@ def test_predict_returns_estimate_inside_interval():
     assert body["interval"]["lo"] <= body["estimate"] <= body["interval"]["hi"]
     assert len(body["factors"]) == 5
     assert len(body["comparables"]) == 5
+    assert body["mae"] > 0
 
 
 def test_predict_rejects_unknown_city():

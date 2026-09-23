@@ -9,7 +9,8 @@ ARTIFACTS = ROOT / "artifacts"
 model = joblib.load(ARTIFACTS / "model.pkl")
 interval = joblib.load(ARTIFACTS / "interval.pkl")
 data = pd.read_csv(CLEAN_DATA_PATH)
-R2 = float(pd.read_csv(ARTIFACTS / "metrics.csv").iloc[0]["R2"])
+best = pd.read_csv(ARTIFACTS / "metrics.csv").iloc[0]  # rows are sorted by R2, best first
+R2, MAE = float(best["R2"]), float(best["MAE"])
 
 # A "typical listing": each feature's contribution is measured against it.
 BASELINE = ({c: data[c].mode()[0] for c in CATEGORICAL_COLS}
@@ -57,6 +58,7 @@ def value(raw: dict) -> dict:
         "estimate": estimate,
         "price_per_sqft": estimate / raw["area"],
         "r2": R2,
+        "mae": MAE,
         "interval": {"lo": float(lo), "hi": float(hi),
                      "coverage": round(interval["coverage"] * 100)},
         "segment": {"low": float(low), "mid": float(mid), "high": float(high), "n": len(seg)},

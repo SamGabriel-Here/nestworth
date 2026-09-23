@@ -69,7 +69,7 @@ const rows = Array.from({ length: 5 }, () => {
 function paintFactors(factors) {
   const max = Math.max(...factors.map((f) => Math.abs(f.delta)), 1);
   rows.forEach((li, i) => {
-    const f = factors[i], w = Math.abs(f.delta) / max;
+    const f = factors[i], w = f.delta ? Math.max(Math.abs(f.delta) / max, 0.04) : 0; // small effects still draw as a bar
     li.querySelector(".fl").textContent = f.label;
     li.querySelector(".fv").textContent = signed(f.delta);
     li.querySelector(".up").style.transform = `scaleX(${f.delta >= 0 ? w : 0})`;
@@ -104,15 +104,16 @@ function paintComps(d) {
 
 function render(d, p) {
   const where = `${p.location}, ${p.city}`;
-  $("#answer-h").textContent = `${p.bedrooms} BHK, ${p.area.toLocaleString("en-IN")} sq ft in ${where}`;
+  $("#price-label").textContent = `${p.bedrooms} BHK, ${p.area.toLocaleString("en-IN")} sq ft in ${where}`;
   paintPrice(d.estimate);
   $("#ppsf").textContent = `₹${Math.round(d.price_per_sqft).toLocaleString("en-IN")} per sq ft`;
   paintRange(d);
-  $("#range-cap").textContent = `Dark track: the middle 80% of ${d.segment.n} listings near ${where}. Marigold: this home's ${d.interval.coverage}% range. White line: the estimate.`;
+  $("#range-cap").textContent = `Track: the middle 80% of ${d.segment.n} listings near ${where}. Band: this home's ${d.interval.coverage}% range. Mark: the estimate.`;
   paintFactors(d.factors);
   paintComps(d);
   $("#rate-sub").textContent = `The five closest in size among ${d.segment.n} listings near ${where}.`;
   $("#r2").textContent = d.r2.toFixed(3);
+  $("#mae").textContent = inr(d.mae);
   $("#cov").textContent = d.interval.coverage + "%";
   $("#dock-price").textContent = inr(d.estimate);
   $("#dock-range").textContent = `${d.interval.coverage}% range ${inr(d.interval.lo)} – ${inr(d.interval.hi)}`;
@@ -124,10 +125,10 @@ let inflight, timer;
 async function value() {
   const p = readForm();
   if (!areaOk(p)) return;
-  Scene.paint(p);
+  paintHome(p);
   inflight?.abort();
   const ctl = (inflight = new AbortController());
-  const answer = $("#answer"), status = $("#status");
+  const answer = $(".estimate"), status = $("#status");
   const slow = setTimeout(() => { answer.dataset.slow = ""; status.textContent = "Repainting…"; }, 300);
   answer.setAttribute("aria-busy", "true");
   try {
@@ -148,15 +149,41 @@ async function value() {
     if (inflight === ctl) { delete answer.dataset.slow; answer.setAttribute("aria-busy", "false"); }
   }
 }
+/* ---- the home itself: the room photograph follows furnishing, the section drawing follows everything ---- */
+const ROOM = { unfurnished: "Unfurnished", "semi-furnished": "Semi-furnished", furnished: "Furnished" };
+let drawingSeen = false;
+function paintHome(p) {
+  document.querySelectorAll(".room img").forEach((img) => img.classList.toggle("on", img.dataset.room === p.furnishing_status));
+  $("#room-cap").textContent = ROOM[p.furnishing_status];
+  if (drawingSeen) Scene.paint(p);
+}
 Scene.init($("#scene"));
+// build the drawing the first time it scrolls into view, so its assembly is seen
+new IntersectionObserver(([e], io) => {
+  if (!e.isIntersecting) return;
+  drawingSeen = true; io.disconnect();
+  const p = readForm();
+  if (area.value !== "" && p.area >= 300 && p.area <= 9000) Scene.paint(p);
+}, { threshold: 0.35 }).observe($("#scene"));
+
 form.addEventListener("input", () => {
   const p = readForm();
-  if (area.value !== "" && p.area >= 300 && p.area <= 9000) Scene.paint(p); // the drawing answers at once
+  if (area.value !== "" && p.area >= 300 && p.area <= 9000) paintHome(p); // the drawing answers at once
   clearTimeout(timer); timer = setTimeout(value, 160);
 });
 form.addEventListener("submit", (e) => { e.preventDefault(); value(); });
 value();
 
-/* ---- phone dock: show the live price while the big one is off screen ---- */
-new IntersectionObserver(([e]) => $("#dock").classList.toggle("show", !e.isIntersecting))
-  .observe($("#price"));
+/* ---- page motion: the top bar over the photograph, a slow parallax on the hero ---- */
+const topBar = $(".top"), hero = $(".hero"), media = $(".hero-media");
+new IntersectionObserver(([e]) => topBar.classList.toggle("over", e.isIntersecting), { rootMargin: "-64px 0px 0px 0px" }).observe(hero);
+// one scroll pass per frame: the phone dock (checked by position, so jumps via links count too) and the hero parallax
+const dock = $("#dock"), price = $("#price");
+let ticking = false;
+function onScroll() {
+  ticking = false;
+  dock.classList.toggle("show", price.getBoundingClientRect().bottom < 0); // only once the price is above the viewport
+  if (!calm.matches && scrollY < innerHeight) media.style.transform = `translateY(${scrollY * 0.18}px)`;
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+onScroll();

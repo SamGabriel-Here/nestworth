@@ -2,7 +2,7 @@
    Every piece is keyed, so a change moves, adds or removes only what changed. */
 const Scene = (() => {
   const NS = "http://www.w3.org/2000/svg";
-  const W = 800, GROUND = 266, FLOOR = 58, SLAB = 6, CLEAR = FLOOR - SLAB;
+  const W = 800, GROUND = 266, FLOOR = 58, SLAB = 6, CLEAR = FLOOR - SLAB, LABEL = 12;
 
   // Furniture in side elevation: [width, height, markup], drawn standing on y = height.
   const F = {
@@ -29,6 +29,8 @@ const Scene = (() => {
     bath: { w: 1.0, furnished: ["bath", "basin"], "semi-furnished": ["bath", "basin"], unfurnished: ["bath", "basin"] },
   };
   const LOOSE = new Set(["sofa", "bed"]); // drawn as floor-tape outlines when unfurnished
+  const NAMES = { living: () => "LIVING", kitchen: () => "KITCHEN", bed: (k) => "BED " + k.split("-")[1], bath: (k) => "BATH " + k.split("-")[1] };
+  const narrow = matchMedia("(max-width: 560px)");
 
   // Landmarks in the far distance, one per city: [width, height, markup].
   const MARKS = {
@@ -65,8 +67,8 @@ const Scene = (() => {
   let svg, layers, first = true;
   function init(el) {
     svg = el;
-    svg.innerHTML = '<rect class="sky" width="800" height="266"/><circle class="sun" cx="712" cy="50" r="20"/>'
-      + ["far", "ground", "rooms", "rugs", "furniture", "shell", "front"].map((n) => `<g data-layer="${n}"></g>`).join("");
+    svg.innerHTML = '<rect class="sky" width="800" height="266"/>'
+      + ["far", "ground", "rooms", "rugs", "furniture", "shell", "front", "annot"].map((n) => `<g data-layer="${n}"></g>`).join("");
     layers = Object.fromEntries([...svg.querySelectorAll("[data-layer]")].map((g) => [g.dataset.layer, { g, map: new Map() }]));
   }
 
@@ -98,7 +100,10 @@ const Scene = (() => {
     }
   }
 
+  let last;
+  narrow.addEventListener("change", () => last && paint(last));
   function paint(p) {
+    last = p;
     const floors = p.stories, bw = Math.round(Math.min(Math.max(250 + 2.4 * Math.sqrt(p.area), 290), 480));
     const x0 = 70, iw = bw - 12, roofY = GROUND - floors * FLOOR;
     const surface = (i) => GROUND - i * FLOOR - SLAB, ceiling = (i) => GROUND - (i + 1) * FLOOR;
@@ -119,7 +124,7 @@ const Scene = (() => {
       load[best] += ROOMS[room.t].w;
     }
 
-    const rooms = [], parts = [], rugs = [], furniture = [];
+    const rooms = [], parts = [], rugs = [], furniture = [], labels = [];
     let n = 0;
     plan.forEach((list, f) => {
       let x = x0 + 6;
@@ -127,11 +132,14 @@ const Scene = (() => {
         const rw = (iw * ROOMS[room.t].w) / load[f], floorY = surface(f);
         rooms.push({ key: "room-" + room.k, x, y: ceiling(f), sx: rw, sy: CLEAR, anim: "rise", delay: f * 140,
           html: `<rect class="${room.t === "bath" ? "tile" : "room"}" width="1" height="1"/>` });
+        labels.push({ key: "label-" + room.k, x: x + 4, y: ceiling(f) + 9, anim: "fade", delay: 420,
+          html: `<text class="tag">${NAMES[room.t](room.k)}</text>` });
         if (j < list.length - 1) parts.push({ key: "part-" + room.k, x: x + rw - 1.5, y: ceiling(f), anim: "rise", delay: f * 140,
           html: '<rect class="ct" width="3" height="15"/>' });
         const items = ROOMS[room.t][p.furnishing_status];
         const total = items.reduce((s, it) => s + F[it][0], 0) + 6 * (items.length - 1);
-        const s = Math.min(1, (rw - 10) / total), gap = (rw - total * s) / 2;
+        const tallest = Math.max(...items.map((it) => F[it][1]));
+        const s = Math.min(1, (rw - 10) / total, (CLEAR - LABEL) / tallest), gap = (rw - total * s) / 2; // clear the label band
         let ix = x + gap;
         for (const it of items) {
           const [w, h, html] = F[it];
@@ -169,9 +177,27 @@ const Scene = (() => {
       { key: "wall-r", x: x0 + bw - 6, y: roofY, sy: floors * FLOOR, html: '<rect class="ct" width="6" height="1"/>', anim: "rise" },
       { key: "roof", x: x0 - 5, y: roofY - 14, sx: bw + 10, html: '<rect class="ct" width="1" height="14"/>', anim: "rise", delay: floors * 140 },
     ]);
-    sync("front", [{ key: "tree", x: 18, y: GROUND - 60, html: F.tree[2], anim: "rise", delay: 200 }, ...cars,
-      { key: "plaque", x: x0 + bw / 2, y: roofY - 4, anim: "fade", delay: floors * 140 + 200,
-        html: `<text class="plq" text-anchor="middle">${p.house_age === 0 ? "NEW BUILD" : "EST. " + year}</text>` }]);
+    sync("front", [{ key: "tree", x: 0, y: GROUND - 60, html: F.tree[2], anim: "rise", delay: 200 }, ...cars]);
+
+    // frame: the full sheet on wide screens; on a phone, just the house and its parking so the furniture reads
+    const top = narrow.matches ? roofY - 140 : Math.max(0, Math.min(roofY - 70, 120)); // phone: headroom for the enlarged title
+    const left = narrow.matches ? 34 : 0;
+    const right = narrow.matches ? x0 + bw + (p.parking ? 16 + p.parking * 70 : 12) : W;
+    svg.setAttribute("viewBox", `${left} ${top} ${right - left} ${300 - top}`);
+
+    // drafting: level datums, the built-up area as a dimension string, room labels, a title block
+    const datums = Array.from({ length: floors + 1 }, (_, i) => ({
+      key: "datum-" + i, x: x0 - 6, y: GROUND - i * FLOOR - SLAB, anim: "fade", delay: 300 + i * 140,
+      html: `<g class="datum"><path class="dim" d="M0 0H-4M-4 0L-7 -4H-1Z"/><text class="lvl" x="-9" y="2" text-anchor="end">${i ? "+" + (i * 3).toFixed(2) : "±0.00"}</text></g>` }));
+    const dimY = roofY - (narrow.matches ? 34 : 22);
+    const dimension = { key: "dimension", x: x0, y: dimY, anim: "fade", delay: floors * 140 + 200,
+      html: `<path class="dim" d="M0 0H${bw}M0 -4V4M${bw} -4V${4}"/><text class="lvl" x="${bw / 2}" y="-3" text-anchor="middle">${p.area.toLocaleString("en-IN")} sq ft built-up</text>` };
+    const k = narrow.matches ? 2.3 : 1; // the phone crop shrinks the sheet; set its words big enough to read
+    const title = { key: "title", x: right - 8, y: top + 14 * k, anim: "fade",
+      html: `<text class="ttl" text-anchor="end">SECTION A–A</text>`
+        + `<text class="lvl" y="${11 * k}" text-anchor="end">${p.bedrooms} BHK · ${floors} floor${floors > 1 ? "s" : ""} · ${p.house_age === 0 ? "new build" : "built " + year}</text>`
+        + `<text class="lvl" y="${21 * k}" text-anchor="end">Schematic, not to scale</text>` };
+    sync("annot", [...labels, ...datums, dimension, title]);
 
     svg.setAttribute("aria-label", `Illustration: a ${floors}-floor, ${p.bedrooms}-bedroom home with ${p.bathrooms} `
       + `bathroom${p.bathrooms > 1 ? "s" : ""}, ${p.furnishing_status}, ${p.parking} parking spot${p.parking === 1 ? "" : "s"}, `

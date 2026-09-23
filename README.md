@@ -3,15 +3,15 @@
 Home valuations for five Indian metros: Mumbai, Delhi, Bangalore, Chennai and Kolkata.
 Describe a home and NestWorth returns a price in lakh or crore, a **calibrated 90% range**,
 the features pushing the price up or down, and the five most similar listings. Every
-control repaints the valuation live and redraws a cutaway of the home: a bed per bedroom,
-a floor per storey, a car per parking spot, rooms that fill up with furniture, and the
-city's landmark on the skyline.
+control updates the valuation live, swaps the room photograph to match the furnishing, and
+redraws a section through the home: a floor per storey, a bed per bedroom, furniture by
+furnishing, a car per parking spot, and the city's landmark on the skyline.
 
 **Live:** https://samgabrielofficially-nestworth.hf.space
 
-![NestWorth in the light theme: the marigold form sheet beside a live estimate of ₹2.30 Cr, its 90% range and the factors moving the price](docs/screenshot-form.png)
+![NestWorth: a full-bleed photograph of a residential tower under the headline "What is your home worth?"](docs/screenshot-form.png)
 
-![NestWorth in the dark theme, with the homes most like this one and how the number is made](docs/screenshot-estimate.png)
+![The valuation in the dark theme: room photograph, estimate and 90% range beside the numbered specification, then the section drawing and the reasons](docs/screenshot-estimate.png)
 
 A scikit-learn pipeline with XGBoost, served by FastAPI with a hand-built HTML/CSS/JS
 frontend, running in Docker on Hugging Face Spaces.
@@ -45,7 +45,7 @@ src/
   predictor.py           loads artifacts once; one home -> full valuation
   api/
     app.py               FastAPI: POST /api/predict + the static frontend
-    static/              index.html, style.css, app.js, scene.js (the drawn home), fonts/
+    static/              index.html, style.css, app.js, scene.js (the section drawing), img/, fonts/
 artifacts/               model.pkl, interval.pkl, metrics.csv
 data/                    housing_data.csv (raw), housing_clean.csv
 tests/                   test_pipeline.py, test_api.py
@@ -124,6 +124,23 @@ the home is re-priced. The change is that feature's contribution. The top five b
 - `factors` and `comparables`.
 
 Out-of-range input returns 422.
+
+## Design
+
+A formal, editorial layout on a 12-column grid: a full-bleed photograph, a numbered
+specification form beside a sticky estimate, and a live section drawing of the home in
+architectural line style. Light and Dark themes swap the photographs (day and night).
+Archivo is self-hosted (SIL Open Font License, `src/api/static/fonts/OFL.txt`).
+
+Photography, all free under the [Unsplash License](https://unsplash.com/license):
+
+| File | Photo | Photographer |
+|---|---|---|
+| `img/hero-day.webp` | [Residential towers](https://unsplash.com/photos/04FfOI_aYy4) | Vaibhav Surana |
+| `img/hero-night.webp` | [House at dusk](https://unsplash.com/photos/hmlP-v0vJ5o) | Elite prop |
+| `img/room-unfurnished.webp` | [Empty room](https://unsplash.com/photos/4YhNRgL59Fc) | Christian Lue |
+| `img/room-semi.webp` | [Living room](https://unsplash.com/photos/CfBDgt5BafU) | Dinesh Lunked |
+| `img/room-furnished.webp` | [Furnished living room](https://unsplash.com/photos/CgA03H9jCKw) | Pyx Photography |
 
 ## Possible improvements
 
